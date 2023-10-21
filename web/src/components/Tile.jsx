@@ -8,7 +8,7 @@ export default function Tile({x, y, z, type}) {
 
     return (
         <img
-            src={`/tiles/${type}.svg`}
+            src={`${type}.svg`}
             alt={`cube-tile-${x}-${z}`}
             className={"scale-100 absolute tile -translate-x-1/2"}
             style={{

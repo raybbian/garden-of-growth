@@ -2,131 +2,49 @@ import {useEffect, useState} from 'react';
 import './App.css';
 import Tile from "./components/Tile";
 import {screenToGridCoordinates} from "./utils/TileMapping";
-import {WaveFunction} from "./utils/WaveFunction";
 import {matrix} from "mathjs";
 
 
-const socketList = {
-    "0-0": {
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 0,
-    },
-    "1-0": {
-        0: 1,
-        1: 0,
-        2: 0,
-        3: 0,
-    },
-    "1-1": {
-        0: 0,
-        1: 1,
-        2: 0,
-        3: 0,
-    },
-    "1-2": {
-        0: 0,
-        1: 0,
-        2: 1,
-        3: 0,
-    },
-    "1-3": {
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 1,
-    },
-    "2-0": {
-        0: 1,
-        1: 1,
-        2: 0,
-        3: 0,
-    },
-    "2-1": {
-        0: 0,
-        1: 1,
-        2: 1,
-        3: 0,
-    },
-    "2-2": {
-        0: 0,
-        1: 0,
-        2: 1,
-        3: 1,
-    },
-    "2-3": {
-        0: 1,
-        1: 0,
-        2: 0,
-        3: 1,
-    },
-    "3-0": {
-        0: 1,
-        1: 1,
-        2: 1,
-        3: 0,
-    },
-    "3-1": {
-        0: 0,
-        1: 1,
-        2: 1,
-        3: 1,
-    },
-    "3-2": {
-        0: 1,
-        1: 0,
-        2: 1,
-        3: 1,
-    },
-    "3-3": {
-        0: 1,
-        1: 1,
-        2: 0,
-        3: 1,
-    },
-    "4-0": {
-        0: 1,
-        1: 1,
-        2: 1,
-        3: 1,
-    }
-}
+import SimpleTiledModel from "./wfc/simple-tiled-model";
 
 export default function App() {
-    const waveFunction = new WaveFunction(19, socketList)
-    const [tiles, setTiles] = useState(waveFunction.tiles);
+    const [tiles, setTiles] = useState(initTiles());
     const [mouseGridXPosition, updateMouseGridXPosition] = useState(0)
     const [mouseGridZPosition, updateMouseGridZPosition] = useState(0)
 
     function onMouseMove(e) {
         let gridCoordinates = screenToGridCoordinates(matrix([[e.pageY], [e.pageX]]));
-        if (waveFunction.gridCoordinateOutOfBounds(gridCoordinates)) {
-            return;
+        const x = gridCoordinates.get([0,0])
+        const z = gridCoordinates.get([1,0])
+        if (x < 0 || z < 0 || x >= 19 || z >= 19) return;
+        updateMouseGridXPosition(x)
+        updateMouseGridZPosition(z)
+    }
+
+    function initTiles() {
+        const tilesInit = [];
+        for(let i = 0; i < 19; i++) {
+            tilesInit[i] = []
+            for(let j = 0; j < 19; j++) {
+                tilesInit[i][j] = {"x": i, "y": 0, "z": j, "type": "cube-tile"}
+            }
         }
-        updateMouseGridXPosition(gridCoordinates.get([0,0]))
-        updateMouseGridZPosition(gridCoordinates.get([1,0]))
+        return tilesInit
     }
 
     useEffect(() => {
-        const display = setInterval(() => {
-            if(!waveFunction.iterate()) {
-                clearInterval(display)
-            }
-            setTiles(waveFunction.tiles.map(row => row.slice()))
-        }, 0)
-    }, [])
+        const data = require('./wfc/example/data/castle.definition')
+        const wfc = new SimpleTiledModel(data, null, 20, 20, false);
+    }, []);
 
     useEffect(() => {
-        const mouseGridPosition = matrix([[mouseGridXPosition], [mouseGridZPosition]])
-
         const newTiles = tiles.map(row => row.slice())
-        newTiles[mouseGridPosition.get([0,0])][mouseGridPosition.get([1,0])].y = 24
+        newTiles[mouseGridXPosition][mouseGridZPosition].y = 24
         setTiles(newTiles)
 
         setTimeout(() => {
             const newTiles = tiles.map(row => row.slice())
-            newTiles[mouseGridPosition.get([0,0])][mouseGridPosition.get([1,0])].y = 0
+            newTiles[mouseGridXPosition][mouseGridZPosition].y = 0
             setTiles(newTiles)
         }, 1000)
     }, [mouseGridXPosition, mouseGridZPosition])
