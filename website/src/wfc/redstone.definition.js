@@ -1,30 +1,16 @@
 module.exports = {
     tiles: [
-        { name:"0-0", symmetry:""},
-        { name:"1-0", symmetry:""},
-        { name:"1-1", symmetry:""},
-        { name:"1-2", symmetry:""},
-        { name:"1-3", symmetry:""},
+        { name:"0", symmetry:"X" },
+        { name:"2", symmetry:"L" },
+        { name:"line", symmetry:"I" },
     ],
     neighbors: [
-        { left:"1-0 0", right:"1-2 2" },
-        { left:"1-0 1", right:"0-0" },
-        { left:"1-0 2", right:"0-0" },
-        { left:"1-0 3", right:"0-0" },
+        { left:"0 0", right:"0 0" },
+        { left:"0 0", right:"line 0" },
+        { left:"0 0", right:"2 0" },
 
-        { left:"1-1 0", right:"0-0" },
-        { left:"1-1 1", right:"1-3 3" },
-        { left:"1-1 2", right:"0-0" },
-        { left:"1-1 3", right:"0-0" },
-
-        { left:"1-2 0", right:"0-0" },
-        { left:"1-2 1", right:"0-0" },
-        { left:"1-2 2", right:"1-0 0" },
-        { left:"1-2 3", right:"0-0" },
-
-        { left:"1-3 0", right:"0-0" },
-        { left:"1-3 1", right:"0-0" },
-        { left:"1-3 2", right:"0-0" },
-        { left:"1-3 3", right:"1-1 1" },
+        { left:"line 1", right:"line 1" },
+        { left:"line 1", right:"2 1" },
+        { left:"2 0", right:"2 2" },
     ]
 };

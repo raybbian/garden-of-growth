@@ -184,7 +184,7 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
 
     for(let t = 0; t < cardinality; t++) {
       this.tiles.push(tile(function () {
-        return currentTile.name
+        return `${currentTile.name}-${t}`
       }))
     }
     //implement symmetry fix later

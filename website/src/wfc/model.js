@@ -65,6 +65,8 @@ Model.prototype.initialize = function () {
 
   this.startingEntropy = Math.log(this.sumOfWeights) - this.sumOfWeightLogWeights / this.sumOfWeights;
 
+  this.observed = new Array(this.FMXxFMY);
+
   this.sumsOfOnes = new Array(this.FMXxFMY);
   this.sumsOfWeights = new Array(this.FMXxFMY);
   this.sumsOfWeightLogWeights = new Array(this.FMXxFMY);
@@ -107,6 +109,7 @@ Model.prototype.observe = function (rng) {
   }
 
   if (argmin === -1) {
+/*
     this.observed = new Array(this.FMXxFMY);
 
     for (let i = 0; i < this.FMXxFMY; i++) {
@@ -117,6 +120,7 @@ Model.prototype.observe = function (rng) {
         }
       }
     }
+*/
 
     return true;
   }
@@ -286,6 +290,18 @@ Model.prototype.ban = function (i, t) {
   this.sumsOfOnes[i] -= 1;
   this.sumsOfWeights[i] -= this.weights[t];
   this.sumsOfWeightLogWeights[i] -= this.weightLogWeights[t];
+
+  //if sums of ones is 1, then we have observed the last remaining tile, go find it
+  //I draw the observed output here once a tile is decided, instead of when generation is finished
+  //i wonder if this is slower or faster
+  if (this.sumsOfOnes[i] == 1) {
+    for(let t = 0; t < this.T; t++) {
+      if (this.wave[i][t]) {
+        this.observed[i] = t;
+        break;
+      }
+    }
+  }
 
   const sum = this.sumsOfWeights[i];
   this.entropies[i] = Math.log(sum) - this.sumsOfWeightLogWeights[i] / sum;
