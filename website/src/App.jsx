@@ -42,7 +42,7 @@ export default function App() {
             if (model.isGenerationComplete()) {
                 clearInterval(display)
             }
-        }, 0)
+        }, 100)
     }, []);
 
     return (
