@@ -1,14 +1,14 @@
 import {matrix} from "mathjs";
-import {gridToScreenCoordinates, getZIndex} from "../utils/TileMapping"
+import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
 import "./Tile.css"
 import React from "react";
 
-export default function Tile({x, y, z, type}) {
+export default function Tile({x, y, z, src}) {
     const screenCoordinates = gridToScreenCoordinates(matrix([[x], [z]]))
 
     return (
         <img
-            src={`${type}.svg`}
+            src={`${src}`}
             alt={`cube-tile-${x}-${z}`}
             className={"scale-100 absolute tile -translate-x-1/2"}
             style={{

@@ -1,103 +1,67 @@
 import {useEffect, useState} from 'react';
 import './App.css';
 import Tile from "./components/Tile";
-import {screenToGridCoordinates} from "./utils/TileMapping";
+import {screenToGridCoordinates} from "./utils/tile-mapping";
 import {matrix} from "mathjs";
-import {addBitmapDataToStructure} from "./wfc/initialization";
 import {SimpleTiledModel} from "./wfc/simple-tiled-model";
-const Jimp = require('jimp/browser/lib/jimp')
 
 
 export default function App() {
-    const [tiles, setTiles] = useState(initTiles());
-    const [mouseGridXPosition, updateMouseGridXPosition] = useState(0)
-    const [mouseGridZPosition, updateMouseGridZPosition] = useState(0)
-    const [imageURL, setImageURL] = useState("/cube-tile.svg");
+    const destWidth = 19;
+    const destHeight = 5;
 
-    function onMouseMove(e) {
-        let gridCoordinates = screenToGridCoordinates(matrix([[e.pageY], [e.pageX]]));
-        const x = gridCoordinates.get([0,0])
-        const z = gridCoordinates.get([1,0])
-        if (x < 0 || z < 0 || x >= 19 || z >= 19) return;
-        updateMouseGridXPosition(x)
-        updateMouseGridZPosition(z)
-    }
-
-    function initTiles() {
-        const tilesInit = [];
-        for(let i = 0; i < 19; i++) {
-            tilesInit[i] = []
-            for(let j = 0; j < 19; j++) {
-                tilesInit[i][j] = {"x": i, "y": 0, "z": j, "type": "cube-tile"}
-            }
-        }
-        return tilesInit
-    }
+    const [tiles, setTiles] = useState(new Array(destWidth * destHeight));
 
     useEffect(() => {
-        const data = require('./wfc/castle.definition')
-        addBitmapDataToStructure(data, function (err, definition) {
-            if (err) {
-                throw err;
-            }
+        const data = require('./wfc/redstone.definition')
+        //try catch to prevent the eventual errors from being silenced by the promise...
 
-            const destWidth = 20;
-            const destHeight = 20;
+        try {
+            const model = new SimpleTiledModel(data, null, destWidth, destHeight, false);
 
-            //try catch to prevent the eventual errors from being silenced by the promise...
-
-            try {
-                const model = new SimpleTiledModel(definition, null, destWidth, destHeight, false);
-                const finished = model.generate(0);
-
-                if (finished) {
-                    console.log('Success');
-                    console.log(model.graphics())
-                    const result = model.graphics();
-                    const image = new Jimp(destWidth * definition.tilesize, destHeight * definition.tilesize, function (err, image) {
-                        image.bitmap.data = Buffer.from(result.buffer);
-                        image.getBase64(Jimp.MIME_PNG, (err, dataURL) => {
-                            if (err) throw err
-
-                            setImageURL(dataURL)
-                        })
-                    });
-                } else {
-                    console.log('The generation ended in a contradiction');
+            model.generate(0);
+            const newTiles = tiles.slice()
+            for(let i = 0; i < destWidth; i++) {
+                for(let j = 0; j < destHeight; j++) {
+                    if (model.observed) {
+                        const index = model.observed[i * destHeight + j]
+                        const name = model.tiles[index]
+                        newTiles[i * destHeight + j] = {
+                            "x": i,
+                            "y": 0,
+                            "z": j,
+                            "src": `/tiles/redstone/${name}.svg`
+                        }
+                    } else {
+                        newTiles[i * destHeight +j] = {
+                            "x": i,
+                            "y": 0,
+                            "z": j,
+                            "src": '/tiles/redstone/empty.svg'
+                        }
+                    }
                 }
-            } catch(e) {
-                console.log('An error occurred');
-                console.log(e);
             }
-        });
-    }, []);
-
-    useEffect(() => {
-        const newTiles = tiles.map(row => row.slice())
-        newTiles[mouseGridXPosition][mouseGridZPosition].y = 24
-        setTiles(newTiles)
-
-        setTimeout(() => {
-            const newTiles = tiles.map(row => row.slice())
-            newTiles[mouseGridXPosition][mouseGridZPosition].y = 0
             setTiles(newTiles)
-        }, 1000)
-    }, [mouseGridXPosition, mouseGridZPosition])
-
+            if (model.isGenerationComplete()) {
+                console.log('Success');
+                console.log(model)
+            } else {
+                console.log('contra')
+            }
+        } catch(e) {
+            console.log('An error occurred');
+            console.log(e);
+        }
+    }, []);
 
     return (
         <div
             className={"relative"}
-            onMouseMove={onMouseMove}
         >
-            {tiles.map((tileRow, rowIndex) => (
-                <div key={rowIndex}>
-                    {tileRow.map((tile, colIndex) => (
-                        <Tile key={`${rowIndex}-${colIndex}`} x={tile.x} y={tile.y} z={tile.z} type={tile.type}/>
-                    ))}
-                </div>
+            {tiles.map((tile, tileNum) => (
+                <Tile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src}/>
             ))}
-            <img src={imageURL} alt={'temp'}/>
         </div>
     );
 }

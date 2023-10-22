@@ -11,14 +11,14 @@ import {Model} from './model'
  * @constructor
  */
 export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, width, height, periodic) {
-  const tilesize = data.tilesize || 16;
+  // const tilesize = data.tilesize || 16;
 
   this.FMX = width;
   this.FMY = height;
   this.FMXxFMY = width * height;
 
   this.periodic = periodic;
-  this.tilesize = tilesize;
+  // this.tilesize = tilesize;
 
   const unique = !!data.unique;
   let subset = null;
@@ -27,6 +27,7 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
     subset = data.subsets[subsetName];
   }
 
+/*
   const tile = function tile (f) {
     const result = new Array(tilesize * tilesize);
 
@@ -38,7 +39,13 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
 
     return result;
   };
+*/
 
+  const tile = function tile (f) {
+    return f()
+  }
+
+/*
   const rotate = function rotate (array) {
     return tile(function (x, y) {
       return array[tilesize - 1 - y + x * tilesize];
@@ -50,6 +57,7 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
       return array[tilesize - 1 - x + y * tilesize];
     });
   };
+*/
 
   this.tiles = [];
   const tempStationary = [];
@@ -142,6 +150,7 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
     }
 
 
+/*
     let bitmap;
 
     if (unique) {
@@ -171,6 +180,14 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
         this.tiles.push(t < 4 ? rotate(this.tiles[this.T + t - 1]) : reflect(this.tiles[this.T + t - 4]));
       }
     }
+*/
+
+    for(let t = 0; t < cardinality; t++) {
+      this.tiles.push(tile(function () {
+        return currentTile.name
+      }))
+    }
+    //implement symmetry fix later
 
     for (let t = 0; t < cardinality; t++) {
       tempStationary.push(currentTile.weight || 1);
@@ -204,6 +221,7 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
     const right = neighbor.right.split(' ').filter(function (v) {
       return v.length;
     });
+
 
     if (subset !== null && (subset.indexOf(left[0]) === -1 || subset.indexOf(right[0]) === -1)) {
       continue;
@@ -264,7 +282,8 @@ SimpleTiledModel.prototype.onBoundary = function (x, y) {
   return !this.periodic && (x < 0 || y < 0 || x >= this.FMX || y >= this.FMY);
 };
 
-/**
+/*
+/!**
  * Retrieve the RGBA data
  *
  * @param {Array|Uint8Array|Uint8ClampedArray} [array] Array to write the RGBA data into (must already be set to the correct size), if not set a new Uint8Array will be created and returned
@@ -273,7 +292,7 @@ SimpleTiledModel.prototype.onBoundary = function (x, y) {
  * @returns {Array|Uint8Array|Uint8ClampedArray} RGBA data
  *
  * @public
- */
+ *!/
 SimpleTiledModel.prototype.graphics = function (array, defaultColor) {
   array = array || new Uint8Array(this.FMXxFMY * this.tilesize * this.tilesize * 4);
 
@@ -286,13 +305,13 @@ SimpleTiledModel.prototype.graphics = function (array, defaultColor) {
   return array;
 };
 
-/**
+/!**
  * Set the RGBA data for a complete generation in a given array
  *
  * @param {Array|Uint8Array|Uint8ClampedArray} [array] Array to write the RGBA data into, if not set a new Uint8Array will be created and returned
  *
  * @protected
- */
+ *!/
 SimpleTiledModel.prototype.graphicsComplete = function (array) {
   for (let x = 0; x < this.FMX; x++) {
     for (let y = 0; y < this.FMY; y++) {
@@ -313,14 +332,14 @@ SimpleTiledModel.prototype.graphicsComplete = function (array) {
   }
 };
 
-/**
+/!**
  * Set the RGBA data for an incomplete generation in a given array
  *
  * @param {Array|Uint8Array|Uint8ClampedArray} [array] Array to write the RGBA data into, if not set a new Uint8Array will be created and returned
  * @param {Array|Uint8Array|Uint8ClampedArray} [defaultColor] RGBA data of the default color to use on untouched tiles
  *
  * @protected
- */
+ *!/
 SimpleTiledModel.prototype.graphicsIncomplete = function (array, defaultColor) {
   if (!defaultColor || defaultColor.length !== 4) {
     defaultColor = false;
@@ -376,4 +395,4 @@ SimpleTiledModel.prototype.graphicsIncomplete = function (array, defaultColor) {
       }
     }
   }
-};
+};*/
