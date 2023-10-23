@@ -1,7 +1,8 @@
 {
   "name": "website",
   "version": "0.1.0",
-  "homepage": "https://raybbian.github.io/garden-of-growth",
+  "homepage": "https://raybb.dev",
+  "url": "https://raybb.dev",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -41,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.0.0",
     "tailwindcss": "^3.3.3"
   }
 }
