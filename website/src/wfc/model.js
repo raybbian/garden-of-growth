@@ -1,4 +1,4 @@
-import {randomIndice} from "./random-indice"
+import {randomIndice} from "../utils/random-indice"
 
 export const Model = function Model () {};
 
