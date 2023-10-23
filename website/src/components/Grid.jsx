@@ -34,14 +34,14 @@ export default function Grid() {
                             "x": i,
                             "y": 0,
                             "z": j,
-                            "src": `/tiles/redstone/${name}.svg`
+                            "src": `${process.env.PUBLIC_URL}/tiles/green/${name}.png`
                         }
                     } else {
                         newTiles[i * destHeight + j] = {
                             "x": i,
                             "y": 0,
                             "z": j,
-                            "src": `/tiles/redstone/empty.svg`
+                            "src": `${process.env.PUBLIC_URL}/tiles/green/empty.png`
                         }
                     }
                 }

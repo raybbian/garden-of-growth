@@ -11,7 +11,7 @@ export default function Nav() {
                 onMouseLeave={() => setTitleHovered(false)}
                 className={"text-7xl font-semibold overflow-hidden w-1/3"}
             >
-                <div className={`transition duration-500 w-[200%] flex items-center justify-around ${titleHovered ? "-translate-x-1/2" : ""}`}>
+                <div className={`transition duration-300 w-[200%] flex items-center justify-around ${titleHovered ? "-translate-x-1/2" : ""}`}>
                     <p>raybb.dev</p>
                     <p>Raymond Bian</p>
                 </div>
