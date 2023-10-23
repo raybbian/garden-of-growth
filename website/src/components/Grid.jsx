@@ -11,8 +11,24 @@ export default function Grid() {
 
     const [tiles, setTiles] = useState(new Array(destWidth * destHeight));
 
+    const [update, triggerUpdate] = useState(0);
+
     const [mouseGridXCoordinate, setMouseGridXCoordinate] = useState(0);
     const [mouseGridZCoordinate, setMouseGridZCoordinate] = useState(0);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'r' || e.key === 'R') {
+                triggerUpdate(Math.random())
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [])
+
 
     useEffect(() => {
         const data = require('../wfc/redstone.definition')
@@ -20,8 +36,7 @@ export default function Grid() {
 
         const display = setInterval(() => {
             if (!model.iterate(1)) {
-                model.clear()
-                setTiles(new Array(destWidth * destHeight))
+                clearInterval(display)
                 return
             }
             const newTiles = tiles.slice()
@@ -51,7 +66,7 @@ export default function Grid() {
                 clearInterval(display)
             }
         }, 0)
-    }, []);
+    }, [update]);
 
     function onMouseMove(e) {
         if (!gridDivRef.current) {
@@ -65,7 +80,6 @@ export default function Grid() {
         setMouseGridZCoordinate(gridCoordinates.get([1,0]))
     }
 
-
     const gridDivRef = useRef(null)
     useEffect(() => {
         const newTiles = tiles.slice()
@@ -78,7 +92,7 @@ export default function Grid() {
 
     return (
         <div
-            className={"relative translate-x-1/2 translate-y-16"}
+            className={"relative translate-x-1/2 translate-y-16 w-full h-full"}
             onMouseMove={onMouseMove}
             ref={gridDivRef}
         >
