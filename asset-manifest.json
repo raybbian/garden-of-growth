@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/garden-of-growth/static/css/main.2a8cec8c.css",
+    "main.js": "/garden-of-growth/static/js/main.c820d7e0.js",
+    "index.html": "/garden-of-growth/index.html",
+    "main.2a8cec8c.css.map": "/garden-of-growth/static/css/main.2a8cec8c.css.map",
+    "main.c820d7e0.js.map": "/garden-of-growth/static/js/main.c820d7e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a8cec8c.css",
+    "static/js/main.c820d7e0.js"
+  ]
+}
