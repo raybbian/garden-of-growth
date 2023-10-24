@@ -313,6 +313,9 @@ Model.prototype.ban = function (i, t) {
  * @public
  */
 Model.prototype.clear = function () {
+  //this means the model hasn't been initialized yet, so it is already clear
+  if (!this.wave) return;
+
   for (let i = 0; i < this.FMXxFMY; i++) {
     for (let t = 0; t < this.T; t++) {
       this.wave[i][t] = true;
@@ -328,6 +331,7 @@ Model.prototype.clear = function () {
     this.entropies[i] = this.startingEntropy;
   }
 
+  this.observed = new Array(this.FMXxFMY);
   this.initiliazedField = true;
   this.generationComplete = false;
 };

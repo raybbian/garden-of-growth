@@ -3,6 +3,7 @@ import {SimpleTiledModel} from "../wfc/simple-tiled-model";
 import {gridCoordinateOutOfBounds, screenToGridCoordinates} from "../utils/tile-mapping";
 import {matrix} from "mathjs";
 import MemoizedTile from "./Tile";
+import data from "../wfc/green.definition";
 
 export default function Grid({state, setState}) {
 
@@ -15,13 +16,18 @@ export default function Grid({state, setState}) {
     const [mouseGridZCoordinate, setMouseGridZCoordinate] = useState(0);
 
 
+    //only have one model for each grid, but clear it on refresh instead of making a new one
+    //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
+    const dataRef = useRef(require('../wfc/green.definition'))
+    const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
+
+
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
-        const data = require('../wfc/green.definition')
-        const path = data.path
-        const tileFormat = data.tileFormat
-        const model = new SimpleTiledModel(data, null, destWidth, destHeight, false);
-
+        const path = dataRef.current.path
+        const tileFormat = dataRef.current.tileFormat
+        const model = modelRef.current;
+        model.clear()
         const display = setInterval(() => {
             if (!model.iterate(1)) {
                 clearInterval(display)
