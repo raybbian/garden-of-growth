@@ -1,8 +1,8 @@
 import {matrix} from "mathjs";
 import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
-import React from "react";
+import {memo} from "react";
 
-export default function Tile({x, y, z, src}) {
+function Tile({x, y, z, src}) {
     const screenCoordinates = gridToScreenCoordinates(matrix([[x], [z]]))
 
     return (
@@ -19,3 +19,6 @@ export default function Tile({x, y, z, src}) {
         ></img>
     );
 }
+
+const MemoizedTile = memo(Tile)
+export default MemoizedTile

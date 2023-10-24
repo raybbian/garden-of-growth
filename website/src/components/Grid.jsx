@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {SimpleTiledModel} from "../wfc/simple-tiled-model";
 import {gridCoordinateOutOfBounds, screenToGridCoordinates} from "../utils/tile-mapping";
 import {matrix} from "mathjs";
-import Tile from "./Tile";
+import MemoizedTile from "./Tile";
 
 export default function Grid({state, setState}) {
 
@@ -90,7 +90,7 @@ export default function Grid({state, setState}) {
             ref={gridDivRef}
         >
             {tiles.map((tile, tileNum) => (
-                <Tile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src}/>
+                <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src}/>
             ))}
         </div>
     )
