@@ -1,4 +1,6 @@
 module.exports = {
+    path: "/tiles/green", //%PUBLIC_URL%{thisPath}/name.{tileFormat}
+    tileFormat: "png",
     tiles: [
         { name:"0", symmetry:"X" },
         { name:"2", symmetry:"L" },

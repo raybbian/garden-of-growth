@@ -4,34 +4,22 @@ import {gridCoordinateOutOfBounds, screenToGridCoordinates} from "../utils/tile-
 import {matrix} from "mathjs";
 import Tile from "./Tile";
 
-export default function Grid() {
+export default function Grid({state, setState}) {
 
     const destWidth = 16;
     const destHeight = 16;
 
     const [tiles, setTiles] = useState(new Array(destWidth * destHeight));
 
-    const [update, triggerUpdate] = useState(0);
-
     const [mouseGridXCoordinate, setMouseGridXCoordinate] = useState(0);
     const [mouseGridZCoordinate, setMouseGridZCoordinate] = useState(0);
 
+
+    //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (e.key === 'r' || e.key === 'R') {
-                triggerUpdate(Math.random())
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [])
-
-
-    useEffect(() => {
-        const data = require('../wfc/redstone.definition')
+        const data = require('../wfc/green.definition')
+        const path = data.path
+        const tileFormat = data.tileFormat
         const model = new SimpleTiledModel(data, null, destWidth, destHeight, false);
 
         const display = setInterval(() => {
@@ -49,14 +37,14 @@ export default function Grid() {
                             "x": i,
                             "y": 0,
                             "z": j,
-                            "src": `${process.env.PUBLIC_URL}/tiles/green/${name}.png`
+                            "src": `${process.env.PUBLIC_URL}${path}/${name}.${tileFormat}`
                         }
                     } else {
                         newTiles[i * destHeight + j] = {
                             "x": i,
                             "y": 0,
                             "z": j,
-                            "src": `${process.env.PUBLIC_URL}/tiles/green/empty.png`
+                            "src": `${process.env.PUBLIC_URL}${path}/empty.${tileFormat}`
                         }
                     }
                 }
@@ -66,8 +54,11 @@ export default function Grid() {
                 clearInterval(display)
             }
         }, 0)
-    }, [update]);
+    }, [state]);
 
+
+    //gets the grid position x z of the mouse and stores it in state
+    const gridDivRef = useRef(null)
     function onMouseMove(e) {
         if (!gridDivRef.current) {
             return
@@ -80,7 +71,8 @@ export default function Grid() {
         setMouseGridZCoordinate(gridCoordinates.get([1,0]))
     }
 
-    const gridDivRef = useRef(null)
+
+    //pushes the tile up whenever the mouse grid position has changed
     useEffect(() => {
         const newTiles = tiles.slice()
         const x = mouseGridXCoordinate
@@ -89,6 +81,7 @@ export default function Grid() {
         newTiles[x * destHeight + z].y = 24
         setTiles(newTiles)
     }, [mouseGridXCoordinate, mouseGridZCoordinate]);
+
 
     return (
         <div
