@@ -50,9 +50,9 @@ export default function Dev({state, setState}) {
             {view.map((mainTileInfo, num) => (
                 <div key={num}>
                     {mainTileInfo.map((adjList, dir) => (
-                        <div key={`${num}-${dir}`} className={"relative left-16 h-20"}>
+                        <div key={`${num}-${dir}`} className={"relative left-16 h-20 scale-50"}>
                             {adjList.map((nTile, tNum) => (
-                                <MemoizedTile key={`${num}-${dir}-${tNum}`} src={nTile.src} x={nTile.x} y={nTile.y} z={nTile.z} scale={50}/>
+                                <MemoizedTile key={`${num}-${dir}-${tNum}`} src={nTile.src} x={nTile.x} y={nTile.y} z={nTile.z}/>
                             ))}
                         </div>
                     ))}

@@ -2,8 +2,8 @@ import {matrix} from "mathjs";
 import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
 import {memo, useRef} from "react";
 
-function Tile({x, y, z, src, scale}) {
-    const screenCoordinatesRef = useRef(gridToScreenCoordinates(matrix([[x * scale/100], [z * scale/100]])))
+function Tile({x, y, z, src}) {
+    const screenCoordinatesRef = useRef(gridToScreenCoordinates(matrix([[x], [z]])))
 
     return (
         <img
@@ -15,7 +15,6 @@ function Tile({x, y, z, src, scale}) {
                 left: `${screenCoordinatesRef.current.get([1, 0])}px`,
                 zIndex: getZIndex(x, z),
                 transition: "ease-in-out top 0.1s, left 0.1s",
-                transform: `scale(${scale/100})`
             }}
         ></img>
     );
