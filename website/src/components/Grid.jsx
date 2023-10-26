@@ -18,7 +18,7 @@ export default function Grid({state, setState}) {
 
     //only have one model for each grid, but clear it on refresh instead of making a new one
     //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
-    const dataRef = useRef(require('../wfc/green.definition'))
+    const dataRef = useRef(require('../wfc/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
 
 
