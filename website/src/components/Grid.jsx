@@ -96,7 +96,7 @@ export default function Grid({state, setState}) {
             ref={gridDivRef}
         >
             {tiles.map((tile, tileNum) => (
-                <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src}/>
+                <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} scale={100}/>
             ))}
         </div>
     )
