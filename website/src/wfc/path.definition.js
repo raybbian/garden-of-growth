@@ -2,12 +2,149 @@ module.exports = {
     path: "/tiles/path", //%PUBLIC_URL%{thisPath}/name.{tileFormat}
     tileFormat: "png",
     tiles: [
-        { name: "corner-0" },
-        { name: "corner-1" },
-        { name: "corner-2" },
-        { name: "corner-3" },
+        {
+            name: "grass" ,
+            u: ['0-0'],
+            l: ['0-0'],
+            d: ['0-0'],
+            r: ['0-0'],
+            weight: 7,
+        },
+        {
+            name: "corner-0" ,
+            u: ['0-1'],
+            l: ['1-0'],
+            d: ['0-0'],
+            r: ['0-0'],
+            ban: {
+                u: ['corner-1'],
+                l: ['corner-3'],
+            },
+            weight: 0.2,
+        },
+        {
+            name: "corner-1" ,
+            u: ['0-0'],
+            l: ['0-1'],
+            d: ['1-0'],
+            r: ['0-0'],
+            ban: {
+                l: ['corner-2'],
+                d: ['corner-0'],
+            },
+            weight: 0.2,
+        },
+        {
+            name: "corner-2" ,
+            u: ['0-0'],
+            l: ['0-0'],
+            d: ['0-1'],
+            r: ['1-0'],
+            ban: {
+                d: ['corner-3'],
+                r: ['corner-1'],
+            },
+            weight: 0.2,
+        },
+        {
+            name: "corner-3" ,
+            u: ['1-0'],
+            l: ['0-0'],
+            d: ['0-0'],
+            r: ['0-1'],
+            ban: {
+                u: ['corner-2'],
+                r: ['corner-0'],
+            },
+            weight: 0.2,
+        },
+        {
+            name: "line-0" ,
+            u: ['1-1'],
+            l: ['1-0'],
+            d: ['0-0'],
+            r: ['0-1'],
+            ban: {
+                d: ['line-2'],
+            },
+        },
+        {
+            name: "line-1" ,
+            u: ['0-1'],
+            l: ['1-1'],
+            d: ['1-0'],
+            r: ['0-0'],
+            ban: {
+                r: ['line-3'],
+            },
+        },
+        {
+            name: "line-2" ,
+            u: ['0-0'],
+            l: ['0-1'],
+            d: ['1-1'],
+            r: ['1-0'],
+            ban: {
+                u: ['line-0'],
+            },
+        },
+        {
+            name: "line-3" ,
+            u: ['1-0'],
+            l: ['0-0'],
+            d: ['0-1'],
+            r: ['1-1'],
+            ban: {
+                l: ['line-1'],
+            },
+        },
+        {
+            name: "bend-0" ,
+            u: ['0-1'],
+            l: ['1-1'],
+            d: ['1-1'],
+            r: ['1-0'],
+            ban: {
+                u: ['corner-1', 'bend-3'],
+                r: ['corner-1', 'bend-1'],
+            },
+            weight: 0.1,
+        },
+        {
+            name: "bend-1" ,
+            u: ['1-0'],
+            l: ['0-1'],
+            d: ['1-1'],
+            r: ['1-1'],
+            ban: {
+                u: ['corner-2', 'bend-2'],
+                l: ['corner-2', 'bend-0'],
+            },
+            weight: 0.1,
+        },
+        {
+            name: "bend-2" ,
+            u: ['1-1'],
+            l: ['1-0'],
+            d: ['0-1'],
+            r: ['1-1'],
+            ban: {
+                l: ['corner-3', 'bend-3'],
+                d: ['corner-3', 'bend-1'],
+            },
+            weight: 0.1,
+        },
+        {
+            name: "bend-3" ,
+            u: ['1-1'],
+            l: ['1-1'],
+            d: ['1-0'],
+            r: ['0-1'],
+            ban: {
+                d: ['corner-0', 'bend-0'],
+                r: ['corner-0', 'bend-2'],
+            },
+            weight: 0.1,
+        },
     ],
-    neighbors: [
-        { left: "corner-2", right: "corner-0"}
-    ]
 };

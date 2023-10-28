@@ -29,7 +29,7 @@ export default function Grid({state, setState}) {
         const model = modelRef.current;
         model.clear()
         const display = setInterval(() => {
-            if (!model.iterate(1)) {
+            if (!model.iterate(1) || model.isGenerationComplete()) {
                 clearInterval(display)
                 return
             }
@@ -56,9 +56,6 @@ export default function Grid({state, setState}) {
                 }
             }
             setTiles(newTiles)
-            if (model.isGenerationComplete()) {
-                clearInterval(display)
-            }
         }, 0)
     }, [state]);
 
