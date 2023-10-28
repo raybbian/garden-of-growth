@@ -1,12 +1,11 @@
-import {Fragment, useEffect, useRef, useState} from "react";
-import {SimpleTiledModel} from "../wfc/simple-tiled-model";
-import Tile from "./Tile";
+import {useEffect, useRef, useState} from "react";
+import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 
 export default function Dev({state, setState}) {
     const [view, setView] = useState([])
 
-    const dataRef = useRef(require('../wfc/path.definition'))
+    const dataRef = useRef(require('../terrain/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, 1, 1, false))
 
     //initialize the model and generate once the page (and grid) loads
