@@ -21,10 +21,14 @@ export default function Grid({state, setState}) {
         const tileFormat = dataRef.current.tileFormat
         const model = modelRef.current;
         model.clear()
+
         const display = setInterval(() => {
-            if (!model.iterate(1) || model.isGenerationComplete()) {
+            const result = model.iterate(1)
+            console.log(result)
+            if (result === false || model.isGenerationComplete()) {
+                console.log(model)
                 clearInterval(display)
-                return
+                return;
             }
             const newTiles = tiles.slice()
             for(let i = 0; i < destWidth; i++) {

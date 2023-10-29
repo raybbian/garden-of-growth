@@ -19,6 +19,9 @@ Model.prototype.sumOfWeightLogWeights = 0;
 
 Model.prototype.startingEntropy = 0;
 
+Model.prototype.tileLimits = null;
+Model.prototype.tileCount = null;
+
 Model.prototype.sumsOfOnes = null;
 Model.prototype.sumsOfWeights = null;
 Model.prototype.sumsOfWeightLogWeights = null;
@@ -57,10 +60,14 @@ Model.prototype.initialize = function () {
   this.sumOfWeights = 0;
   this.sumOfWeightLogWeights = 0;
 
+  this.tileCount = new Array(this.T);
+
   for (let t = 0; t < this.T; t++) {
     this.weightLogWeights[t] = this.weights[t] * Math.log(this.weights[t]);
     this.sumOfWeights += this.weights[t];
     this.sumOfWeightLogWeights += this.weightLogWeights[t];
+
+    this.tileCount[t] = 0;
   }
 
   this.startingEntropy = Math.log(this.sumOfWeights) - this.sumOfWeightLogWeights / this.sumOfWeights;
@@ -94,7 +101,10 @@ Model.prototype.observe = function (rng) {
 
     const amount = this.sumsOfOnes[i];
 
-    if (amount === 0) return false;
+    if (amount === 0) {
+      console.log(`observation failed at tile ${i}`)
+      return false;
+    }
 
     const entropy = this.entropies[i];
 
@@ -137,6 +147,19 @@ Model.prototype.observe = function (rng) {
 
   return null;
 };
+
+
+/**
+ * @public
+ */
+Model.prototype.place = function(argmin, r) {
+  if (!this.wave) this.initialize()
+
+  const w = this.wave[argmin];
+  for (let t = 0; t < this.T; t++) {
+    if (w[t] !== (t === r)) this.ban(argmin, t);
+  }
+}
 
 /**
  * @protected
@@ -276,6 +299,7 @@ Model.prototype.isGenerationComplete = function () {
  * @protected
  */
 Model.prototype.ban = function (i, t) {
+  if (!this.wave[i][t]) return;
   const comp = this.compatible[i][t];
 
   for (let d = 0; d < 4; d++) {
@@ -298,6 +322,16 @@ Model.prototype.ban = function (i, t) {
     for(let t = 0; t < this.T; t++) {
       if (this.wave[i][t]) {
         this.observed[i] = t;
+        this.tileCount[t]++;
+
+        if (this.tileCount[t] >= this.tileLimits[t]) {
+          //for all positions, if this is able, ban it because we can't place any more
+          for (let j = 0; j < this.FMXxFMY; j++) {
+            if (j === i || this.observed[j]) continue;
+            this.ban(j, t)
+          }
+        }
+
         break;
       }
     }
@@ -329,6 +363,10 @@ Model.prototype.clear = function () {
     this.sumsOfWeights[i] = this.sumOfWeights;
     this.sumsOfWeightLogWeights[i] = this.sumOfWeightLogWeights;
     this.entropies[i] = this.startingEntropy;
+  }
+
+  for (let t = 0; t < this.T; t++) {
+    this.tileCount[t] = 0;
   }
 
   this.observed = new Array(this.FMXxFMY);

@@ -156,6 +156,7 @@ module.exports = {
             d: ['2-2'],
             r: ['2-2'],
             weight: 3,
+            limit: 25,
         },
         {
             name: "water-corner-0" ,
@@ -163,11 +164,11 @@ module.exports = {
             l: ['2-0'],
             d: ['0-0'],
             r: ['0-0'],
-            weight: 0.2,
             ban: {
                 u: ['water-corner-1'],
                 l: ['water-corner-3'],
             },
+            weight: 0.4,
         },
         {
             name: "water-corner-1" ,
@@ -179,7 +180,7 @@ module.exports = {
                 l: ['water-corner-2'],
                 d: ['water-corner-0'],
             },
-            weight: 0.2,
+            weight: 0.4,
         },
         {
             name: "water-corner-2" ,
@@ -187,11 +188,11 @@ module.exports = {
             l: ['0-0'],
             d: ['0-2'],
             r: ['2-0'],
-            weight: 0.2,
             ban: {
                 d: ['water-corner-3'],
                 r: ['water-corner-1'],
             },
+            weight: 0.4,
         },
         {
             name: "water-corner-3" ,
@@ -199,11 +200,11 @@ module.exports = {
             l: ['0-0'],
             d: ['0-0'],
             r: ['0-2'],
-            weight: 0.2,
             ban: {
                 u: ['water-corner-2'],
                 r: ['water-corner-0'],
             },
+            weight: 0.4,
         },
         {
             name: "water-line-0" ,
@@ -211,12 +212,10 @@ module.exports = {
             l: ['2-0'],
             d: ['0-0'],
             r: ['0-2'],
-            weight: 0.2,
             ban: {
-                u: ['water-line-2'],
-                r: ['water-line-0'],
-                l: ['water-line-0'],
+                u: ['water-line-2', 'water-bend-0', 'water-bend-1'],
             },
+            weight: 0.1,
         },
         {
             name: "water-line-1" ,
@@ -224,12 +223,10 @@ module.exports = {
             l: ['2-2'],
             d: ['2-0'],
             r: ['0-0'],
-            weight: 0.2,
             ban: {
-                l: ['water-line-3'],
-                u: ['water-line-1'],
-                d: ['water-line-1'],
+                l: ['water-line-3', 'water-bend-1', 'water-bend-2'],
             },
+            weight: 0.1,
         },
         {
             name: "water-line-2" ,
@@ -237,12 +234,10 @@ module.exports = {
             l: ['0-2'],
             d: ['2-2'],
             r: ['2-0'],
-            weight: 0.2,
             ban: {
-                d: ['water-line-0'],
-                l: ['water-line-2'],
-                r: ['water-line-2'],
+                d: ['water-line-0', 'water-bend-2', 'water-bend-3'],
             },
+            weight: 0.1,
         },
         {
             name: "water-line-3" ,
@@ -250,12 +245,10 @@ module.exports = {
             l: ['0-0'],
             d: ['0-2'],
             r: ['2-2'],
-            weight: 0.2,
             ban: {
-                r: ['water-line-1'],
-                d: ['water-line-3'],
-                u: ['water-line-3'],
+                r: ['water-line-1', 'water-bend-0', 'water-bend-3'],
             },
+            weight: 0.1,
         },
         {
             name: "water-bend-0" ,
@@ -263,13 +256,11 @@ module.exports = {
             l: ['2-2'],
             d: ['2-2'],
             r: ['2-0'],
-            weight: 0.2,
             ban: {
-                u: ['water-bend-3'],
-                r: ['water-bend-1'],
                 l: ['water-line-3', 'water-bend-1', 'water-bend-2'],
                 d: ['water-line-0', 'water-bend-3', 'water-bend-2']
             },
+            weight: 0.4,
         },
         {
             name: "water-bend-1" ,
@@ -277,13 +268,11 @@ module.exports = {
             l: ['0-2'],
             d: ['2-2'],
             r: ['2-2'],
-            weight: 0.2,
             ban: {
-                u: ['water-bend-2'],
-                l: ['water-bend-0'],
                 d: ['water-line-0', 'water-bend-2', 'water-bend-3'],
                 r: ['water-line-1', 'water-bend-0', 'water-bend-3'],
             },
+            weight: 0.4,
         },
         {
             name: "water-bend-2" ,
@@ -291,13 +280,11 @@ module.exports = {
             l: ['2-0'],
             d: ['0-2'],
             r: ['2-2'],
-            weight: 0.2,
             ban: {
-                l: ['water-bend-3'],
-                d: ['water-bend-1'],
                 r: ['water-line-1', 'water-bend-0', 'water-bend-3'],
                 u: ['water-line-2', 'water-bend-0', 'water-bend-1'],
             },
+            weight: 0.4,
         },
         {
             name: "water-bend-3" ,
@@ -305,13 +292,11 @@ module.exports = {
             l: ['2-2'],
             d: ['2-0'],
             r: ['0-2'],
-            weight: 0.2,
             ban: {
-                d: ['water-bend-3'],
-                r: ['water-bend-1'],
                 u: ['water-line-2', 'water-bend-0', 'water-bend-1'],
                 l: ['water-line-3', 'water-bend-1', 'water-bend-2'],
             },
+            weight: 0.4,
         },
     ],
 };
