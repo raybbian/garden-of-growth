@@ -25,6 +25,7 @@ The following image was generated to use for inspiration:
 ## Project Milestones
 
 October 30, 2023: Working terrain generation and name animation
+
 <img src="/assets/devlog/tiles-name-demo.gif" width="40%" height="40%"/>
 
 October 15, 2023: Initial commit
