@@ -15,9 +15,16 @@ on core and fixed attributes.
 The following image was generated to use for inspiration:
 ![design2](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/planning/design2.webp)
 
+## Upcoming Features
+
+- [ ] Character movement
+- [ ] Koi pond animation
+- [ ] Foliage generation
+- [ ] Display panel for portfolio items
+
 ## Project Milestones
 
 October 30, 2023: Working terrain generation and name animation
-![tile-and-name](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/assets/devlog/tiles-name-demo.gif)
+<img src="/assets/devlog/tiles-name-demo.gif" width="40%" height="40%"/>
 
 October 15, 2023: Initial commit
