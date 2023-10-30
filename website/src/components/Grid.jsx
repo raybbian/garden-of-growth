@@ -68,12 +68,10 @@ export default function Grid({state, setState}) {
 
     function handleResize() {
         if (window.innerWidth >= 1920) {
-            console.log('set bigger')
             setTileSize(128)
         } else {
             setTileSize(64)
         }
-        console.log(tileSize, window.innerWidth)
     }
 
     useEffect(() => {
