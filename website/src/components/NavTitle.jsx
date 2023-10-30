@@ -82,7 +82,7 @@ export default function NavTitle() {
 
     return (
         <div
-            className={"font-semibold whitespace-nowrap relative"}
+            className={"whitespace-nowrap relative"}
             onMouseEnter={() => setTitleHovered(true)}
             onMouseLeave={() => setTitleHovered(false)}
         >
