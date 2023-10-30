@@ -2,7 +2,7 @@ import NavTitle from "./NavTitle";
 
 export default function Nav({state, setState}) {
     return (
-        <div className={"bg-[#fffef4] w-full h-auto z-50 flex justify-between items-center py-4 px-16 font-semibold whitespace-nowrap"}>
+        <div className={`select-none absolute bg-[#fffef4] w-full z-50 flex justify-between items-center py-4 px-16 font-semibold whitespace-nowrap ${state === 0 ? "h-auto" : "opacity-0 pointer-events-none"}`}>
             <button
                 onClick={() => setState(0)}
                 style={{

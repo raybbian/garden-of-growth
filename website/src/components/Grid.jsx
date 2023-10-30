@@ -29,16 +29,16 @@ export default function Grid({state, setState}) {
                     const index = model.observed[i * destHeight + j]
                     const name = model.tiles[index]
                     newTiles[i * destHeight + j] = {
-                        "x": i+1,
+                        "x": i - destWidth/2,
                         "y": 0,
-                        "z": j+1,
+                        "z": j - destHeight/2,
                         "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/${name}.${tileFormat}`
                     }
                 } else {
                     newTiles[i * destHeight + j] = {
-                        "x": i+1,
+                        "x": i - destWidth/2,
                         "y": 0,
-                        "z": j+1,
+                        "z": j - destHeight/2,
                         "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/empty.${tileFormat}`
                     }
                 }
@@ -50,8 +50,6 @@ export default function Grid({state, setState}) {
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
         const model = modelRef.current;
-        model.clear()
-
         const display = setInterval(() => {
             const result = model.iterate(1)
             if (result === false) {
@@ -63,6 +61,9 @@ export default function Grid({state, setState}) {
             }
             updateTiles()
         }, 0)
+        return () => {
+            model.clear()
+        }
     }, [state]);
 
 
@@ -87,14 +88,12 @@ export default function Grid({state, setState}) {
 
 
     return (
-        <div className={"overflow-hidden w-full h-full select-none pointer-events-none"}>
-            <div
-                className={"relative translate-x-1/2 w-full h-full"}
-            >
-                {tiles.map((tile, tileNum) => (
-                    <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} tileSize={tileSize}/>
-                ))}
-            </div>
+        <div
+            className={"relative translate-x-1/2 translate-y-1/2 w-full h-full"}
+        >
+            {tiles.map((tile, tileNum) => (
+                <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} tileSize={tileSize}/>
+            ))}
         </div>
     )
 }

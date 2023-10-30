@@ -12,7 +12,7 @@ function Tile({x, y, z, src, tileSize}) {
         <img
             src={`${src}`}
             alt={`cube-tile-${x}-${z}`}
-            className={"scale-100 absolute -translate-x-1/2 -translate-y-1/4"}
+            className={"scale-100 absolute -translate-x-1/2"}
             style={{
                 top: `${screenCoordinates[0][0] - y}px`,
                 left: `${screenCoordinates[1][0]}px`,
