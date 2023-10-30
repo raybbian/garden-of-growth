@@ -2,7 +2,6 @@ import './App.css';
 import Grid from "./components/Grid";
 import Nav from "./components/Nav";
 import {useState} from "react";
-import Dev from "./components/Dev";
 
 
 export default function App() {
