@@ -14,11 +14,41 @@ export default function Grid({state, setState}) {
     const dataRef = useRef(require('../terrain/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
 
+    const [tileSize, setTileSize] = useState(window.innerWidth >= 1920 ? 128 : 64);
+
+    function updateTiles() {
+        const path = dataRef.current.path
+        const tileFormat = dataRef.current.tileFormat
+        const model = modelRef.current;
+        if (!model.observed) return;
+
+        const newTiles = tiles.slice()
+        for(let i = 0; i < destWidth; i++) {
+            for(let j = 0; j < destHeight; j++) {
+                if (model.observed[i * destHeight + j] !== undefined) {
+                    const index = model.observed[i * destHeight + j]
+                    const name = model.tiles[index]
+                    newTiles[i * destHeight + j] = {
+                        "x": i+1,
+                        "y": 0,
+                        "z": j+1,
+                        "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/${name}.${tileFormat}`
+                    }
+                } else {
+                    newTiles[i * destHeight + j] = {
+                        "x": i+1,
+                        "y": 0,
+                        "z": j+1,
+                        "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/empty.${tileFormat}`
+                    }
+                }
+            }
+        }
+        setTiles(newTiles)
+    }
 
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
-        const path = dataRef.current.path
-        const tileFormat = dataRef.current.tileFormat
         const model = modelRef.current;
         model.clear()
 
@@ -31,40 +61,42 @@ export default function Grid({state, setState}) {
                 clearInterval(display)
                 return;
             }
-            const newTiles = tiles.slice()
-            for(let i = 0; i < destWidth; i++) {
-                for(let j = 0; j < destHeight; j++) {
-                    if (model.observed[i * destHeight + j] !== undefined) {
-                        const index = model.observed[i * destHeight + j]
-                        const name = model.tiles[index]
-                        newTiles[i * destHeight + j] = {
-                            "x": i,
-                            "y": 0,
-                            "z": j,
-                            "src": `${process.env.PUBLIC_URL}${path}/${name}.${tileFormat}`
-                        }
-                    } else {
-                        newTiles[i * destHeight + j] = {
-                            "x": i,
-                            "y": 0,
-                            "z": j,
-                            "src": `${process.env.PUBLIC_URL}${path}/empty.${tileFormat}`
-                        }
-                    }
-                }
-            }
-            setTiles(newTiles)
+            updateTiles()
         }, 0)
     }, [state]);
 
 
+    function handleResize() {
+        if (window.innerWidth >= 1920) {
+            console.log('set bigger')
+            setTileSize(128)
+        } else {
+            setTileSize(64)
+        }
+        console.log(tileSize, window.innerWidth)
+    }
+
+    useEffect(() => {
+        updateTiles()
+    }, [tileSize])
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, []);
+
+
     return (
-        <div
-            className={"relative translate-x-1/2 w-full h-full"}
-        >
-            {tiles.map((tile, tileNum) => (
-                <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} scale={100}/>
-            ))}
+        <div className={"overflow-hidden w-full h-full select-none pointer-events-none"}>
+            <div
+                className={"relative translate-x-1/2 w-full h-full"}
+            >
+                {tiles.map((tile, tileNum) => (
+                    <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} tileSize={tileSize}/>
+                ))}
+            </div>
         </div>
     )
 }

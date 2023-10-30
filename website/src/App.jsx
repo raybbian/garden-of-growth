@@ -8,7 +8,7 @@ export default function App() {
     const [state, setState] = useState(0)
 
     return (
-        <div className={"relative h-screen w-screen bg-[#d7e4c2]"}>
+        <div className={"relative h-screen w-screen overflow-hidden bg-[#d7e4c2]"}>
             <Nav state={state} setState={setState}/>
             <Grid state={state} setState={setState}/>
         </div>

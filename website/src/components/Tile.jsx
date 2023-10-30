@@ -1,20 +1,22 @@
-import {matrix} from "mathjs";
 import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
-import {memo, useRef} from "react";
+import {memo, useEffect, useState} from "react";
 
-function Tile({x, y, z, src}) {
-    const screenCoordinatesRef = useRef(gridToScreenCoordinates(matrix([[x], [z]])))
+function Tile({x, y, z, src, tileSize}) {
+    const [screenCoordinates, setScreenCoordinates] = useState(gridToScreenCoordinates(x, z, tileSize))
+
+    useEffect(() => {
+        setScreenCoordinates(gridToScreenCoordinates(x, z, tileSize))
+    }, [tileSize]);
 
     return (
         <img
             src={`${src}`}
             alt={`cube-tile-${x}-${z}`}
-            className={"scale-100 absolute -translate-x-1/2"}
+            className={"scale-100 absolute -translate-x-1/2 -translate-y-1/4"}
             style={{
-                top: `${screenCoordinatesRef.current.get([0, 0]) - y}px`,
-                left: `${screenCoordinatesRef.current.get([1, 0])}px`,
+                top: `${screenCoordinates[0][0] - y}px`,
+                left: `${screenCoordinates[1][0]}px`,
                 zIndex: getZIndex(x, z),
-                transition: "ease-in-out top 0.1s, left 0.1s",
             }}
         ></img>
     );
