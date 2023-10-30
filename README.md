@@ -12,10 +12,12 @@ https://www.youtube.com/watch?v=2SuvO4Gi7uY. I wanted to use this algorithm for
 my project because it allows for the generation of unique ideas and places based
 on core and fixed attributes.
 
-The following images were generated to use for inspiration:
-![design1](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/planning/design1.webp)
+The following image was generated to use for inspiration:
 ![design2](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/planning/design2.webp)
 
 ## Project Milestones
 
-October 15, 2023: Initial Commit
+October 30, 2023: Working terrain generation and name animation
+![tile-and-name](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/assets/devlog/tiles-name-demo.gif)
+
+October 15, 2023: Initial commit
