@@ -1,7 +1,7 @@
 export default function SidebarAbout() {
     return (
         <div className={"h-full w-full overflow-hidden flex flex-col"}>
-            <div className={"sticky top-0 h-auto bg-[#fffef4] px-12"}>
+            <div className={"sticky top-0 h-auto bg-[#fffef4] px-12 whitespace-nowrap"}>
                 <p className={"text-title font-bold my-4"}>About Me</p>
             </div>
             <div className={"h-full w-full overflow-y-scroll px-12 pb-8 grow"}>
