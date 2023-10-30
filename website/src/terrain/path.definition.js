@@ -155,7 +155,7 @@ module.exports = {
             l: ['2-2'],
             d: ['2-2'],
             r: ['2-2'],
-            weight: 3,
+            weight: 2,
             limit: 25,
         },
         {

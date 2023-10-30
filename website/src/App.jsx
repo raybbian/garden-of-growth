@@ -11,7 +11,7 @@ export default function App() {
     return (
         <div className={"relative h-screen w-screen bg-[#d7e4c2]"}>
             <Nav state={state} setState={setState}/>
-            {state !== 4 ? <Grid state={state} setState={setState}/> : <Dev state={state} setState={setState}/>}
+            <Grid state={state} setState={setState}/>
         </div>
     );
 }

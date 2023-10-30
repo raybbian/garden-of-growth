@@ -24,8 +24,9 @@ export default function Grid({state, setState}) {
 
         const display = setInterval(() => {
             const result = model.iterate(1)
-            console.log(result)
-            if (result === false || model.isGenerationComplete()) {
+            if (result === false) {
+                model.clear()
+            } else if (model.isGenerationComplete()) {
                 console.log(model)
                 clearInterval(display)
                 return;
@@ -59,7 +60,7 @@ export default function Grid({state, setState}) {
 
     return (
         <div
-            className={"relative translate-x-1/2 translate-y-16 w-full h-full"}
+            className={"relative translate-x-1/2 w-full h-full"}
         >
             {tiles.map((tile, tileNum) => (
                 <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} scale={100}/>
