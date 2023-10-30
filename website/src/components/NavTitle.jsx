@@ -93,12 +93,12 @@ export default function NavTitle() {
             <span className={`select-none pointer-events-none ${animationCanPlay ? "" : "opacity-0"}`}>
                 <span>ray</span>
                 <span
-                    className={`${animationCanPlay && "transition duration-300 ease-in-out"}`}
+                    className={`${animationCanPlay && "transition duration-200 ease-in-out"}`}
                     ref={hiddenMond}
                     style={{opacity: hiddenOpacityValue}}
                 >mond </span>
                 <span
-                    className={`inline-block ${animationCanPlay && "transition duration-300 ease-in-out"}`}
+                    className={`inline-block ${animationCanPlay && "transition duration-200 ease-in-out"}`}
                     style={{transform: `translate(${b1XTransform}px, 0px)`}}
                 >b</span>
                 <span
@@ -106,16 +106,16 @@ export default function NavTitle() {
                     style={{opacity: hiddenOpacityValue}}
                 > </span>
                 <span
-                    className={`inline-block ${animationCanPlay && "transition duration-300 ease-in-out"}`}
+                    className={`inline-block ${animationCanPlay && "transition duration-200 ease-in-out"}`}
                     style={{transform: `translate(${b2XTransform}px, 0px)`}}
                 >b</span>
                 <span
-                    className={`${animationCanPlay && "transition duration-300 ease-in-out"}`}
+                    className={`${animationCanPlay && "transition duration-200 ease-in-out"}`}
                     ref={hiddenIan}
                     style={{opacity: hiddenOpacityValue}}
                 >ian </span>
                 <span
-                    className={`inline-block ${animationCanPlay && "transition duration-300 ease-in-out"}`}
+                    className={`inline-block ${animationCanPlay && "transition duration-200 ease-in-out"}`}
                     style={{
                         transform: `translate(${dotDevXTransform}px, 0px)`,
                         opacity: devOpacityValue
