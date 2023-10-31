@@ -2,7 +2,7 @@ import SidebarAbout from "./SidebarAbout";
 import SidebarExperience from "./SidebarExperience";
 import SidebarProjects from "./SidebarProjects";
 import SidebarContact from "./SidebarContact";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Sidebar({state, setState}) {
 
@@ -20,7 +20,7 @@ export default function Sidebar({state, setState}) {
             {lastNonZeroState === 3 && <SidebarProjects/>}
             {lastNonZeroState === 4 && <SidebarContact/>}
             <button
-                className={"bg-[#fd2e5f] w-[5%] aspect-square rounded-full absolute top-12 right-12 translate-x-1/2 -translate-y-1/2"}
+                className={"bg-[#fd2e5f] w-6 aspect-square rounded-full absolute top-12 right-12 translate-x-1/2 -translate-y-1/2"}
                 onClick={() => setState(0)}
             >
             </button>
