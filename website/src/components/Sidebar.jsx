@@ -3,6 +3,7 @@ import SidebarExperience from "./SidebarExperience";
 import SidebarProjects from "./SidebarProjects";
 import SidebarContact from "./SidebarContact";
 import {useEffect, useState} from "react";
+import {FaArrowLeft, FaArrowRight} from "react-icons/fa6";
 
 export default function Sidebar({state, setState}) {
 
@@ -14,15 +15,22 @@ export default function Sidebar({state, setState}) {
     }, [state])
 
     return (
-        <div className={"w-full h-full bg-[#fffef4] border-r-2 border-black"}>
+        <div className={"w-full h-full bg-[#fffef4] border-l-2 border-black"}>
             {lastNonZeroState === 1 && <SidebarAbout/>}
             {lastNonZeroState === 2 && <SidebarExperience/>}
             {lastNonZeroState === 3 && <SidebarProjects/>}
             {lastNonZeroState === 4 && <SidebarContact/>}
             <button
-                className={"bg-[#fd2e5f] w-6 aspect-square rounded-full absolute top-12 right-12 translate-x-1/2 -translate-y-1/2"}
-                onClick={() => setState(0)}
+                className={"bg-[#fd2e5f] w-12 aspect-square rounded-full absolute top-1/2 left-0 border-2 border-black -translate-x-1/2 -translate-y-1/2 grid place-items-center"}
+                onClick={() => {
+                    if (state === 0) {
+                        setState(1)
+                    } else {
+                        setState(0)
+                    }
+                }}
             >
+                {state === 0 ? <FaArrowLeft size={24}/> : <FaArrowRight size={24}/> }
             </button>
         </div>
     )

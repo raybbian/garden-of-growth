@@ -25,6 +25,15 @@ export default function App() {
             <Nav state={state} setState={setState}/>
             <div className={"grow w-full min-h-0 flex flex-row"}>
                 <div
+                    className={`relative grow`}
+                    style={{
+                        /*https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css/8331169#8331169*/
+                        transition: "max-width 300ms ease-in-out",
+                    }}
+                >
+                    <Grid state={state} setState={setState}/>
+                </div>
+                <div
                     className={`relative`}
                     style={{
                         transition: "width 300ms ease-in-out",
@@ -32,14 +41,6 @@ export default function App() {
                     }}
                 >
                     <Sidebar state={state} setState={setState}/>
-                </div>
-                <div
-                    className={`relative grow`}
-                    style={{
-                        transition: "max-width 300ms ease-in-out",
-                    }}
-                >
-                    <Grid state={state} setState={setState}/>
                 </div>
             </div>
         </div>
