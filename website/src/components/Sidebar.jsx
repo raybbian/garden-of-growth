@@ -21,7 +21,7 @@ export default function Sidebar({state, setState}) {
             {lastNonZeroState === 3 && <SidebarProjects/>}
             {lastNonZeroState === 4 && <SidebarContact/>}
             <button
-                className={"bg-[#fd2e5f] w-12 aspect-square rounded-full absolute top-1/2 left-0 border-2 border-black -translate-x-1/2 -translate-y-1/2 grid place-items-center"}
+                className={"bg-[#fd2e5f] w-16 aspect-square rounded-full absolute top-1/2 -left-16 border-2 border-black -translate-x-1/2 -translate-y-1/2 grid place-items-center"}
                 onClick={() => {
                     if (state === 0) {
                         setState(1)
