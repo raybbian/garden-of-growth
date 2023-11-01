@@ -20,7 +20,9 @@ The following image was generated to use for inspiration:
 - [ ] Character movement
 - [ ] Koi pond animation
 - [ ] Foliage generation
-- [ ] Display panel for portfolio items
+- [x] Display panel for portfolio items
+- [ ] Fractional scaling for tiles
+- [ ] Actual content
 
 ## Project Milestones
 
