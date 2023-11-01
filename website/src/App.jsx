@@ -9,11 +9,15 @@ import {simplifyConstant} from "mathjs";
 export default function App() {
     const [state, setState] = useState(1)
     const [showSidebar, toggleSidebar] = useState(false)
-    const [sidebarWidth, setSidebarWidth] = useState(Math.min(window.innerWidth * 0.30, 576))
+    const [sidebarWidth, setSidebarWidth] = useState(getSidebarWidth())
+
+    function getSidebarWidth() {
+        return Math.max(1280 * 0.3 + 24, Math.min(window.innerWidth * 0.30, 1920 * 0.3 + 24))
+    }
 
     useEffect(() => {
         const handleResize = function () {
-            setSidebarWidth(Math.max(410, Math.min(window.innerWidth * 0.30, 576)))
+            setSidebarWidth(getSidebarWidth())
         }
         window.addEventListener('resize', handleResize)
         return () => {
