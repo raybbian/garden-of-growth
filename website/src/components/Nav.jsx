@@ -20,8 +20,8 @@ export default function Nav({state, showSidebar, toggleSidebar, scrollTo}) {
                 className={"flex justify-between items-center gap-8 font-semibold text-header"}
             >
                 <button onClick={() => handleClick(1)} className={showSidebar && state === 1 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>about me</button>
-                <button onClick={() => handleClick(2)} className={showSidebar && state === 2 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>experience</button>
-                <button onClick={() => handleClick(3)} className={showSidebar && state === 3 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>projects</button>
+                <button onClick={() => handleClick(2)} className={showSidebar && state === 2 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>projects</button>
+                <button onClick={() => handleClick(3)} className={showSidebar && state === 3 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>experience</button>
                 <button onClick={() => handleClick(4)} className={showSidebar && state === 4 && "text-[#fd2e5f] text-title"} style={{transition: "all 200ms ease-in-out"}}>contact</button>
             </div>
         </div>

@@ -55,7 +55,6 @@ export default function Grid({state, setState}) {
             if (result === false) {
                 model.clear()
             } else if (model.isGenerationComplete()) {
-                console.log(model)
                 clearInterval(display)
                 return;
             }

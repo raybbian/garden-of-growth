@@ -22,7 +22,7 @@ The following image was generated to use for inspiration:
 - [ ] Foliage generation
 - [x] Display panel for portfolio items
 - [ ] Fractional scaling for tiles
-- [ ] Actual content
+- [x] Actual content
 
 ## Project Milestones
 
