@@ -89,7 +89,10 @@ export default function Grid({state, setState}) {
     return (
         <div className={"h-full w-full overflow-hidden select-none pointer-events-none "}>
             <div
-                className={"relative translate-x-1/2 translate-y-1/2 w-full h-full"}
+                className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
+                style={{
+                    top: `${tileSize/2}px`
+                }}
             >
                 {tiles.map((tile, tileNum) => (
                     <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} tileSize={tileSize}/>

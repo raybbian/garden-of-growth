@@ -11,6 +11,30 @@ module.exports = {
             weight: 7,
         },
         {
+            name: "grass-foliage-0" ,
+            u: ['0-0'],
+            l: ['0-0'],
+            d: ['0-0'],
+            r: ['0-0'],
+            weight: 3,
+            limit: 8,
+        },
+        {
+            name: "grass-foliage-1" ,
+            u: ['0-0'],
+            l: ['0-0'],
+            d: ['0-0'],
+            r: ['0-0'],
+            weight: 3,
+            limit: 4,
+            ban: {
+                u:['grass-foliage-1'],
+                l:['grass-foliage-1'],
+                d:['grass-foliage-1'],
+                r:['grass-foliage-1'],
+            }
+        },
+        {
             name: "corner-0" ,
             u: ['0-1'],
             l: ['1-0'],
