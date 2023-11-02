@@ -98,7 +98,7 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                     <ProjectEntry
                         title={"Choreolyzer"}
                         detail={"Dance choreography analysis AI that uses multi-object image recognition to parse and display the birds-eye position of dancers."}
-                        link={"https://github.com/Choreolyzer/repositories"}
+                        link={"https://github.com/orgs/Choreolyzer/repositories"}
                         src={`${process.env.PUBLIC_URL}/project-covers/choreolyzer.png`}
                         left={false}
                     />
