@@ -37,7 +37,7 @@ export default function Grid({state, setState}) {
                         "x": i - destWidth/2,
                         "y": 0,
                         "z": j - destHeight/2,
-                        "spriteData": data.tiles[0].sprite,
+                        "spriteData": {x: '256', y: '256', w:'64', h: '64'}
                     }
                 }
             }
