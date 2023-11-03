@@ -14,11 +14,10 @@ export default function Grid({state, setState}) {
     const dataRef = useRef(require('../terrain/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
 
-    const [tileSize, setTileSize] = useState(window.innerWidth >= 1920 ? 128 : 64);
+    const [tileSize, setTileSize] = useState(Math.floor(window.innerWidth / 15 / 64) * 64);
 
     function updateTiles() {
-        const path = dataRef.current.path
-        const tileFormat = dataRef.current.tileFormat
+        const data = dataRef.current
         const model = modelRef.current;
         if (!model.observed) return;
 
@@ -27,19 +26,18 @@ export default function Grid({state, setState}) {
             for(let j = 0; j < destHeight; j++) {
                 if (model.observed[i * destHeight + j] !== undefined) {
                     const index = model.observed[i * destHeight + j]
-                    const name = model.tiles[index]
                     newTiles[i * destHeight + j] = {
                         "x": i - destWidth/2,
                         "y": 0,
                         "z": j - destHeight/2,
-                        "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/${name}.${tileFormat}`
+                        "spriteData": data.tiles[index].sprite,
                     }
                 } else {
                     newTiles[i * destHeight + j] = {
                         "x": i - destWidth/2,
                         "y": 0,
                         "z": j - destHeight/2,
-                        "src": `${process.env.PUBLIC_URL}${path}/${tileSize}/empty.${tileFormat}`
+                        "spriteData": data.tiles[0].sprite,
                     }
                 }
             }
@@ -67,11 +65,7 @@ export default function Grid({state, setState}) {
 
 
     function handleResize() {
-        if (window.innerWidth >= 1920) {
-            setTileSize(128)
-        } else {
-            setTileSize(64)
-        }
+        setTileSize(Math.floor(window.innerWidth / 15 / 64) * 64)
     }
 
     useEffect(() => {
@@ -95,7 +89,7 @@ export default function Grid({state, setState}) {
                 }}
             >
                 {tiles.map((tile, tileNum) => (
-                    <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} src={tile.src} tileSize={tileSize}/>
+                    <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} spriteData={tile.spriteData} spriteSheet={`${process.env.PUBLIC_URL}${dataRef.current.spriteSheet}`} tileSize={tileSize}/>
                 ))}
             </div>
         </div>

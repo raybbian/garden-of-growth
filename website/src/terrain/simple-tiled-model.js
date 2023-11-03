@@ -39,13 +39,13 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
     this.tileLimits.push(tile.limit || Infinity)
 
     let ban = new Array(4)
-    if (tile.ban) ban = [tile.ban.u, tile.ban.l, tile.ban.d, tile.ban.r]
+    if (tile.ban) ban = [tile.ban.tl, tile.ban.bl, tile.ban.br, tile.ban.tr]
 
-    const sockets = [tile.u, tile.l, tile.d, tile.r]
+    const sockets = [tile.tl, tile.bl, tile.br, tile.tr]
       for(let j = i; j >= 0; j--) {
         const oTile = data.tiles[j]
 
-        const oSockets = [oTile.d, oTile.r, oTile.u, oTile.l]
+        const oSockets = [oTile.br, oTile.tr, oTile.tl, oTile.bl]
         //check if reversed socket is in oSockets[i]
         for(let dir = 0; dir < 4; dir++) {
 
