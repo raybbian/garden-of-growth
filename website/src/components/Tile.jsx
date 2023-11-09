@@ -19,8 +19,8 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize}) {
                 height: `${spriteData.h}px`,
                 backgroundImage: `url(${spriteSheet})`,
                 backgroundPosition: `-${spriteData.x}px -${spriteData.y}px`,
-                scale: `${100 * tileSize / 64}%`,
-                imageRendering: "pixelated",
+                scale: `${100 * Math.floor(tileSize / 48)}%`,
+                imageRendering: "crisp-edges"
             }}
         ></div>
     );

@@ -14,7 +14,7 @@ export default function Grid({state, setState}) {
     const dataRef = useRef(require('../terrain/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
 
-    const [tileSize, setTileSize] = useState(Math.floor(window.innerWidth / 15 / 64) * 64);
+    const [tileSize, setTileSize] = useState(Math.floor(window.innerWidth / 15 / 48) * 48);
 
     function updateTiles() {
         const data = dataRef.current
@@ -37,7 +37,7 @@ export default function Grid({state, setState}) {
                         "x": i - destWidth/2,
                         "y": 0,
                         "z": j - destHeight/2,
-                        "spriteData": {x: '256', y: '256', w:'64', h: '64'}
+                        "spriteData": {x: '336', y: '144', w:'48', h: '48'}
                     }
                 }
             }
@@ -65,7 +65,7 @@ export default function Grid({state, setState}) {
 
 
     function handleResize() {
-        setTileSize(Math.floor(window.innerWidth / 15 / 64) * 64)
+        setTileSize(Math.floor(window.innerWidth / 15 / 48) * 48)
     }
 
     useEffect(() => {
