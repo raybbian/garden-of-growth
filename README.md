@@ -18,8 +18,6 @@ The following image was generated to use for inspiration:
 
 ## Upcoming Features
 
-~~- [ ] Character movement~~
-
 - [ ] Tile animations
 - [ ] Koi pond, bridge
 - [ ] Foliage generation
