@@ -165,11 +165,11 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                 >
                     <label className={"text-body flex flex-row justify-between gap-4 items-center"}>
                         Email:
-                        <input type="email" name="email" className={"border-b-2 border-r-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"john.doe@gmail.com"}/>
+                        <input type="email" name="email" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"john.doe@gmail.com"}/>
                     </label>
                     <label className={"text-body flex flex-row justify-between gap-4 items-center"}>
                         Message:
-                        <textarea name="message" className={"border-b-2 border-r-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
+                        <textarea name="message" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     </label>
                     <div className={"flex flex-row justify-end items-center gap-6"}>
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
