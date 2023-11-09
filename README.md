@@ -13,21 +13,28 @@ my project because it allows for the generation of unique ideas and places based
 on core and fixed attributes.
 
 The following image was generated to use for inspiration:
-![design2](https://raw.githubusercontent.com/raybbian/garden-of-growth/master/planning/design2.webp)
+
+<img src="/planning/design2.webp" width="40%"/>
 
 ## Upcoming Features
 
-- [ ] Character movement
-- [ ] Koi pond animation
+~~- [ ] Character movement~~
+
+- [ ] Tile animations
+- [ ] Koi pond, bridge
 - [ ] Foliage generation
 - [x] Display panel for portfolio items
-- [ ] Fractional scaling for tiles
+- [x] Fractional scaling for tiles (Better: WebGL pixel art shader?)
 - [x] Actual content
 
 ## Project Milestones
 
+November 9, 2023: Finished terrain tiles, content and sidebar
+
+<img src="/assets/devlog/content-art-demo.gif" width="40%"/>
+
 October 30, 2023: Working terrain generation and name animation
 
-<img src="/assets/devlog/tiles-name-demo.gif" width="40%" height="40%"/>
+<img src="/assets/devlog/tiles-name-demo.gif" width="40%"/>
 
 October 15, 2023: Initial commit
