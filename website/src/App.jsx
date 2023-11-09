@@ -9,22 +9,6 @@ import {simplifyConstant} from "mathjs";
 export default function App() {
     const [state, setState] = useState(1)
     const [showSidebar, toggleSidebar] = useState(false)
-    const [sidebarWidth, setSidebarWidth] = useState(getSidebarWidth())
-
-    function getSidebarWidth() {
-        return Math.max(1280 * 0.3 + 24, Math.min(window.innerWidth * 0.30, 1920 * 0.3 + 24))
-    }
-
-    useEffect(() => {
-        const handleResize = function () {
-            setSidebarWidth(getSidebarWidth())
-        }
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, []);
-
 
     //lets the current scroll position of sidebar content to handle the state,
     //diverts clicking on the nav bars to scroll to the correct position instead
@@ -66,10 +50,9 @@ export default function App() {
                     <Grid state={state} setState={setState}/>
                 </div>
                 <div
-                    className={`relative`}
+                    className={`relative ${showSidebar ? "w-[36rem]" : "w-0"}`}
                     style={{
                         transition: "width 300ms ease-in-out",
-                        width: !showSidebar ? "0px" : `${sidebarWidth}px`
                     }}
                 >
                     <Sidebar
@@ -82,8 +65,6 @@ export default function App() {
                         stageTwoRef={stageTwoRef}
                         stageThreeRef={stageThreeRef}
                         stageFourRef={stageFourRef}
-                        sidebarWidth={sidebarWidth}
-                        scrollTo={scrollTo}
                     />
                 </div>
             </div>

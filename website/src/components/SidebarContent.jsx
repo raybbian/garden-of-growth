@@ -4,7 +4,7 @@ import {FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
 import ExperienceTimeline from "./ExperienceTimeline";
 import axios from "axios";
 
-export default function SidebarContent({state, setState, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef, sidebarWidth}) {
+export default function SidebarContent({setState, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
     useEffect(() => {
         if (containerRef.current === null) return;
         const getVisibility = function(ref) {
@@ -58,18 +58,15 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
     return (
         <div
             ref={containerRef}
-            className={"h-full overflow-y-scroll px-12"}
-            style={{
-                width: `${sidebarWidth}px`,
-            }}
+            className={"h-full overflow-y-scroll px-12 w-[36rem]"}
         >
             <div ref={stageOneRef} className={"py-4"}>
-                <p className={"text-header"}>About Me</p>
+                <p className={"text-4xl"}>About Me</p>
                 <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 <div className={"grid place-items-center w-full"}>
                     <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/headshot.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
-                <p className={"text-body"}>
+                <p className={"text-lg"}>
                     Hi! My name is Raymond Bian, and I'm a freshman studying computer science at Georgia Tech. I'm interested in a multitude of topics, ranging from AI/ML to NLP to Competitive Programming. But above all, I'm most interested in always learning more.
                 </p>
                 <div className={"flex flex-row justify-center gap-6 p-6 w-full"}>
@@ -85,7 +82,7 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                 </div>
             </div>
             <div ref={stageTwoRef} className={"py-4"}>
-                <p className={"top-0 text-header"}>Projects</p>
+                <p className={"top-0 text-4xl"}>Projects</p>
                 <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 <div className={"grid gap-6"}>
                     <ProjectEntry
@@ -133,17 +130,17 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                 </div>
             </div>
             <div ref={stageThreeRef} className={"py-4"}>
-                <p className={"top-0 text-header"}>Experience</p>
+                <p className={"top-0 text-4xl"}>Experience</p>
                 <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 <ExperienceTimeline/>
             </div>
             <div ref={stageFourRef} className={"py-4"}>
-                <p className={"top-0 text-header"}>Contact</p>
+                <p className={"top-0 text-4xl"}>Contact</p>
                 <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 <div className={"grid place-items-center w-full"}>
                     <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/contact.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
-                <p className={"text-body"}>
+                <p className={"text-lg"}>
                     I would love to be informed of any bugs, inquiries, and knowledge that you might have! I am always interested in learning about new things that I may have missed.
                     <br/>
                     <br/>
@@ -163,11 +160,11 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                     onSubmit={handleFormSubmit}
                     className={"flex flex-col gap-6 mt-4"}
                 >
-                    <label className={"text-body flex flex-row justify-between gap-4 items-center"}>
+                    <label className={"text-lg flex flex-row justify-between gap-4 items-center"}>
                         Email:
                         <input type="email" name="email" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"john.doe@gmail.com"}/>
                     </label>
-                    <label className={"text-body flex flex-row justify-between gap-4 items-center"}>
+                    <label className={"text-lg flex flex-row justify-between gap-4 items-center"}>
                         Message:
                         <textarea name="message" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     </label>
@@ -175,7 +172,7 @@ export default function SidebarContent({state, setState, containerRef, stageOneR
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
                             <FaCheck size={48}/>
                         </div>
-                        <button type="submit" className={"border-2 border-black p-4 w-1/4 text-body justify-self-center"}>Send</button>
+                        <button type="submit" className={"border-2 border-black p-4 w-1/4 text-lg justify-self-center"}>Send</button>
                     </div>
                 </form>
             </div>

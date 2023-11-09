@@ -6,6 +6,7 @@ export default function Grid({state, setState}) {
 
     const destWidth = 16;
     const destHeight = 16;
+    const tileSize = 48;
 
     const [tiles, setTiles] = useState(new Array(destWidth * destHeight));
 
@@ -14,14 +15,14 @@ export default function Grid({state, setState}) {
     const dataRef = useRef(require('../terrain/path.definition'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
 
-    const [tileSize, setTileSize] = useState(Math.floor(window.innerWidth / 15 / 48) * 48);
+    const [scale, setScale] = useState(48)
 
     function updateTiles() {
         const data = dataRef.current
         const model = modelRef.current;
         if (!model.observed) return;
 
-        const newTiles = tiles.slice()
+        const newTiles = [...tiles];
         for(let i = 0; i < destWidth; i++) {
             for(let j = 0; j < destHeight; j++) {
                 if (model.observed[i * destHeight + j] !== undefined) {
@@ -65,14 +66,15 @@ export default function Grid({state, setState}) {
 
 
     function handleResize() {
-        setTileSize(Math.floor(window.innerWidth / 15 / 48) * 48)
+        setScale(Math.floor(window.innerWidth / 16 / tileSize) * tileSize)
     }
 
     useEffect(() => {
         updateTiles()
-    }, [tileSize])
+    }, [scale])
 
     useEffect(() => {
+        handleResize()
         window.addEventListener('resize', handleResize)
         return () => {
             window.removeEventListener('resize', handleResize)
@@ -81,15 +83,24 @@ export default function Grid({state, setState}) {
 
 
     return (
-        <div className={"h-full w-full overflow-hidden select-none pointer-events-none "}>
+        <div className={"h-full w-full overflow-hidden select-none pointer-events-none"}>
             <div
                 className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
                 style={{
-                    top: `${tileSize/2}px`
+                    top: `${1.5*tileSize}px`
                 }}
             >
                 {tiles.map((tile, tileNum) => (
-                    <MemoizedTile key={tileNum} x={tile.x} y={tile.y} z={tile.z} spriteData={tile.spriteData} spriteSheet={`${process.env.PUBLIC_URL}${dataRef.current.spriteSheet}`} tileSize={tileSize}/>
+                    <MemoizedTile
+                        key={tileNum}
+                        x={tile.x}
+                        y={tile.y}
+                        z={tile.z}
+                        spriteData={tile.spriteData}
+                        spriteSheet={`${process.env.PUBLIC_URL}${dataRef.current.spriteSheet}`}
+                        tileSize={tileSize}
+                        scale={scale}
+                    />
                 ))}
             </div>
         </div>

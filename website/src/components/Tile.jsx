@@ -1,16 +1,16 @@
 import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
 import {memo, useEffect, useState} from "react";
 
-function Tile({x, y, z, spriteData, spriteSheet, tileSize}) {
-    const [screenCoordinates, setScreenCoordinates] = useState(gridToScreenCoordinates(x, z, tileSize))
+function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
+    const [screenCoordinates, setScreenCoordinates] = useState(gridToScreenCoordinates(x, z, scale))
 
     useEffect(() => {
-        setScreenCoordinates(gridToScreenCoordinates(x, z, tileSize))
-    }, [tileSize]);
+        setScreenCoordinates(gridToScreenCoordinates(x, z, scale))
+    }, [scale]);
 
     return (
         <div
-            className={"absolute -translate-x-1/2 -translate-y-full"}
+            className={"absolute -translate-x-1/4 -translate-y-1/2"}
             style={{
                 top: `${screenCoordinates[0][0] - y}px`,
                 left: `${screenCoordinates[1][0]}px`,
@@ -19,7 +19,7 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize}) {
                 height: `${spriteData.h}px`,
                 backgroundImage: `url(${spriteSheet})`,
                 backgroundPosition: `-${spriteData.x}px -${spriteData.y}px`,
-                scale: `${100 * Math.floor(tileSize / 48)}%`,
+                scale: `${100 * scale / tileSize}%`,
                 imageRendering: "crisp-edges"
             }}
         ></div>

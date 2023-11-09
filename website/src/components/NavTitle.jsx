@@ -65,27 +65,9 @@ export default function NavTitle() {
         }
     }
 
-    //jank as hell
-    const tempRef = useRef(null)
-    function handleResize() {
-        clearTimeout(tempRef.current)
-        setAnimationCanPlay(false)
-        runAnimation(false, 0)
-        tempRef.current = setTimeout(() => {
-            setAnimationCanPlay(true);
-        }, 100)
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, []);
-
     return (
         <div
-            className={"whitespace-nowrap relative"}
+            className={"whitespace-nowrap relative text-left"}
             onMouseEnter={() => setTitleHovered(true)}
             onMouseLeave={() => setTitleHovered(false)}
         >
