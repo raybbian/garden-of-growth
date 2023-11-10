@@ -3,7 +3,6 @@ import Grid from "./components/Grid";
 import Nav from "./components/Nav";
 import {useEffect, useRef, useState} from "react";
 import Sidebar from "./components/Sidebar";
-import {simplifyConstant} from "mathjs";
 
 
 export default function App() {
