@@ -79,8 +79,8 @@ module.exports = {
         {
             name: "bigsakura",
             sprite: {
-                x: 320,
-                y: 144,
+                x: 480,
+                y: 0,
                 w: 80,
                 h: 119,
             },
@@ -96,32 +96,120 @@ module.exports = {
             },
             limit: 2,
         },
-/*
+
         {
-            name: "grass-foliage-0" ,
+            name: "temple-2",
+            sprite: {
+                x: 48,
+                y: 192,
+                w: 48,
+                h: 196,
+            },
             tl: ['0-0'],
             bl: ['0-0'],
-            br: ['0-0'],
+            br: ['2'],
             tr: ['0-0'],
-            weight: 3,
-            limit: 8,
-        },
-        {
-            name: "grass-foliage-1" ,
-            tl: ['0-0'],
-            bl: ['0-0'],
-            br: ['0-0'],
-            tr: ['0-0'],
-            weight: 3,
-            limit: 4,
+            limit: 1,
             ban: {
-                tl:['grass-foliage-1'],
-                bl:['grass-foliage-1'],
-                br:['grass-foliage-1'],
-                tr:['grass-foliage-1'],
-            }
+                br: ['temple+3', 'temple+2', 'temple+1', 'temple+0', 'temple-3'],
+            },
+            weight: 999,
         },
-*/
+        {
+            name: "temple-1",
+            sprite: {
+                x: 96,
+                y: 192,
+                w: 48,
+                h: 208,
+            },
+            tl: ['2'],
+            bl: ['0-0'],
+            br: ['2'],
+            tr: ['0-0'],
+            limit: 1,
+            ban: {
+                tl: ['temple+3', 'temple+2', 'temple+1', 'temple+0', 'temple-3'],
+                br: ['temple+3', 'temple+2', 'temple+1', 'temple-2', 'temple-3'],
+            },
+            weight: 999,
+        },
+        {
+            name: "temple+0",
+            sprite: {
+                x: 144,
+                y: 192,
+                w: 48,
+                h: 220,
+            },
+            tl: ['2'],
+            bl: ['0-0'],
+            br: ['0-0'],
+            tr: ['2'],
+            limit: 1,
+            ban: {
+                tl: ['temple+3', 'temple+2', 'temple+1', 'temple-2', 'temple-3'],
+                tr: ['temple+3', 'temple+2', 'temple-1', 'temple-2', 'temple-3'],
+            },
+            weight: 999,
+        },
+        {
+            name: "temple+1",
+            sprite: {
+                x: 192,
+                y: 192,
+                w: 48,
+                h: 208,
+            },
+            tl: ['0-0'],
+            bl: ['2'],
+            br: ['0-0'],
+            tr: ['2'],
+            limit: 1,
+            ban: {
+                bl: ['temple+3', 'temple+2', 'temple-1', 'temple-2', 'temple-3'],
+                tr: ['temple+3', 'temple+0', 'temple-1', 'temple-2', 'temple-3'],
+            },
+            weight: 999,
+        },
+        {
+            name: "temple+2",
+            sprite: {
+                x: 240,
+                y: 192,
+                w: 48,
+                h: 196,
+            },
+            tl: ['0-0'],
+            bl: ['2'],
+            br: ['0-1'],
+            tr: ['2'],
+            ban: {
+                bl: ['temple+3', 'temple+0', 'temple-1', 'temple-2', 'temple-3'],
+                tr: ['temple+1', 'temple+0', 'temple-1', 'temple-2', 'temple-3'],
+            },
+            weight: 999,
+            limit: 1,
+        },
+        {
+            name: "temple+3",
+            sprite: {
+                x: 288,
+                y: 192,
+                w: 48,
+                h: 184,
+            },
+            tl: ['0-0'],
+            bl: ['2'],
+            br: ['1-0'],
+            tr: ['0-0'],
+            ban: {
+                bl: ['temple+1', 'temple+0', 'temple-1', 'temple-2', 'temple-3'],
+            },
+            weight: 999,
+            limit: 1,
+        },
+
         {
             name: "corner-0" ,
             sprite: {
