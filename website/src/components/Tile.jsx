@@ -10,7 +10,7 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
 
     return (
         <div
-            className={"absolute -translate-x-1/4 -translate-y-1/2"}
+            className={"absolute -translate-x-1/4 -translate-y-full"}
             style={{
                 top: `${screenCoordinates[0][0] - y}px`,
                 left: `${screenCoordinates[1][0]}px`,
@@ -20,6 +20,7 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
                 backgroundImage: `url(${spriteSheet})`,
                 backgroundPosition: `-${spriteData.x}px -${spriteData.y}px`,
                 scale: `${100 * scale / tileSize}%`,
+                transformOrigin: "top",
                 imageRendering: "crisp-edges"
             }}
         ></div>

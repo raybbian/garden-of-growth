@@ -38,7 +38,7 @@ export default function Grid({state, setState}) {
                         "x": i - destWidth/2,
                         "y": 0,
                         "z": j - destHeight/2,
-                        "spriteData": {x: '336', y: '144', w:'48', h: '48'}
+                        "spriteData": {x: '48', y: '144', w:'48', h: '48'}
                     }
                 }
             }

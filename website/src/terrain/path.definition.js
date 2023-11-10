@@ -1,5 +1,5 @@
 module.exports = {
-    spriteSheet: "/tiles/tileset.png",
+    spriteSheet: "/tiles/final.png",
     tileFormat: "png",
     tiles: [
         {
@@ -15,6 +15,86 @@ module.exports = {
             br: ['0-0'],
             tr: ['0-0'],
             weight: 7,
+        },
+        {
+            name: "sakura",
+            sprite: {
+                x: 384,
+                y: 0,
+                w: 48,
+                h: 119,
+            },
+            tl: ['0-0'],
+            bl: ['0-0'],
+            br: ['0-0'],
+            tr: ['0-0'],
+            ban: {
+                tl: ['sakura, tree, bigsakura, bigtree'],
+                bl: ['sakura, tree, bigsakura, bigtree'],
+                br: ['sakura, tree, bigsakura, bigtree'],
+                tr: ['sakura, tree, bigsakura, bigtree'],
+            },
+            limit: 1,
+        },
+        {
+            name: "tree",
+            sprite: {
+                x: 432,
+                y: 0,
+                w: 48,
+                h: 119,
+            },
+            tl: ['0-0'],
+            bl: ['0-0'],
+            br: ['0-0'],
+            tr: ['0-0'],
+            ban: {
+                tl: ['sakura, tree, bigsakura, bigtree'],
+                bl: ['sakura, tree, bigsakura, bigtree'],
+                br: ['sakura, tree, bigsakura, bigtree'],
+                tr: ['sakura, tree, bigsakura, bigtree'],
+            },
+            limit: 1,
+        },
+        {
+            name: "bigtree",
+            sprite: {
+                x: 400,
+                y: 120,
+                w: 80,
+                h: 119,
+            },
+            tl: ['0-0'],
+            bl: ['0-0'],
+            br: ['0-0'],
+            tr: ['0-0'],
+            ban: {
+                tl: ['sakura, tree, bigsakura, bigtree'],
+                bl: ['sakura, tree, bigsakura, bigtree'],
+                br: ['sakura, tree, bigsakura, bigtree'],
+                tr: ['sakura, tree, bigsakura, bigtree'],
+            },
+            limit: 2,
+        },
+        {
+            name: "bigsakura",
+            sprite: {
+                x: 320,
+                y: 144,
+                w: 80,
+                h: 119,
+            },
+            tl: ['0-0'],
+            bl: ['0-0'],
+            br: ['0-0'],
+            tr: ['0-0'],
+            ban: {
+                tl: ['sakura, tree, bigsakura, bigtree'],
+                bl: ['sakura, tree, bigsakura, bigtree'],
+                br: ['sakura, tree, bigsakura, bigtree'],
+                tr: ['sakura, tree, bigsakura, bigtree'],
+            },
+            limit: 2,
         },
 /*
         {
