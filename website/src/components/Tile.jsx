@@ -1,8 +1,8 @@
 import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
 import {memo, useEffect, useState} from "react";
 
-function Tile({x, y, z, spriteData, spriteSheet, tileSize}) {
-    const screenCoordinates = gridToScreenCoordinates(x, z, tileSize)
+function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
+    const screenCoordinates = gridToScreenCoordinates(x, z, scale * tileSize)
 
     return (
         <div
@@ -11,10 +11,10 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize}) {
                 top: `${screenCoordinates[0][0] - y}px`,
                 left: `${screenCoordinates[1][0]}px`,
                 zIndex: getZIndex(x, z),
-                width: `${spriteData.w}px`,
-                height: `${spriteData.h}px`,
+                width: `${scale * spriteData.w}px`,
+                height: `${scale * spriteData.h}px`,
                 backgroundImage: `url(${spriteSheet})`,
-                backgroundPosition: `-${spriteData.x}px -${spriteData.y}px`,
+                backgroundPosition: `-${scale * spriteData.x}px -${scale * spriteData.y}px`,
                 transformOrigin: "top center",
                 imageRendering: "crisp-edges"
             }}

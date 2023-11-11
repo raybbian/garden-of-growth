@@ -1,4 +1,4 @@
-# Garden of Growth
+﻿# Garden of Growth
 
 This repository contains the files for my personal portfolio, which is still
 under construction. I've started this place to remind myself to constantly grow,
@@ -14,7 +14,7 @@ on core and fixed attributes.
 
 The following image was generated to use for inspiration:
 
-<img src="/planning/design2.webp" width="40%"/>
+<img src="/assets/planning/design2.webp" width="40%"/>
 
 ## Upcoming Features
 

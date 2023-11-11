@@ -1,5 +1,16 @@
 module.exports = {
-    "spriteSheet": "/tiles/final.png",
+    "sprites": {
+        1: "tiles/final1x.png",
+        2: "tiles/final2x.png",
+        3: "tiles/final3x.png",
+        4: "tiles/final4x.png",
+        5: "tiles/final5x.png",
+        6: "tiles/final6x.png",
+        7: "tiles/final7x.png",
+        8: "tiles/final8x.png",
+        9: "tiles/final9x.png",
+        10: "tiles/final10x.png",
+    },
     "tiles":[
         {
             "name": "temple-0-3",
@@ -14,9 +25,11 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                 ],
                 "br": [
                     "temple-0-2"
@@ -42,6 +55,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                 ],
                 "br": [
                     "temple-0-1"
@@ -67,6 +81,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                 ],
                 "br": [
                     "temple-0-0"
@@ -92,9 +107,11 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                 ],
                 "br": [
                     "grass",
+                    "bush",
                 ],
                 "tr": [
                     "temple-1-0"
@@ -120,6 +137,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                 ],
                 "tr": [
                     "temple-2-0"
@@ -195,9 +213,11 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                 ]
             }
         },
@@ -214,6 +234,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                 ],
                 "bl": [
                     "temple-0-3"
@@ -348,6 +369,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                 ]
             }
         },
@@ -364,6 +386,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                 ],
                 "bl": [
                     "temple-1-3"
@@ -448,6 +471,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                 ]
             }
         },
@@ -464,6 +488,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                 ],
                 "bl": [
                     "temple-2-3"
@@ -489,6 +514,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                 ],
                 "bl": [
                     "temple-3-3"
@@ -498,6 +524,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                 ]
             }
         },
@@ -514,6 +541,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                     "sakura",
                     "tree",
                     "bigtree",
@@ -530,6 +558,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                     "sakura",
                     "tree",
                     "bigtree",
@@ -547,6 +576,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                     "sakura",
                     "tree",
                     "bigtree",
@@ -565,6 +595,92 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
+                    "sakura",
+                    "tree",
+                    "bigtree",
+                    "bigsakura",
+                    "corner-2",
+                    "corner-3",
+                    "line-3",
+                    "water-corner-2",
+                    "water-corner-3",
+                    "water-line-3",
+                    "temple-0-0",
+                    "temple-0-1",
+                    "temple-0-2",
+                    "temple-0-3",
+                ]
+            }
+        },
+        {
+            "name": "bush",
+            "weight": 1,
+            "count": 7,
+            "sprite": {
+                "x": 336,
+                "y": 144,
+                "w": 48,
+                "h": 55,
+            },
+            "adj": {
+                "tl": [
+                    "grass",
+                    "bush",
+                    "sakura",
+                    "tree",
+                    "bigtree",
+                    "bigsakura",
+                    "corner-0",
+                    "corner-3",
+                    "line-0",
+                    "water-corner-0",
+                    "water-corner-3",
+                    "water-line-0",
+                    "temple-4-0",
+                    "temple-1-0",
+                    "temple-0-0",
+                ],
+                "bl": [
+                    "grass",
+                    "bush",
+                    "sakura",
+                    "tree",
+                    "bigtree",
+                    "bigsakura",
+                    "corner-0",
+                    "corner-1",
+                    "line-1",
+                    "water-corner-0",
+                    "water-corner-1",
+                    "water-line-1",
+                    "temple-4-3",
+                    "temple-4-2",
+                    "temple-4-1",
+                    "temple-4-0",
+                ],
+                "br": [
+                    "grass",
+                    "bush",
+                    "sakura",
+                    "tree",
+                    "bigtree",
+                    "bigsakura",
+                    "corner-1",
+                    "corner-2",
+                    "line-2",
+                    "water-corner-1",
+                    "water-corner-2",
+                    "water-line-2",
+                    "temple-0-3",
+                    "temple-1-3",
+                    "temple-2-3",
+                    "temple-3-3",
+                    "temple-4-3",
+                ],
+                "tr": [
+                    "grass",
+                    "bush",
                     "sakura",
                     "tree",
                     "bigtree",
@@ -585,7 +701,7 @@ module.exports = {
         {
             "name": "sakura",
             "weight": 1,
-            "count": 1,
+            "count": 3,
             "sprite": {
                 "x": 384,
                 "y": 0,
@@ -595,6 +711,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-3",
                     "line-0",
@@ -604,6 +721,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-1",
                     "line-1",
@@ -613,6 +731,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                     "corner-1",
                     "corner-2",
                     "line-2",
@@ -622,6 +741,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -644,6 +764,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-3",
                     "line-0",
@@ -653,6 +774,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-1",
                     "line-1",
@@ -662,6 +784,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                     "corner-1",
                     "corner-2",
                     "line-2",
@@ -671,6 +794,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -693,6 +817,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-3",
                     "line-0",
@@ -702,6 +827,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-1",
                     "line-1",
@@ -711,6 +837,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                     "corner-1",
                     "corner-2",
                     "line-2",
@@ -720,6 +847,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -742,6 +870,7 @@ module.exports = {
             "adj": {
                 "tl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-3",
                     "line-0",
@@ -751,6 +880,7 @@ module.exports = {
                 ],
                 "bl": [
                     "grass",
+                    "bush",
                     "corner-0",
                     "corner-1",
                     "line-1",
@@ -760,6 +890,7 @@ module.exports = {
                 ],
                 "br": [
                     "grass",
+                    "bush",
                     "corner-1",
                     "corner-2",
                     "line-2",
@@ -769,6 +900,7 @@ module.exports = {
                 ],
                 "tr": [
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -801,6 +933,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "corner-1",
                     "corner-2",
                     "line-2",
@@ -814,6 +947,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -841,6 +975,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "corner-3",
                     "line-0",
                     "water-corner-0",
@@ -859,6 +994,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "corner-2",
                     "corner-3",
                     "line-3",
@@ -886,6 +1022,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "corner-3",
                     "line-0",
                     "water-corner-0",
@@ -900,6 +1037,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "line-1",
                     "water-corner-0",
                     "water-corner-1",
@@ -935,6 +1073,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "line-1",
                     "water-corner-0",
                     "water-corner-1",
@@ -948,6 +1087,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "line-2",
                     "water-corner-1",
                     "water-corner-2",
@@ -988,6 +1128,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-1",
                     "water-corner-2",
                     "water-line-2"
@@ -1037,6 +1178,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-2",
                     "water-corner-3",
                     "water-line-3",
@@ -1062,6 +1204,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-0",
                     "water-corner-3",
                     "water-line-0"
@@ -1111,6 +1254,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-0",
                     "water-corner-1",
                     "water-line-1"
@@ -1246,7 +1390,7 @@ module.exports = {
         },
         {
             "name": "water",
-            "weight": 1.8,
+            "weight": 2.2,
             "count": 25,
             "sprite": {
                 "x": 192,
@@ -1313,6 +1457,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-1",
                     "water-corner-2",
                     "water-line-2"
@@ -1326,6 +1471,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-2",
                     "water-corner-3",
                     "water-line-3"
@@ -1353,6 +1499,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-3",
                     "water-line-0"
                 ],
@@ -1373,6 +1520,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-2",
                     "water-corner-3",
                     "water-line-3"
@@ -1400,6 +1548,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-corner-3",
                     "water-line-0"
                 ],
@@ -1414,6 +1563,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-line-1"
                 ],
                 "br": [
@@ -1452,6 +1602,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-line-1"
                 ],
                 "br": [
@@ -1465,6 +1616,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-line-2"
                 ],
                 "tr": [
@@ -1504,6 +1656,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-line-2"
                 ],
                 "tr": [
@@ -1551,6 +1704,7 @@ module.exports = {
                     "tree",
                     "sakura",
                     "grass",
+                    "bush",
                     "water-line-3"
                 ]
             }
@@ -1577,7 +1731,8 @@ module.exports = {
                     "bigtree",
                     "tree",
                     "sakura",
-                    "grass"
+                    "grass",
+                    "bush",
                 ],
                 "bl": [
                     "water-line-2",
@@ -1624,7 +1779,8 @@ module.exports = {
                     "bigtree",
                     "tree",
                     "sakura",
-                    "grass"
+                    "grass",
+                    "bush",
                 ],
                 "br": [
                     "water-line-3",

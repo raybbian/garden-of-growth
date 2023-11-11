@@ -15,7 +15,7 @@ export default function Grid({state, setState}) {
     //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
     const dataRef = useRef(require('../terrain/japanese'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
-    modelRef.current.place(85, 5)
+    modelRef.current.place(180, 5)
 
     const [scale, setScale] = useState(2)
 
@@ -51,12 +51,12 @@ export default function Grid({state, setState}) {
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
         const model = modelRef.current;
-        model.place(85, 5)
+        model.place(180, 5)
         const display = setInterval(() => {
             const result = model.iterate(1)
             if (result === false) {
                 model.clear()
-                model.place(85, 5)
+                model.place(180, 5)
             } else if (model.isGenerationComplete()) {
                 clearInterval(display)
                 return;
@@ -77,6 +77,14 @@ export default function Grid({state, setState}) {
     }, [scale])
 
     useEffect(() => {
+        for(let dir = 0; dir < 4; dir++) {
+            for(let i = 0; i < modelRef.current.propagator[dir][21].length; i++) {
+                console.log(dir, modelRef.current.tiles[modelRef.current.propagator[dir][21][i]])
+            }
+        }
+
+
+
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => {
@@ -91,7 +99,6 @@ export default function Grid({state, setState}) {
                 className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
                 style={{
                     top: `${1.5*tileSize}px`,
-                    scale: `${scale * 100}%`,
                 }}
             >
                 {tiles.map((tile, tileNum) => (
@@ -101,8 +108,9 @@ export default function Grid({state, setState}) {
                         y={tile.y}
                         z={tile.z}
                         spriteData={tile.spriteData}
-                        spriteSheet={`${process.env.PUBLIC_URL}${dataRef.current.spriteSheet}`}
+                        spriteSheet={`${process.env.PUBLIC_URL}/${dataRef.current.sprites[scale]}`}
                         tileSize={tileSize}
+                        scale={scale}
                     />
                 ))}
             </div>
