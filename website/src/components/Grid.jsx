@@ -77,14 +77,6 @@ export default function Grid({state, setState}) {
     }, [scale])
 
     useEffect(() => {
-        for(let dir = 0; dir < 4; dir++) {
-            for(let i = 0; i < modelRef.current.propagator[dir][21].length; i++) {
-                console.log(dir, modelRef.current.tiles[modelRef.current.propagator[dir][21][i]])
-            }
-        }
-
-
-
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => {
