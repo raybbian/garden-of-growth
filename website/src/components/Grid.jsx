@@ -3,80 +3,72 @@ import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 import {get} from "axios";
 
-export default function Grid({state, setState}) {
+export default function Grid({progress}) {
 
     const destWidth = 16;
     const destHeight = 16;
     const tileSize = 48;
 
-    const [tiles, setTiles] = useState(new Array(destWidth * destHeight));
+    const [tiles, setTiles] = useState(initTiles());
 
     //only have one model for each grid, but clear it on refresh instead of making a new one
     //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
     const dataRef = useRef(require('../terrain/japanese'))
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
-    modelRef.current.place(180, 5)
 
-    const [scale, setScale] = useState(2)
+    const [scale, setScale] = useState(1)
 
-    function updateTiles() {
-        const data = dataRef.current
-        const model = modelRef.current;
-        if (!model.observed) return;
-
-        const newTiles = [...tiles];
-        for(let i = 0; i < destWidth; i++) {
-            for(let j = 0; j < destHeight; j++) {
-                if (model.observed[i * destHeight + j] !== undefined) {
-                    const index = model.observed[i * destHeight + j]
-                    newTiles[i * destHeight + j] = {
-                        "x": i - destWidth/2,
-                        "y": 0,
-                        "z": j - destHeight/2,
-                        "spriteData": data.tiles[index].sprite,
-                    }
-                } else {
-                    newTiles[i * destHeight + j] = {
-                        "x": i - destWidth/2,
-                        "y": 0,
-                        "z": j - destHeight/2,
-                        "spriteData": {x: '48', y: '144', w:'48', h: '48'}
-                    }
-                }
+    function initTiles() {
+        const newTiles = new Array(destWidth * destHeight)
+        for(let i = 0; i < newTiles.length; i++) {
+            const z = i % destWidth;
+            const x = i / destWidth | 0;
+            newTiles[i] = {
+                "x": x - destWidth/2,
+                "y": 0,
+                "z": z - destHeight/2,
+                // "spriteData": {x: '0', y: '0', w:'48', h: '48'},
+                "spriteData": {x: '48', y: '144', w:'48', h: '48'},
             }
         }
-        setTiles(newTiles)
+        return newTiles;
     }
 
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
         const model = modelRef.current;
-        model.place(180, 5)
-        const display = setInterval(() => {
-            const result = model.iterate(1)
-            if (result === false) {
-                model.clear()
-                model.place(180, 5)
-            } else if (model.isGenerationComplete()) {
-                clearInterval(display)
-                return;
-            }
-            updateTiles()
-        }, 0)
-        return () => {
+        while (!model.generate()) {
             model.clear()
         }
-    }, [state]);
-
-    function handleResize() {
-        setScale(Math.floor(window.innerWidth / 16 / tileSize))
-    }
+        console.log(model.process)
+    }, []);
 
     useEffect(() => {
-        updateTiles()
-    }, [scale])
+        const data = dataRef.current
+        const model = modelRef.current;
+        if (!model.observed) return;
 
+        const newTiles = [...initTiles()]
+        const placeAmount = Math.floor(progress * model.process.length)
+        for(let i = 0; i < placeAmount; i++) {
+            const pos = model.process[i][0];
+            const z = pos % destWidth;
+            const x = pos / destWidth | 0;
+            newTiles[pos] = {
+                "x": x - destWidth/2,
+                "z": z - destHeight/2,
+                "spriteData": data.tiles[model.process[i][1]].sprite
+            }
+        }
+        setTiles(newTiles)
+    }, [progress]);
+
+    //for resizing events
     useEffect(() => {
+        const handleResize = function() {
+            setScale(Math.floor(window.innerWidth / 16 / tileSize))
+            setTiles([...tiles])
+        }
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => {
@@ -97,7 +89,6 @@ export default function Grid({state, setState}) {
                     <MemoizedTile
                         key={tileNum}
                         x={tile.x}
-                        y={tile.y}
                         z={tile.z}
                         spriteData={tile.spriteData}
                         spriteSheet={`${process.env.PUBLIC_URL}/${dataRef.current.sprites[scale]}`}

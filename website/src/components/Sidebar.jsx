@@ -1,11 +1,12 @@
 import SidebarContent from "./SidebarContent";
 import {FaArrowLeft, FaArrowRight} from "react-icons/fa6";
 
-export default function Sidebar({state, setState, showSidebar, toggleSidebar, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
+export default function Sidebar({setState, setProgress, showSidebar, toggleSidebar, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
     return (
         <div className={"w-full h-full bg-[#fffef4] border-l-2 border-black"}>
             <SidebarContent
                 setState={setState}
+                setProgress={setProgress}
                 containerRef={containerRef}
                 stageOneRef={stageOneRef}
                 stageTwoRef={stageTwoRef}

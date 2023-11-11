@@ -4,60 +4,36 @@ import {FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
 import ExperienceTimeline from "./ExperienceTimeline";
 import axios from "axios";
 
-export default function SidebarContent({setState, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
-    useEffect(() => {
-        if (containerRef.current === null) return;
-        const getVisibility = function(ref) {
-            if (ref.current == null || containerRef.current == null) return 0;
-            const rect = ref.current.getBoundingClientRect()
-            const containerRect = containerRef.current.getBoundingClientRect()
+export default function SidebarContent({setState, setProgress, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
+    function getVisibility(ref) {
+        if (ref.current == null || containerRef.current == null) return 0;
+        const rect = ref.current.getBoundingClientRect()
+        const containerRect = containerRef.current.getBoundingClientRect()
 
-            const visibleHeight = Math.min(rect.bottom, containerRect.bottom) - Math.max(rect.top, containerRect.top)
-            return visibleHeight / rect.height
-        }
-        const handleScroll = function() {
-            const arr = [stageOneRef, stageTwoRef, stageThreeRef, stageFourRef]
-            const maxRef = arr.reduce((a,b) => {
-                return (getVisibility(a) < getVisibility(b)) ? b : a
-            })
-            if (maxRef === stageOneRef) {
-                setState(1)
-            } else if (maxRef === stageTwoRef) {
-                setState(2)
-            } else if (maxRef === stageThreeRef) {
-                setState(3)
-            } else if (maxRef === stageFourRef) {
-                setState(4)
-            }
-        }
-        containerRef.current.addEventListener('scroll', handleScroll)
+        const visibleHeight = Math.min(rect.bottom, containerRect.bottom) - Math.max(rect.top, containerRect.top)
+        return visibleHeight / rect.height
+    }
 
-        return () => {
-            containerRef.current.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
+    function handleScroll() {
+        const scrollProgress = containerRef.current.scrollTop
+        const scrollTotal = containerRef.current.scrollHeight - containerRef.current.clientHeight
+        setProgress(scrollProgress / scrollTotal)
+        const arr = [stageOneRef, stageTwoRef, stageThreeRef, stageFourRef]
+        const maxRef = arr.reduce((a,b) => {
+            return (getVisibility(a) < getVisibility(b)) ? b : a
+        })
+        if (maxRef === stageOneRef) setState(1)
+        else if (maxRef === stageTwoRef) setState(2)
+        else if (maxRef === stageThreeRef) setState(3)
+        else if (maxRef === stageFourRef) setState(4)
+    }
 
     const [formSucceeded, setFormSucceeded] = useState(false);
-    function handleFormSubmit(e) {
-        e.preventDefault()
-        axios({
-            url: 'https://formspree.io/f/myyqvzae',
-            method: 'post',
-            headers: {
-                'Accept': 'application/json'
-            },
-            data: {
-                email: e.target[0].value,
-                message: e.target[1].value
-            }
-        }).then(() => {
-            setFormSucceeded(true);
-        })
-    }
 
     return (
         <div
             ref={containerRef}
+            onScroll={handleScroll}
             className={"h-full overflow-y-scroll px-12 w-[36rem]"}
         >
             <div ref={stageOneRef} className={"py-4"}>
@@ -157,7 +133,22 @@ export default function SidebarContent({setState, containerRef, stageOneRef, sta
                     Alternatively, you can use the form below:
                 </p>
                 <form
-                    onSubmit={handleFormSubmit}
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        axios({
+                            url: 'https://formspree.io/f/myyqvzae',
+                            method: 'post',
+                            headers: {
+                                'Accept': 'application/json'
+                            },
+                            data: {
+                                email: e.target[0].value,
+                                message: e.target[1].value
+                            }
+                        }).then(() => {
+                            setFormSucceeded(true);
+                        })
+                    }}
                     className={"flex flex-col gap-6 mt-4"}
                 >
                     <label className={"text-lg flex flex-row justify-between gap-4 items-center"}>

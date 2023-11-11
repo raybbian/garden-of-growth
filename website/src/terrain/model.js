@@ -38,6 +38,8 @@ Model.prototype.DX = [-1, 0, 1, 0];
 Model.prototype.DY = [0, 1, 0, -1];
 Model.prototype.opposite = [2, 3, 0, 1];
 
+Model.prototype.process = null;
+
 /**
  * @protected
  */
@@ -81,6 +83,8 @@ Model.prototype.initialize = function () {
 
   this.stack = new Array(this.FMXxFMY * this.T);
   this.stackSize = 0;
+
+  this.process = [];
 };
 
 /**
@@ -142,8 +146,9 @@ Model.prototype.place = function(argmin, r) {
   //argmin is the spot on the wave
   if (!this.wave) this.initialize()
 
+  const w = this.wave[argmin]
   for (let t = 0; t < this.T; t++) {
-    if (t !== r) this.ban(argmin, t);
+    if (w[t] !== (t === r)) this.ban(argmin, t);
   }
 }
 
@@ -256,6 +261,7 @@ Model.prototype.generate = function (rng) {
   if (!this.wave) this.initialize();
 
   this.clear();
+  this.place(180, 5)
 
   while(true) {
     const result = this.singleIteration(rng);
@@ -310,6 +316,8 @@ Model.prototype.ban = function (i, t) {
         this.observed[i] = t;
         this.tileCount[t]++;
 
+        this.process.push([i, t])
+
         if (this.tileCount[t] >= this.tileLimits[t]) {
           //for all positions, if this is able, ban it because we can't place any more
           for (let j = 0; j < this.FMXxFMY; j++) {
@@ -362,4 +370,6 @@ Model.prototype.clear = function () {
   this.observed = new Array(this.FMXxFMY);
   this.initiliazedField = true;
   this.generationComplete = false;
+
+  this.process = []
 };

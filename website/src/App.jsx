@@ -7,7 +7,8 @@ import Sidebar from "./components/Sidebar";
 
 export default function App() {
     const [state, setState] = useState(1)
-    const [showSidebar, toggleSidebar] = useState(false)
+    const [progress, setProgress] = useState(0);
+    const [showSidebar, toggleSidebar] = useState(true)
 
     //lets the current scroll position of sidebar content to handle the state,
     //diverts clicking on the nav bars to scroll to the correct position instead
@@ -18,15 +19,9 @@ export default function App() {
     const stageFourRef = useRef(null)
     function scrollTo(state) {
         let scrollYAmount = 0;
-        if (state >= 2) {
-            scrollYAmount += stageOneRef.current.getBoundingClientRect().height
-        }
-        if (state >= 3) {
-            scrollYAmount += stageTwoRef.current.getBoundingClientRect().height
-        }
-        if (state >= 4) {
-            scrollYAmount += stageThreeRef.current.getBoundingClientRect().height
-        }
+        if (state >= 2) scrollYAmount += stageOneRef.current.getBoundingClientRect().height
+        if (state >= 3) scrollYAmount += stageTwoRef.current.getBoundingClientRect().height
+        if (state >= 4) scrollYAmount += stageThreeRef.current.getBoundingClientRect().height
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
@@ -46,7 +41,7 @@ export default function App() {
                         transition: "max-width 300ms ease-in-out",
                     }}
                 >
-                    <Grid state={state} setState={setState}/>
+                    <Grid progress={progress}/>
                 </div>
                 <div
                     className={`relative ${showSidebar ? "w-[36rem]" : "w-0"}`}
@@ -55,8 +50,8 @@ export default function App() {
                     }}
                 >
                     <Sidebar
-                        state={state}
                         setState={setState}
+                        setProgress={setProgress}
                         showSidebar={showSidebar}
                         toggleSidebar={toggleSidebar}
                         containerRef={containerRef}
