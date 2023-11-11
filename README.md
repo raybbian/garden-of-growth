@@ -20,7 +20,7 @@ The following image was generated to use for inspiration:
 
 - [ ] Tile animations
 - [ ] Koi pond, bridge
-- [ ] Foliage generation
+- [x] Foliage generation
 - [x] Display panel for portfolio items
 - [x] Fractional scaling for tiles (Better: WebGL pixel art shader?)
 - [x] Actual content
