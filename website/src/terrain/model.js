@@ -102,7 +102,6 @@ Model.prototype.observe = function (rng) {
     const amount = this.sumsOfOnes[i];
 
     if (amount === 0) {
-      console.log(`observation failed at tile ${i}`)
       return false;
     }
 
