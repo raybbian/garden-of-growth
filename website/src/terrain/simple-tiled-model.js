@@ -1,4 +1,5 @@
 import {Model} from './model'
+import test from "./japanese";
 
 /**
  *
@@ -25,43 +26,36 @@ export const SimpleTiledModel = function SimpleTiledModel (data, subsetName, wid
   this.T = data.tiles.length
 
   for (let dir = 0; dir < 4; dir++) {
-    this.propagator[dir] = new Array(data.tiles.length)
-    for (let i = 0; i < data.tiles.length; i++) {
+    this.propagator[dir] = new Array(this.T)
+    for (let i = 0; i < this.T; i++) {
       this.propagator[dir][i] = []
     }
   }
 
-  for (let i = 0; i < data.tiles.length; i++) {
+  const tileToIdx = {}
+
+  for (let i = 0; i < this.T; i++) {
     const tile = data.tiles[i];
     this.tiles[i] = tile.name;
+    this.weights[i] = tile.weight
+    this.tileLimits[i] = tile.count
+    tileToIdx[tile.name] = i;
+  }
 
-    this.weights.push(tile.weight || 1)
-    this.tileLimits.push(tile.limit || Infinity)
-
-    let ban = new Array(4)
-    if (tile.ban) ban = [tile.ban.tl, tile.ban.bl, tile.ban.br, tile.ban.tr]
-
-    const sockets = [tile.tl, tile.bl, tile.br, tile.tr]
-      for(let j = i; j >= 0; j--) {
-        const oTile = data.tiles[j]
-
-        const oSockets = [oTile.br, oTile.tr, oTile.tl, oTile.bl]
-        //check if reversed socket is in oSockets[i]
-        for(let dir = 0; dir < 4; dir++) {
-
-          if (ban[dir] && ban[dir].includes(oTile.name)) continue
-
-          for(let s = 0; s < sockets[dir].length; s++) {
-            const reversedName = [...sockets[dir][s]].reverse().join("")
-            if (oSockets[dir].includes(reversedName)) {
-              //add to propagator
-              this.propagator[dir][i].push(j)
-              this.propagator[(dir + 2) % 4][j].push(i)
-            }
-          }
-
-      }
-    }
+  for (let i = 0; i < this.T; i++) {
+    const tile = data.tiles[i];
+    tile.adj.tl.forEach((tile) => {
+      this.propagator[0][i].push(tileToIdx[tile]);
+    })
+    tile.adj.bl.forEach((tile) => {
+      this.propagator[1][i].push(tileToIdx[tile]);
+    })
+    tile.adj.br.forEach((tile) => {
+      this.propagator[2][i].push(tileToIdx[tile]);
+    })
+    tile.adj.tr.forEach((tile) => {
+      this.propagator[3][i].push(tileToIdx[tile]);
+    })
   }
 };
 

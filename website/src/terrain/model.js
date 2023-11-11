@@ -119,19 +119,6 @@ Model.prototype.observe = function (rng) {
   }
 
   if (argmin === -1) {
-/*
-    this.observed = new Array(this.FMXxFMY);
-
-    for (let i = 0; i < this.FMXxFMY; i++) {
-      for (let t = 0; t < this.T; t++) {
-        if (this.wave[i][t]) {
-          this.observed[i] = t;
-          break;
-        }
-      }
-    }
-*/
-
     return true;
   }
 
@@ -153,11 +140,11 @@ Model.prototype.observe = function (rng) {
  * @public
  */
 Model.prototype.place = function(argmin, r) {
+  //argmin is the spot on the wave
   if (!this.wave) this.initialize()
 
-  const w = this.wave[argmin];
   for (let t = 0; t < this.T; t++) {
-    if (w[t] !== (t === r)) this.ban(argmin, t);
+    if (t !== r) this.ban(argmin, t);
   }
 }
 
@@ -315,7 +302,7 @@ Model.prototype.ban = function (i, t) {
   this.sumsOfWeights[i] -= this.weights[t];
   this.sumsOfWeightLogWeights[i] -= this.weightLogWeights[t];
 
-  //if sums of ones is 1, then we have observed the last remaining tile, go find it
+  //if sums of ones is 1, then we have observed tile, go find which one it is
   //I draw the observed output here once a tile is decided, instead of when generation is finished
   //i wonder if this is slower or faster
   if (this.sumsOfOnes[i] == 1) {
@@ -335,6 +322,10 @@ Model.prototype.ban = function (i, t) {
         break;
       }
     }
+  }
+
+  if (this.sumsOfOnes[i] == 0) {
+    this.observed[i] = undefined
   }
 
   const sum = this.sumsOfWeights[i];
