@@ -17,7 +17,6 @@ function Tile({x, z, spriteData, spriteSheet, tileSize, scale}) {
                 backgroundPosition: `-${scale * spriteData.x}px -${scale * spriteData.y}px`,
                 transformOrigin: "top center",
                 imageRendering: "crisp-edges",
-                transition: "top 300ms ease-in-out"
             }}
         ></div>
     );

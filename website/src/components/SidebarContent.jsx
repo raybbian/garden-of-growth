@@ -151,14 +151,8 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     }}
                     className={"flex flex-col gap-6 mt-4"}
                 >
-                    <label className={"text-lg flex flex-row justify-between gap-4 items-center"}>
-                        Email:
-                        <input type="email" name="email" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"john.doe@gmail.com"}/>
-                    </label>
-                    <label className={"text-lg flex flex-row justify-between gap-4 items-center"}>
-                        Message:
-                        <textarea name="message" className={"border-2 border-black bg-[#fffef4] w-3/4 p-2"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
-                    </label>
+                    <input type="email" name="email" className={"w-full border-2 border-black bg-[#fffef4] py-2 px-4"} placeholder={"john.doe@gmail.com"}/>
+                    <textarea name="message" className={"w-full border-2 border-black bg-[#fffef4] w-3/4 py-2 px-4"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     <div className={"flex flex-row justify-end items-center gap-6"}>
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
                             <FaCheck size={48}/>
