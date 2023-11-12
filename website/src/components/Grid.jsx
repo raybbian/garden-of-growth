@@ -39,7 +39,7 @@ export default function Grid({progress}) {
         const model = modelRef.current;
 
         const newTiles = [...initTiles()]
-        const placeAmount = Math.floor(progress * model.process.length)
+        const placeAmount = Math.floor(progress * (model.process.length - 1)) + 1
         for(let i = 0; i < placeAmount; i++) {
             for(let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
@@ -72,7 +72,7 @@ export default function Grid({progress}) {
     useEffect(() => {
         const handleResize = function() {
             setScale(Math.floor(window.innerWidth / 16 / tileSize))
-            setTiles([...tiles])
+            updateTiles()
         }
         handleResize()
         window.addEventListener('resize', handleResize)
