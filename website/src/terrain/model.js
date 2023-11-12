@@ -38,6 +38,7 @@ Model.prototype.DX = [-1, 0, 1, 0];
 Model.prototype.DY = [0, 1, 0, -1];
 Model.prototype.opposite = [2, 3, 0, 1];
 
+Model.prototype.iterationCount = 0;
 Model.prototype.process = null;
 
 /**
@@ -84,7 +85,9 @@ Model.prototype.initialize = function () {
   this.stack = new Array(this.FMXxFMY * this.T);
   this.stackSize = 0;
 
-  this.process = [];
+  this.iterationCount = 0;
+  this.process = []
+  this.process.push([])
 };
 
 /**
@@ -202,6 +205,7 @@ Model.prototype.propagate = function () {
  * @protected
  */
 Model.prototype.singleIteration = function (rng) {
+  this.process.push([])
   const result = this.observe(rng);
 
   if (result !== null) {
@@ -261,7 +265,28 @@ Model.prototype.generate = function (rng) {
   if (!this.wave) this.initialize();
 
   this.clear();
+
+  //japanese tileset, place temple
+  this.place(145, 19)
+  this.place(146, 17)
+  this.place(147, 13)
+  this.place(148, 7)
+  this.place(161, 18)
+  this.place(162, 16)
+  this.place(163, 12)
+  this.place(164, 6)
+  this.place(177, 14)
+  this.place(178, 15)
+  this.place(179, 11)
   this.place(180, 5)
+  this.place(193, 8)
+  this.place(194, 9)
+  this.place(195, 10)
+  this.place(196, 4)
+  this.place(209, 0)
+  this.place(210, 1)
+  this.place(211, 2)
+  this.place(212, 3)
 
   while(true) {
     const result = this.singleIteration(rng);
@@ -316,7 +341,7 @@ Model.prototype.ban = function (i, t) {
         this.observed[i] = t;
         this.tileCount[t]++;
 
-        this.process.push([i, t])
+        this.process[this.process.length - 1].push([i, t])
 
         if (this.tileCount[t] >= this.tileLimits[t]) {
           //for all positions, if this is able, ban it because we can't place any more
@@ -371,5 +396,7 @@ Model.prototype.clear = function () {
   this.initiliazedField = true;
   this.generationComplete = false;
 
-  this.process = []
+  this.iterationCount = 0;
+  this.process = [];
+  this.process.push([])
 };

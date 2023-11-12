@@ -34,33 +34,38 @@ export default function Grid({progress}) {
         return newTiles;
     }
 
+    function updateTiles() {
+        const data = dataRef.current
+        const model = modelRef.current;
+
+        const newTiles = [...initTiles()]
+        const placeAmount = Math.floor(progress * model.process.length)
+        for(let i = 0; i < placeAmount; i++) {
+            for(let j = 0; j < model.process[i].length; j++) {
+                const pos = model.process[i][j][0];
+                const z = pos % destWidth;
+                const x = pos / destWidth | 0;
+                newTiles[pos] = {
+                    "x": x - destWidth/2,
+                    "z": z - destHeight/2,
+                    "spriteData": data.tiles[model.process[i][j][1]].sprite
+                }
+            }
+        }
+        setTiles(newTiles)
+    }
+
     //initialize the model and generate once the page (and grid) loads
     useEffect(() => {
         const model = modelRef.current;
         while (!model.generate()) {
             model.clear()
         }
-        console.log(model.process)
+        updateTiles()
     }, []);
 
     useEffect(() => {
-        const data = dataRef.current
-        const model = modelRef.current;
-        if (!model.observed) return;
-
-        const newTiles = [...initTiles()]
-        const placeAmount = Math.floor(progress * model.process.length)
-        for(let i = 0; i < placeAmount; i++) {
-            const pos = model.process[i][0];
-            const z = pos % destWidth;
-            const x = pos / destWidth | 0;
-            newTiles[pos] = {
-                "x": x - destWidth/2,
-                "z": z - destHeight/2,
-                "spriteData": data.tiles[model.process[i][1]].sprite
-            }
-        }
-        setTiles(newTiles)
+        updateTiles()
     }, [progress]);
 
     //for resizing events

@@ -37,8 +37,10 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
             className={"h-full overflow-y-scroll px-12 w-[36rem]"}
         >
             <div ref={stageOneRef} className={"py-4"}>
-                <p className={"text-4xl"}>About Me</p>
-                <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                <div className={"py-6"}>
+                    <p className={"top-0 text-4xl"}>About Me</p>
+                    <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                </div>
                 <div className={"grid place-items-center w-full"}>
                     <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/headshot.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
@@ -58,8 +60,10 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                 </div>
             </div>
             <div ref={stageTwoRef} className={"py-4"}>
-                <p className={"top-0 text-4xl"}>Projects</p>
-                <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                <div className={"py-6"}>
+                    <p className={"top-0 text-4xl"}>Projects</p>
+                    <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                </div>
                 <div className={"grid gap-6"}>
                     <ProjectEntry
                         title={"Garden of Growth"}
@@ -106,13 +110,17 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                 </div>
             </div>
             <div ref={stageThreeRef} className={"py-4"}>
-                <p className={"top-0 text-4xl"}>Experience</p>
-                <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                <div className={"py-6"}>
+                    <p className={"top-0 text-4xl"}>Experience</p>
+                    <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                </div>
                 <ExperienceTimeline/>
             </div>
             <div ref={stageFourRef} className={"py-4"}>
-                <p className={"top-0 text-4xl"}>Contact</p>
-                <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                <div className={"py-6"}>
+                    <p className={"top-0 text-4xl"}>Contact</p>
+                    <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
+                </div>
                 <div className={"grid place-items-center w-full"}>
                     <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/contact.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
