@@ -16,6 +16,7 @@ export default function ExperienceTimeline() {
                     endDate={new Date()}
                     src={`${process.env.PUBLIC_URL}/experience-icons/dmecc.png`}
                     left={true}
+                    last={false}
                 />
                 <ExperienceEntry
                     title={"Epoch Tech."}
@@ -24,6 +25,7 @@ export default function ExperienceTimeline() {
                     endDate={new Date("9/1/2021")}
                     src={`${process.env.PUBLIC_URL}/experience-icons/epoch.png`}
                     left={false}
+                    last={true}
                 />
             </div>
         </div>
