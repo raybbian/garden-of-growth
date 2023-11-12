@@ -51,6 +51,7 @@ export default function App() {
                 >
                     <Sidebar
                         setState={setState}
+                        progress={progress}
                         setProgress={setProgress}
                         showSidebar={showSidebar}
                         toggleSidebar={toggleSidebar}

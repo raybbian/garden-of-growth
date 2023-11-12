@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 import {get} from "axios";
+import {FaArrowDown} from "react-icons/fa6";
 
 export default function Grid({progress}) {
 
@@ -66,13 +67,12 @@ export default function Grid({progress}) {
 
     useEffect(() => {
         updateTiles()
-    }, [progress]);
+    }, [progress, scale]);
 
     //for resizing events
     useEffect(() => {
         const handleResize = function() {
             setScale(Math.floor(window.innerWidth / 16 / tileSize))
-            updateTiles()
         }
         handleResize()
         window.addEventListener('resize', handleResize)

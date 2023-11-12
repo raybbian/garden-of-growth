@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         'sarala': ['Sarala', 'sans-serif'],
       },
+      colors: {
+        'koi-red': '#fd2e5f',
+        'cream': '#fffef4',
+      }
     },
   },
   plugins: [],

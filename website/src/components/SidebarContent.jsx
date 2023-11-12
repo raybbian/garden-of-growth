@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import ProjectEntry from "./ProjectEntry";
-import {FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
+import {FaArrowDown, FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
 import ExperienceTimeline from "./ExperienceTimeline";
 import axios from "axios";
 
@@ -38,7 +38,7 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
         >
             <div ref={stageOneRef} className={"py-4"}>
                 <div className={"py-6"}>
-                    <p className={"top-0 text-4xl"}>About Me</p>
+                    <p className={"top-0 text-4xl font-semibold"}>About Me</p>
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <div className={"grid place-items-center w-full"}>
@@ -49,19 +49,19 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                 </p>
                 <div className={"flex flex-row justify-center gap-6 p-6 w-full"}>
                     <a href={"https://linkedin.com/in/raybbian"} target={"_blank"}>
-                        <FaLinkedin size={48}/>
+                        <FaLinkedin size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
                     </a>
                     <a href={"https://github.com/raybbian"} target={"_blank"}>
-                        <FaGithub size={48}/>
+                        <FaGithub size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
                     </a>
                     <a href={`${process.env.PUBLIC_URL}/resume.pdf`} target={"_blank"}>
-                        <FaFile size={48}/>
+                        <FaFile size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
                     </a>
                 </div>
             </div>
             <div ref={stageTwoRef} className={"py-4"}>
                 <div className={"py-6"}>
-                    <p className={"top-0 text-4xl"}>Projects</p>
+                    <p className={"top-0 text-4xl font-semibold"}>Projects</p>
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <div className={"grid gap-6"}>
@@ -81,7 +81,7 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     />
                     <ProjectEntry
                         title={"LoL CD Tracker"}
-                        detail={"External tool for League of Legends developed with ReClass, ImGUI, reverse engineering and decompiling techniques."}
+                        detail={"External tool for League of Legends developed with ReClass, ImGUI, and reverse engineering techniques."}
                         link={null}
                         src={`${process.env.PUBLIC_URL}/project-covers/lol-cd-tracker.jpg`}
                         left={true}
@@ -95,7 +95,7 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     />
                     <ProjectEntry
                         title={"USACO Checklist App"}
-                        detail={"Sophisticated web scraper to pull problem progress and statistics from USACO, with transferable and sharable progress."}
+                        detail={"Sophisticated web scraper to pull problem progress and statistics from USACO, with sharable progress."}
                         link={"https://github.com/orgs/USACO-Checklist/repositories"}
                         src={`${process.env.PUBLIC_URL}/project-covers/usaco-checklist.png`}
                         left={true}
@@ -111,14 +111,14 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
             </div>
             <div ref={stageThreeRef} className={"py-4"}>
                 <div className={"py-6"}>
-                    <p className={"top-0 text-4xl"}>Experience</p>
+                    <p className={"top-0 text-4xl font-semibold"}>Experience</p>
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <ExperienceTimeline/>
             </div>
             <div ref={stageFourRef} className={"py-4"}>
                 <div className={"py-6"}>
-                    <p className={"top-0 text-4xl"}>Contact</p>
+                    <p className={"top-0 text-4xl font-semibold"}>Contact</p>
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <div className={"grid place-items-center w-full"}>
@@ -157,15 +157,15 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                             setFormSucceeded(true);
                         })
                     }}
-                    className={"flex flex-col gap-6 mt-4"}
+                    className={"flex flex-col gap-6 mt-4 text-lg"}
                 >
-                    <input type="email" name="email" className={"w-full border-2 border-black bg-[#fffef4] py-2 px-4"} placeholder={"john.doe@gmail.com"}/>
-                    <textarea name="message" className={"w-full border-2 border-black bg-[#fffef4] w-3/4 py-2 px-4"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
+                    <input type="email" name="email" className={"w-full border-2 border-black bg-[#fffef4] py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"john.doe@gmail.com"}/>
+                    <textarea name="message" className={"w-full border-2 border-black bg-[#fffef4] w-3/4 py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     <div className={"flex flex-row justify-end items-center gap-6"}>
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
                             <FaCheck size={48}/>
                         </div>
-                        <button type="submit" className={"border-2 border-black p-4 w-1/4 text-lg justify-self-center"}>Send</button>
+                        <button type="submit" className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send</button>
                     </div>
                 </form>
             </div>

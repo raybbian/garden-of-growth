@@ -1,9 +1,17 @@
 import SidebarContent from "./SidebarContent";
-import {FaArrowLeft, FaArrowRight} from "react-icons/fa6";
+import {FaArrowDown, FaArrowLeft, FaArrowRight} from "react-icons/fa6";
 
-export default function Sidebar({setState, setProgress, showSidebar, toggleSidebar, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
+export default function Sidebar({setState, progress, setProgress, showSidebar, toggleSidebar, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
     return (
-        <div className={"w-full h-full bg-[#fffef4] border-l-2 border-black"}>
+        <div className={"w-[36rem] h-full bg-cream border-l-2 border-black"}>
+            <div
+                className={`grid place-items-center absolute bottom-0 left-0 h-28 aspect-square w-[36rem] transform-colors duration-300 ease-in-out ${progress === 0 ? "" : "opacity-0"}`}
+                style={{
+                    boxShadow: "inset 0 -100px 100px -100px #000000"
+                }}
+            >
+                <FaArrowDown size={72} className={"text-koi-red animate-bounce"}/>
+            </div>
             <SidebarContent
                 setState={setState}
                 setProgress={setProgress}
@@ -13,14 +21,6 @@ export default function Sidebar({setState, setProgress, showSidebar, toggleSideb
                 stageThreeRef={stageThreeRef}
                 stageFourRef={stageFourRef}
             />
-            <button
-                className={"bg-[#fd2e5f] w-16 aspect-square rounded-full absolute top-1/2 -left-16 -translate-x-1/2 -translate-y-1/2 grid place-items-center"}
-                onClick={() => {
-                    toggleSidebar(!showSidebar)
-                }}
-            >
-                {!showSidebar ? <FaArrowLeft size={24}/> : <FaArrowRight size={24}/> }
-            </button>
         </div>
     )
 }
