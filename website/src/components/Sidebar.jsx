@@ -5,7 +5,7 @@ export default function Sidebar({setState, progress, setProgress, showSidebar, t
     return (
         <div className={"w-[36rem] h-full bg-cream border-l-2 border-black"}>
             <div
-                className={`grid place-items-center absolute bottom-0 left-0 h-28 aspect-square w-[36rem] transform-colors duration-300 ease-in-out ${progress === 0 ? "" : "opacity-0"}`}
+                className={`grid place-items-center absolute bottom-0 left-0 h-28 aspect-square w-[36rem] transform-colors duration-300 ease-in-out ${progress === 0 ? "" : "opacity-0"} pointer-events-none`}
                 style={{
                     boxShadow: "inset 0 -100px 100px -100px #000000"
                 }}

@@ -159,8 +159,8 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     }}
                     className={"flex flex-col gap-6 mt-4 text-lg"}
                 >
-                    <input type="email" name="email" className={"w-full border-2 border-black bg-[#fffef4] py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"john.doe@gmail.com"}/>
-                    <textarea name="message" className={"w-full border-2 border-black bg-[#fffef4] w-3/4 py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
+                    <input type="email" name="email" className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"john.doe@gmail.com"}/>
+                    <textarea name="message" className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     <div className={"flex flex-row justify-end items-center gap-6"}>
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
                             <FaCheck size={48}/>
