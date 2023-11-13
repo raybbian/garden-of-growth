@@ -1,14 +1,12 @@
-import './App.css';
-import Grid from "./components/Grid";
-import Nav from "./components/Nav";
+import Grid from "./Grid";
+import Nav from "./Nav";
 import {useRef, useState} from "react";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./Sidebar";
 
 
-export default function App() {
+export default function Page() {
     const [state, setState] = useState(1)
     const [progress, setProgress] = useState(0);
-    const [showSidebar, toggleSidebar] = useState(true)
 
     //lets the current scroll position of sidebar content to handle the state,
     //diverts clicking on the nav bars to scroll to the correct position instead
@@ -30,8 +28,6 @@ export default function App() {
         <div className={"relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col overflow-hidden"}>
             <Nav
                 state={state}
-                showSidebar={showSidebar}
-                toggleSidebar={toggleSidebar}
                 scrollTo={scrollTo}
             />
             <div className={"grow w-full min-h-0 flex flex-row"}>
@@ -44,8 +40,7 @@ export default function App() {
                 >
                     <Grid progress={progress}/>
                 </div>
-                <div
-                    className={`relative ${showSidebar ? "mobile:w-screen w-[36rem]" : "w-0"} transition-all duration-300 ease-in-out mobile:transition-none`}
+                <div className={`relative mobile:w-screen w-[36rem]`}
                 >
                     <Sidebar
                         setState={setState}

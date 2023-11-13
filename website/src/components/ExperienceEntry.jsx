@@ -13,9 +13,7 @@ export default function ExperienceEntry({title, detail, startDate, endDate, src,
                     </div>
                 </div>
             </div>
-            <div className={"w-full h-full grid place-items-center pointer-events-none select-none grid-rows-1"}>
-                <div
-                    className={"bg-[#fffef4] absolute w-6 border-2 border-black rounded-full aspect-square z-10"}></div>
+            <div className={"w-full h-full grid place-items-center pointer-events-none select-none"}>
                 <div className={`w-1/2 h-[2px] bg-black ${left ? "-translate-x-1/2" : "translate-x-1/2"}`}></div>
             </div>
             <div

@@ -65,10 +65,9 @@ export default function Sidebar({
                              className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                     </div>
                     <p className={"text-lg"}>
-                        Hi! My name is Raymond Bian, and I'm a freshman studying computer science at Georgia Tech. I'm
-                        interested in a multitude of topics, ranging from AI/ML to NLP to Competitive Programming. But
-                        above
-                        all, I'm most interested in always learning more.
+                        Hi! My name is Raymond Bian, and I'm a freshman studying computer science at Georgia Tech.
+                        Welcome to my website! I'm interested in a multitude of topics, ranging from AI/ML to NLP to
+                        Competitive Programming. But above all, I'm most interested in always learning more.
                     </p>
                     <div className={"flex flex-row justify-center gap-6 p-6 w-full"}>
                         <a href={"https://linkedin.com/in/raybbian"} target={"_blank"}>
