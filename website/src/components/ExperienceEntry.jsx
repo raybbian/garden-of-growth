@@ -3,7 +3,7 @@ export default function ExperienceEntry({title, detail, startDate, endDate, src,
         <div className={`grid grid-cols-5 w-full h-auto ${!last ? "-mb-16" : ""}`}>
             <div
                 className={`${left ? "order-first" : "order-last"} relative col-span-2 w-full h-full border-2 border-black`}>
-                <div className={`flex flex-col w-full h-full`}>
+                <div className={`flex flex-col w-full h-full bg-cream`}>
                     <div className={"w-full pr-4 pl-3 py-2 grid place-items-center border-b-2 border-black"}>
                         <img className={"object-contain"} alt={'company-img'} src={src}/>
                     </div>

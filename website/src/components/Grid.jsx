@@ -70,7 +70,7 @@ export default function Grid({progress}) {
     //for resizing events
     useEffect(() => {
         const handleResize = function () {
-            setScale(Math.floor(window.innerWidth / 16 / tileSize))
+            setScale(Math.max(Math.floor(window.innerWidth / 16 / tileSize), 1))
         }
         handleResize()
         window.addEventListener('resize', handleResize)

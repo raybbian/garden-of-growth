@@ -44,9 +44,10 @@ export default function Sidebar({
         <div
             ref={containerRef}
             onScroll={handleScroll}
-            className={"grid place-items-center h-full overflow-y-scroll mobile:w-screen w-[36rem] bg-cream border-l-2 border-black mobile:border-l-0"}
+            className={"grid place-items-center h-full overflow-y-scroll mobile:w-screen w-[36rem] border-l-2 border-black mobile:border-l-0"}
         >
-            <div className={"h-auto max-w-[36rem] px-12 mobile:px-8"}>
+            <div
+                className={"h-auto max-w-[36rem] px-12 mobile:px-8 bg-cream mobile:bg-opacity-[85%] mobile:border-x-2 border-black small:border-none"}>
                 <div
                     className={`grid place-items-center absolute bottom-0 left-0 h-28 aspect-square w-full transform-colors duration-300 ease-in-out ${progress === 0 ? "" : "opacity-0"} pointer-events-none`}
                     style={{
@@ -224,7 +225,7 @@ export default function Sidebar({
                                 <FaCheck size={48}/>
                             </div>
                             <button type="submit"
-                                    className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send
+                                    className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out bg-cream"}>Send
                             </button>
                         </div>
                     </form>

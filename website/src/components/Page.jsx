@@ -32,7 +32,7 @@ export default function Page() {
             />
             <div className={"grow w-full min-h-0 flex flex-row"}>
                 <div
-                    className={`relative grow`}
+                    className={`relative flex-auto mobile:absolute mobile:w-full mobile:h-full`}
                     style={{
                         /*https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css/8331169#8331169*/
                         transition: "max-width 300ms ease-in-out",

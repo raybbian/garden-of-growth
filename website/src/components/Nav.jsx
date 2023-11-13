@@ -5,9 +5,9 @@ export default function Nav({state, scrollTo}) {
     return (
         <div
             className={`select-none bg-cream w-full z-50 flex justify-between py-6 px-12 
-                        font-semibold whitespace-nowrap h-auto border-b-2 border-black`}
+                        font-semibold whitespace-nowrap h-auto border-b-2 border-black small:hidden`}
         >
-            <div className={"w-2/5 text-6xl small:pointer-events-none mobile:w-full"}
+            <div className={"w-2/5 text-6xl mobile:w-full"}
             >
                 <NavTitle/>
             </div>

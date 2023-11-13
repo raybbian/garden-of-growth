@@ -1,6 +1,6 @@
 export default function ProjectEntry({title, detail, link, src, left}) {
     return (
-        <div className={`grid grid-cols-5 w-full h-auto gap-4 overflow-hidden border-black border-2`}>
+        <div className={`grid grid-cols-5 w-full h-auto gap-4 overflow-hidden border-black border-2 bg-cream`}>
             <div
                 className={`col-span-3 w-full h-auto flex flex-col justify-between pt-2 pb-3 ${left ? "pl-4" : "pr-4"}`}>
                 <div>
