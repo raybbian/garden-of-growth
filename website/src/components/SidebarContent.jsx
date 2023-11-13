@@ -17,7 +17,8 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
     function handleScroll() {
         const scrollProgress = containerRef.current.scrollTop
         const scrollTotal = containerRef.current.scrollHeight - containerRef.current.clientHeight
-        setProgress(scrollProgress / scrollTotal)
+        const progress = Math.max(Math.min(scrollProgress / scrollTotal, 1), 0)
+        setProgress(progress)
         const arr = [stageOneRef, stageTwoRef, stageThreeRef, stageFourRef]
         const maxRef = arr.reduce((a,b) => {
             return (getVisibility(a) < getVisibility(b)) ? b : a
