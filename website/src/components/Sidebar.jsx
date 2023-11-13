@@ -44,10 +44,10 @@ export default function Sidebar({
         <div
             ref={containerRef}
             onScroll={handleScroll}
-            className={"grid place-items-center h-full overflow-y-scroll mobile:w-screen w-[36rem] border-l-2 border-black mobile:border-l-0"}
+            className={"grid place-items-center h-full overflow-y-scroll tablet:w-screen w-[36rem] border-l-2 border-black mobile:border-l-0"}
         >
             <div
-                className={"h-auto max-w-[36rem] px-12 mobile:px-8 bg-cream mobile:bg-opacity-[85%] mobile:border-x-2 border-black small:border-none"}>
+                className={"h-auto max-w-[36rem] px-12 tablet:px-8 bg-cream tablet:bg-opacity-[85%] tablet:border-x-2 border-black mobile:border-none"}>
                 <div
                     className={`grid place-items-center absolute bottom-0 left-0 h-28 aspect-square w-full transform-colors duration-300 ease-in-out ${progress === 0 ? "" : "opacity-0"} pointer-events-none`}
                     style={{
@@ -58,7 +58,7 @@ export default function Sidebar({
                 </div>
                 <div ref={stageOneRef} className={"py-4"}>
                     <div className={"py-6"}>
-                        <p className={"top-0 text-4xl font-semibold"}>About Me</p>
+                        <p className={"top-0 text-3xl font-semibold"}>About Me</p>
                         <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                     </div>
                     <div className={"grid place-items-center w-full"}>
@@ -87,7 +87,7 @@ export default function Sidebar({
                 </div>
                 <div ref={stageTwoRef} className={"py-4"}>
                     <div className={"py-6"}>
-                        <p className={"top-0 text-4xl font-semibold"}>Projects</p>
+                        <p className={"top-0 text-3xl font-semibold"}>Projects</p>
                         <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                     </div>
                     <div className={"grid gap-6"}>
@@ -137,7 +137,7 @@ export default function Sidebar({
                 </div>
                 <div ref={stageThreeRef} className={"py-4"}>
                     <div className={"py-6"}>
-                        <p className={"top-0 text-4xl font-semibold"}>Experience</p>
+                        <p className={"top-0 text-3xl font-semibold"}>Experience</p>
                         <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                     </div>
                     <div className={"relative w-full h-auto"}>
@@ -170,7 +170,7 @@ export default function Sidebar({
                 </div>
                 <div ref={stageFourRef} className={"py-4"}>
                     <div className={"py-6"}>
-                        <p className={"top-0 text-4xl font-semibold"}>Contact</p>
+                        <p className={"top-0 text-3xl font-semibold"}>Contact</p>
                         <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                     </div>
                     <div className={"grid place-items-center w-full"}>

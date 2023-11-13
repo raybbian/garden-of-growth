@@ -9,7 +9,7 @@ export default function ExperienceEntry({title, detail, startDate, endDate, src,
                     </div>
                     <div className={"p-4"}>
                         <p className={"text-2xl"}>{title}</p>
-                        <p className={"text-lg mobile:text-base opacity-60"}>{detail}</p>
+                        <p className={"text-lg tablet:text-base opacity-60"}>{detail}</p>
                     </div>
                 </div>
             </div>
