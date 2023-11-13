@@ -13,12 +13,12 @@ export default function Nav({state, showSidebar, toggleSidebar, scrollTo}) {
         >
             <button
                 onClick={() => toggleSidebar(false)}
-                className={"w-2/5 text-6xl"}
+                className={"w-2/5 text-6xl mobile:pointer-events-none"}
             >
                 <NavTitle/>
             </button>
             <div
-                className={"flex justify-between items-center gap-8 text-3xl"}
+                className={"flex justify-between items-center gap-4 text-3xl mobile:hidden"}
             >
                 <button onClick={() => handleClick(1)} className={showSidebar && state === 1 && "text-koi-red text-4xl"}
                         style={{transition: "all 200ms ease-in-out"}}>about me

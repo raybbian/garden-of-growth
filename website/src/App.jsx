@@ -45,10 +45,7 @@ export default function App() {
                     <Grid progress={progress}/>
                 </div>
                 <div
-                    className={`relative ${showSidebar ? "w-[36rem]" : "w-0"}`}
-                    style={{
-                        transition: "width 300ms ease-in-out",
-                    }}
+                    className={`relative ${showSidebar ? "mobile:w-screen w-[36rem]" : "w-0"} transition-all duration-300 ease-in-out mobile:transition-none`}
                 >
                     <Sidebar
                         setState={setState}
