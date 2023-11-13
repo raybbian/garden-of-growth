@@ -26,7 +26,7 @@ export default function App() {
     }
 
     return (
-        <div className={"relative h-screen w-screen bg-[#d7e4c2] flex flex-col overflow-hidden"}>
+        <div className={"relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col overflow-hidden"}>
             <Nav
                 state={state}
                 showSidebar={showSidebar}
