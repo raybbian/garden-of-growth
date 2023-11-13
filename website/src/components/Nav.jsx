@@ -29,7 +29,7 @@ export default function Nav({state, scrollTo}) {
                 }}
             />
             <div
-                className={"flex justify-between items-center gap-4 text-3xl bg-cream border-black transition-translate duration-300 ease-in-out " +
+                className={"flex justify-between items-center gap-4 text-3xl bg-cream border-black desktop:transition-none tablet:transition-translate duration-300 ease-in-out " +
                     `tablet:absolute ${showMobileNav ? "tablet:-translate-x-full" : ""} tablet:left-full tablet:top-0 tablet:h-full tablet:flex-col tablet:justify-start tablet:p-6 tablet:items-end tablet:border-l-2 tablet:w-60`}
             >
                 <button onClick={() => {
