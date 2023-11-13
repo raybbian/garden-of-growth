@@ -1,5 +1,5 @@
-import {gridToScreenCoordinates, getZIndex} from "../utils/tile-mapping"
-import {memo, useEffect, useState} from "react";
+import {getZIndex, gridToScreenCoordinates} from "../utils/tile-mapping"
+import {memo} from "react";
 
 function Tile({x, z, spriteData, spriteSheet, tileSize, scale}) {
     const screenCoordinates = gridToScreenCoordinates(x, z, scale * tileSize)

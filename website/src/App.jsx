@@ -1,7 +1,7 @@
 import './App.css';
 import Grid from "./components/Grid";
 import Nav from "./components/Nav";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import Sidebar from "./components/Sidebar";
 
 
@@ -17,6 +17,7 @@ export default function App() {
     const stageTwoRef = useRef(null)
     const stageThreeRef = useRef(null)
     const stageFourRef = useRef(null)
+
     function scrollTo(state) {
         let scrollYAmount = 0;
         if (state >= 2) scrollYAmount += stageOneRef.current.getBoundingClientRect().height
@@ -53,8 +54,6 @@ export default function App() {
                         setState={setState}
                         progress={progress}
                         setProgress={setProgress}
-                        showSidebar={showSidebar}
-                        toggleSidebar={toggleSidebar}
                         containerRef={containerRef}
                         stageOneRef={stageOneRef}
                         stageTwoRef={stageTwoRef}

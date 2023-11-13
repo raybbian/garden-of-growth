@@ -1,8 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
-import {get} from "axios";
-import {FaArrowDown} from "react-icons/fa6";
 
 export default function Grid({progress}) {
 
@@ -21,15 +19,15 @@ export default function Grid({progress}) {
 
     function initTiles() {
         const newTiles = new Array(destWidth * destHeight)
-        for(let i = 0; i < newTiles.length; i++) {
+        for (let i = 0; i < newTiles.length; i++) {
             const z = i % destWidth;
             const x = i / destWidth | 0;
             newTiles[i] = {
-                "x": x - destWidth/2,
+                "x": x - destWidth / 2,
                 "y": 0,
-                "z": z - destHeight/2,
+                "z": z - destHeight / 2,
                 // "spriteData": {x: '0', y: '0', w:'48', h: '48'},
-                "spriteData": {x: '48', y: '144', w:'48', h: '48'},
+                "spriteData": {x: '48', y: '144', w: '48', h: '48'},
             }
         }
         return newTiles;
@@ -41,14 +39,14 @@ export default function Grid({progress}) {
 
         const newTiles = [...initTiles()]
         const placeAmount = Math.floor(progress * (model.process.length - 1)) + 1
-        for(let i = 0; i < placeAmount; i++) {
-            for(let j = 0; j < model.process[i].length; j++) {
+        for (let i = 0; i < placeAmount; i++) {
+            for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
                 const z = pos % destWidth;
                 const x = pos / destWidth | 0;
                 newTiles[pos] = {
-                    "x": x - destWidth/2,
-                    "z": z - destHeight/2,
+                    "x": x - destWidth / 2,
+                    "z": z - destHeight / 2,
                     "spriteData": data.tiles[model.process[i][j][1]].sprite
                 }
             }
@@ -71,7 +69,7 @@ export default function Grid({progress}) {
 
     //for resizing events
     useEffect(() => {
-        const handleResize = function() {
+        const handleResize = function () {
             setScale(Math.floor(window.innerWidth / 16 / tileSize))
         }
         handleResize()
@@ -87,7 +85,7 @@ export default function Grid({progress}) {
             <div
                 className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
                 style={{
-                    top: `${1.5*tileSize}px`,
+                    top: `${1.5 * tileSize}px`,
                 }}
             >
                 {tiles.map((tile, tileNum) => (

@@ -33,6 +33,7 @@ export default function NavTitle() {
     //stores the interval delays that run the animations, which should be cleared if a new animation interrupts it
     const stage1Ref = useRef(null)
     const stage2Ref = useRef(null)
+
     //if animationAllowed changes to true, pop a thing off the queue, and run it
     function runAnimation(titleHovered, delay) {
         if (!hiddenMond.current || !hiddenSpace.current || !hiddenIan.current) {
@@ -71,7 +72,8 @@ export default function NavTitle() {
             onMouseEnter={() => setTitleHovered(true)}
             onMouseLeave={() => setTitleHovered(false)}
         >
-            <span className={`absolute select-none pointer-events-none ${animationCanPlay ? "opacity-0" : ""}`}>raybb.dev</span>
+            <span
+                className={`absolute select-none pointer-events-none ${animationCanPlay ? "opacity-0" : ""}`}>raybb.dev</span>
             <span className={`select-none pointer-events-none ${animationCanPlay ? "" : "opacity-0"}`}>
                 <span>ray</span>
                 <span

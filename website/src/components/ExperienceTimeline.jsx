@@ -4,9 +4,11 @@ export default function ExperienceTimeline() {
     return (
         <div className={"relative w-full h-auto"}>
             <div className={"absolute pointer-events-none select-none w-full h-full"}>
-                <div className={"bg-[#fffef4] absolute w-6 border-2 border-black rounded-full aspect-square left-1/2 -translate-x-1/2 z-10"}></div>
+                <div
+                    className={"bg-[#fffef4] absolute w-6 border-2 border-black rounded-full aspect-square left-1/2 -translate-x-1/2 z-10"}></div>
                 <div className={"absolute w-[2px] h-full bg-black left-1/2 -translate-x-1/2"}></div>
-                <div className={"bg-[#fffef4] absolute w-6 border-2 border-black rounded-full aspect-square bottom-0 left-1/2 -translate-x-1/2 z-10"}></div>
+                <div
+                    className={"bg-[#fffef4] absolute w-6 border-2 border-black rounded-full aspect-square bottom-0 left-1/2 -translate-x-1/2 z-10"}></div>
             </div>
             <div className={"w-full h-full"}>
                 <ExperienceEntry

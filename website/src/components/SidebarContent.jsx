@@ -1,10 +1,18 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import ProjectEntry from "./ProjectEntry";
-import {FaArrowDown, FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
+import {FaCheck, FaFile, FaGithub, FaLinkedin} from "react-icons/fa6";
 import ExperienceTimeline from "./ExperienceTimeline";
 import axios from "axios";
 
-export default function SidebarContent({setState, setProgress, containerRef, stageOneRef, stageTwoRef, stageThreeRef, stageFourRef}) {
+export default function SidebarContent({
+                                           setState,
+                                           setProgress,
+                                           containerRef,
+                                           stageOneRef,
+                                           stageTwoRef,
+                                           stageThreeRef,
+                                           stageFourRef
+                                       }) {
     function getVisibility(ref) {
         if (ref.current == null || containerRef.current == null) return 0;
         const rect = ref.current.getBoundingClientRect()
@@ -20,7 +28,7 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
         const progress = Math.max(Math.min(scrollProgress / scrollTotal, 1), 0)
         setProgress(progress)
         const arr = [stageOneRef, stageTwoRef, stageThreeRef, stageFourRef]
-        const maxRef = arr.reduce((a,b) => {
+        const maxRef = arr.reduce((a, b) => {
             return (getVisibility(a) < getVisibility(b)) ? b : a
         })
         if (maxRef === stageOneRef) setState(1)
@@ -43,17 +51,22 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <div className={"grid place-items-center w-full"}>
-                    <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/headshot.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
+                    <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/headshot.jpg`}
+                         className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
                 <p className={"text-lg"}>
-                    Hi! My name is Raymond Bian, and I'm a freshman studying computer science at Georgia Tech. I'm interested in a multitude of topics, ranging from AI/ML to NLP to Competitive Programming. But above all, I'm most interested in always learning more.
+                    Hi! My name is Raymond Bian, and I'm a freshman studying computer science at Georgia Tech. I'm
+                    interested in a multitude of topics, ranging from AI/ML to NLP to Competitive Programming. But above
+                    all, I'm most interested in always learning more.
                 </p>
                 <div className={"flex flex-row justify-center gap-6 p-6 w-full"}>
                     <a href={"https://linkedin.com/in/raybbian"} target={"_blank"}>
-                        <FaLinkedin size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
+                        <FaLinkedin size={48}
+                                    className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
                     </a>
                     <a href={"https://github.com/raybbian"} target={"_blank"}>
-                        <FaGithub size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
+                        <FaGithub size={48}
+                                  className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
                     </a>
                     <a href={`${process.env.PUBLIC_URL}/resume.pdf`} target={"_blank"}>
                         <FaFile size={48} className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}/>
@@ -123,10 +136,12 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                 </div>
                 <div className={"grid place-items-center w-full"}>
-                    <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/contact.jpg`} className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
+                    <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/contact.jpg`}
+                         className={"w-[40%] m-4 aspect-square rounded-full border-2 border-black object-cover"}/>
                 </div>
                 <p className={"text-lg"}>
-                    I would love to be informed of any bugs, inquiries, and knowledge that you might have! I am always interested in learning about new things that I may have missed.
+                    I would love to be informed of any bugs, inquiries, and knowledge that you might have! I am always
+                    interested in learning about new things that I may have missed.
                     <br/>
                     <br/>
                     You can contact me at
@@ -160,13 +175,19 @@ export default function SidebarContent({setState, setProgress, containerRef, sta
                     }}
                     className={"flex flex-col gap-6 mt-4 text-lg"}
                 >
-                    <input type="email" name="email" className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"john.doe@gmail.com"}/>
-                    <textarea name="message" className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"} placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
+                    <input type="email" name="email"
+                           className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"}
+                           placeholder={"john.doe@gmail.com"}/>
+                    <textarea name="message"
+                              className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"}
+                              placeholder={"The quick brown fox jumps over the lazy dog."}></textarea>
                     <div className={"flex flex-row justify-end items-center gap-6"}>
                         <div className={`transition-opacity ${formSucceeded ? "opacity-100" : "opacity-0"}`}>
                             <FaCheck size={48}/>
                         </div>
-                        <button type="submit" className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send</button>
+                        <button type="submit"
+                                className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send
+                        </button>
                     </div>
                 </form>
             </div>
