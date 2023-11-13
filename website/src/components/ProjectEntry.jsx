@@ -5,9 +5,9 @@ export default function ProjectEntry({title, detail, link, src, left}) {
                 className={`col-span-3 w-full h-auto flex flex-col justify-between pt-2 pb-3 ${left ? "pl-4" : "pr-4"}`}>
                 <div>
                     <p className={"text-2xl"}>{title}</p>
-                    <p className={"text-lg tablet:text-base opacity-60"}>{detail}</p>
+                    <p className={"text-lg mobile:text-base opacity-60"}>{detail}</p>
                 </div>
-                <p className={'text-lg tablet:text-base'}>{link ? <a href={link} target={"_blank"}
+                <p className={'text-lg mobile:text-base'}>{link ? <a href={link} target={"_blank"}
                                                                      className={"hover:text-koi-red transition-colors duration-150 ease-in-out"}>Read
                     More ></a> : <p>Link Unavailable</p>}</p>
             </div>
