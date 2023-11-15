@@ -60,7 +60,7 @@ export default function Sidebar({
                     </div>
                     <div ref={stageOneRef} className={"py-4"}>
                         <div className={"py-6"}>
-                            <p className={"top-0 text-3xl font-semibold"}>About Me</p>
+                            <p className={"top-0 text-4xl font-semibold"}>About Me</p>
                             <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                         </div>
                         <div className={"grid place-items-center w-full"}>
@@ -89,7 +89,7 @@ export default function Sidebar({
                     </div>
                     <div ref={stageTwoRef} className={"py-4"}>
                         <div className={"py-6"}>
-                            <p className={"top-0 text-3xl font-semibold"}>Projects</p>
+                            <p className={"top-0 text-4xl font-semibold"}>Projects</p>
                             <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                         </div>
                         <div className={"grid gap-6"}>
@@ -139,7 +139,7 @@ export default function Sidebar({
                     </div>
                     <div ref={stageThreeRef} className={"py-4"}>
                         <div className={"py-6"}>
-                            <p className={"top-0 text-3xl font-semibold"}>Experience</p>
+                            <p className={"top-0 text-4xl font-semibold"}>Experience</p>
                             <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                         </div>
                         <div className={"relative w-full h-auto"}>
@@ -172,7 +172,7 @@ export default function Sidebar({
                     </div>
                     <div ref={stageFourRef} className={"py-4"}>
                         <div className={"py-6"}>
-                            <p className={"top-0 text-3xl font-semibold"}>Contact</p>
+                            <p className={"top-0 text-4xl font-semibold"}>Contact</p>
                             <div className={"h-[2px] w-[30%] mb-4 mt-2 bg-slate-600"}></div>
                         </div>
                         <div className={"grid place-items-center w-full"}>
