@@ -1,11 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
+import {screenToGridCoordinates} from "../utils/tile-mapping";
 
 export default function Grid({progress}) {
 
-    const destWidth = 16;
-    const destHeight = 16;
+    const destLen = 16;
     const tileSize = 48;
 
     const [tiles, setTiles] = useState(initTiles());
@@ -13,19 +13,20 @@ export default function Grid({progress}) {
     //only have one model for each grid, but clear it on refresh instead of making a new one
     //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
     const dataRef = useRef(require('../terrain/japanese'))
-    const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destWidth, destHeight, false))
+    const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false))
 
     const [scale, setScale] = useState(1)
+    const init = useRef(true);
 
     function initTiles() {
-        const newTiles = new Array(destWidth * destHeight)
+        const newTiles = new Array(destLen * destLen)
         for (let i = 0; i < newTiles.length; i++) {
-            const z = i % destWidth;
-            const x = i / destWidth | 0;
+            const z = i % destLen;
+            const x = i / destLen | 0;
             newTiles[i] = {
-                "x": x - destWidth / 2,
+                "x": x - destLen / 2,
                 "y": 0,
-                "z": z - destHeight / 2,
+                "z": z - destLen / 2,
                 // "spriteData": {x: '0', y: '0', w:'48', h: '48'},
                 "spriteData": {x: '48', y: '144', w: '48', h: '48'},
             }
@@ -42,11 +43,12 @@ export default function Grid({progress}) {
         for (let i = 0; i < placeAmount; i++) {
             for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
-                const z = pos % destWidth;
-                const x = pos / destWidth | 0;
+                const z = pos % destLen;
+                const x = pos / destLen | 0;
                 newTiles[pos] = {
-                    "x": x - destWidth / 2,
-                    "z": z - destHeight / 2,
+                    "x": x - destLen / 2,
+                    "y": 0,
+                    "z": z - destLen / 2,
                     "spriteData": data.tiles[model.process[i][j][1]].sprite
                 }
             }
@@ -54,44 +56,73 @@ export default function Grid({progress}) {
         setTiles(newTiles)
     }
 
-    //initialize the model and generate once the page (and grid) loads
+    useEffect(() => {
+        if (init.current) return;
+        updateTiles()
+    }, [progress, scale]);
+
     useEffect(() => {
         const model = modelRef.current;
         while (!model.generate()) {
             model.clear()
         }
         updateTiles()
-    }, []);
-
-    useEffect(() => {
-        updateTiles()
-    }, [progress, scale]);
-
-    //for resizing events
-    useEffect(() => {
         const handleResize = function () {
             setScale(Math.max(Math.floor(window.innerWidth / 16 / tileSize), 1))
         }
         handleResize()
         window.addEventListener('resize', handleResize)
+
+        init.current = false
+
         return () => {
             window.removeEventListener('resize', handleResize)
         }
     }, []);
 
 
+    const gridRef = useRef(null);
+    const [mouseOnX, setMouseOnX] = useState(0)
+    const [mouseOnZ, setMouseOnZ] = useState(0)
+
+    function handleMouseMove(e) {
+        if (gridRef == null) return;
+        const {clientX, clientY} = e;
+        const {left, top} = gridRef.current.getBoundingClientRect();
+
+        const relativeX = clientX - left;
+        //because all tiles are shifted tileSize up, need to do same with Y
+        const relativeY = clientY - top + scale * tileSize
+
+        const gridPos = screenToGridCoordinates(relativeY, relativeX, scale * tileSize)
+        setMouseOnX(gridPos[0])
+        setMouseOnZ(gridPos[1])
+    }
+
+    useEffect(() => {
+        if (init.current) return;
+        if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
+        const newTiles = [...tiles]
+        const idx = (mouseOnX + destLen / 2) * destLen + (mouseOnZ + destLen / 2);
+        newTiles[idx].y = 10;
+        setTiles(newTiles)
+    }, [mouseOnX, mouseOnZ])
+
+
     return (
-        <div className={"h-full w-full overflow-hidden select-none pointer-events-none"}>
+        <div
+            className={"h-full w-full overflow-hidden select-none"}
+        >
             <div
                 className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
-                style={{
-                    top: `${1.5 * tileSize}px`,
-                }}
+                onMouseMove={(e) => handleMouseMove(e)}
+                ref={gridRef}
             >
                 {tiles.map((tile, tileNum) => (
                     <MemoizedTile
                         key={tileNum}
                         x={tile.x}
+                        y={tile.y}
                         z={tile.z}
                         spriteData={tile.spriteData}
                         spriteSheet={`${process.env.PUBLIC_URL}/${dataRef.current.sprites[scale]}`}
