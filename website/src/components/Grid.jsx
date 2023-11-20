@@ -3,7 +3,7 @@ import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 import {screenToGridCoordinates} from "../utils/tile-mapping";
 
-export default function Grid({progress, raisedTilesRef, raiseTile}) {
+export default function Grid({progress, raisedTiles, raiseTile}) {
 
     const destLen = 16;
     const tileSize = 48;
@@ -43,7 +43,7 @@ export default function Grid({progress, raisedTilesRef, raiseTile}) {
             for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
                 newTiles[pos].spriteData = data.tiles[model.process[i][j][1]].sprite
-                if (raisedTilesRef.current.includes(pos)) {
+                if (raisedTiles.includes(pos)) {
                     newTiles[pos].y = 10;
                 }
             }
@@ -54,7 +54,7 @@ export default function Grid({progress, raisedTilesRef, raiseTile}) {
     useEffect(() => {
         if (init.current) return;
         updateTiles()
-    }, [progress, scale]);
+    }, [progress, scale, raisedTiles]);
 
     useEffect(() => {
         const model = modelRef.current;
@@ -76,8 +76,8 @@ export default function Grid({progress, raisedTilesRef, raiseTile}) {
 
 
     const gridRef = useRef(null);
-    const [mouseOnX, setMouseOnX] = useState(0)
-    const [mouseOnZ, setMouseOnZ] = useState(0)
+    const [mouseOnX, setMouseOnX] = useState(-999)
+    const [mouseOnZ, setMouseOnZ] = useState(-999)
 
     function handleMouseMove(e) {
         if (gridRef == null) return;
@@ -98,7 +98,6 @@ export default function Grid({progress, raisedTilesRef, raiseTile}) {
         if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
         const idx = (mouseOnX + destLen / 2) * destLen + (mouseOnZ + destLen / 2);
         raiseTile(idx)
-        updateTiles()
     }, [mouseOnX, mouseOnZ])
 
 

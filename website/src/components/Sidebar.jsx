@@ -13,7 +13,6 @@ export default function Sidebar({
                                     stageTwoRef,
                                     stageThreeRef,
                                     stageFourRef,
-                                    raiseTile,
                                 }) {
     function getVisibility(ref) {
         if (ref.current == null || containerRef.current == null) return 0;

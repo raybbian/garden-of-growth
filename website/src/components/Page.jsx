@@ -1,6 +1,6 @@
 import Grid from "./Grid";
 import Nav from "./Nav";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 
 
@@ -24,11 +24,21 @@ export default function Page() {
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
-    const raisedTilesRef = useRef([])
+    const [raisedTiles, setRaisedTiles] = useState([])
 
     function raiseTile(pos) {
-        raisedTilesRef.current.push(pos)
+        const newTiles = [...raisedTiles]
+        newTiles.push(pos)
+        setRaisedTiles(newTiles)
     }
+
+    const resetRef = useRef(null);
+    useEffect(() => {
+        clearTimeout(resetRef.current)
+        resetRef.current = setTimeout(() => {
+            setRaisedTiles([])
+        }, 1000)
+    }, [raisedTiles])
 
     return (
         <div className={"relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col overflow-hidden"}>
@@ -46,7 +56,7 @@ export default function Page() {
                 >
                     <Grid
                         progress={progress}
-                        raisedTilesRef={raisedTilesRef}
+                        raisedTiles={raisedTiles}
                         raiseTile={raiseTile}
                     />
                 </div>
@@ -61,7 +71,6 @@ export default function Page() {
                         stageTwoRef={stageTwoRef}
                         stageThreeRef={stageThreeRef}
                         stageFourRef={stageFourRef}
-                        raiseTile={raiseTile}
                     />
                 </div>
             </div>
