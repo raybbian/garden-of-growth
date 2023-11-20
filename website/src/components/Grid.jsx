@@ -3,7 +3,7 @@ import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 import {screenToGridCoordinates} from "../utils/tile-mapping";
 
-export default function Grid({progress}) {
+export default function Grid({progress, raisedTilesRef, raiseTile}) {
 
     const destLen = 16;
     const tileSize = 48;
@@ -27,7 +27,6 @@ export default function Grid({progress}) {
                 "x": x - destLen / 2,
                 "y": 0,
                 "z": z - destLen / 2,
-                // "spriteData": {x: '0', y: '0', w:'48', h: '48'},
                 "spriteData": {x: '48', y: '144', w: '48', h: '48'},
             }
         }
@@ -43,13 +42,9 @@ export default function Grid({progress}) {
         for (let i = 0; i < placeAmount; i++) {
             for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
-                const z = pos % destLen;
-                const x = pos / destLen | 0;
-                newTiles[pos] = {
-                    "x": x - destLen / 2,
-                    "y": 0,
-                    "z": z - destLen / 2,
-                    "spriteData": data.tiles[model.process[i][j][1]].sprite
+                newTiles[pos].spriteData = data.tiles[model.process[i][j][1]].sprite
+                if (raisedTilesRef.current.includes(pos)) {
+                    newTiles[pos].y = 10;
                 }
             }
         }
@@ -71,10 +66,9 @@ export default function Grid({progress}) {
             setScale(Math.max(Math.floor(window.innerWidth / 16 / tileSize), 1))
         }
         handleResize()
-        window.addEventListener('resize', handleResize)
-
         init.current = false
 
+        window.addEventListener('resize', handleResize)
         return () => {
             window.removeEventListener('resize', handleResize)
         }
@@ -102,10 +96,9 @@ export default function Grid({progress}) {
     useEffect(() => {
         if (init.current) return;
         if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
-        const newTiles = [...tiles]
         const idx = (mouseOnX + destLen / 2) * destLen + (mouseOnZ + destLen / 2);
-        newTiles[idx].y = 10;
-        setTiles(newTiles)
+        raiseTile(idx)
+        updateTiles()
     }, [mouseOnX, mouseOnZ])
 
 

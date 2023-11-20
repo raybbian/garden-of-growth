@@ -24,6 +24,12 @@ export default function Page() {
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
+    const raisedTilesRef = useRef([])
+
+    function raiseTile(pos) {
+        raisedTilesRef.current.push(pos)
+    }
+
     return (
         <div className={"relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col overflow-hidden"}>
             <Nav
@@ -38,7 +44,11 @@ export default function Page() {
                         transition: "max-width 300ms ease-in-out",
                     }}
                 >
-                    <Grid progress={progress}/>
+                    <Grid
+                        progress={progress}
+                        raisedTilesRef={raisedTilesRef}
+                        raiseTile={raiseTile}
+                    />
                 </div>
                 <div className={`relative tablet:w-screen w-[36rem]`}
                 >
@@ -51,6 +61,7 @@ export default function Page() {
                         stageTwoRef={stageTwoRef}
                         stageThreeRef={stageThreeRef}
                         stageFourRef={stageFourRef}
+                        raiseTile={raiseTile}
                     />
                 </div>
             </div>
