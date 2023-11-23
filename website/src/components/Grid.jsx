@@ -3,21 +3,24 @@ import {SimpleTiledModel} from "../terrain/simple-tiled-model";
 import MemoizedTile from "./Tile";
 import {screenToGridCoordinates} from "../utils/tile-mapping";
 
-export default function Grid({progress, raisedTiles, raiseTile}) {
+export default function Grid({progress}) {
 
-    const destLen = 16;
-    const tileSize = 48;
+    const destLen = 16; //the side length of the grid
+    const tileSize = 48; //the width of each tile, in pixels
 
-    const [tiles, setTiles] = useState(initTiles());
+    const [tiles, setTiles] = useState(initTiles()); //stores the tiles themselves, where each element is an object
+    const [scale, setScale] = useState(1) //stores the scale of the tiles (depends on screen width)
+    const [raisedTiles, setRaisedTiles] = useState([]) //list of tiles that should be raised ATM
+    const [mouseOnX, setMouseOnX] = useState(-999) //grid x position of the mouse
+    const [mouseOnZ, setMouseOnZ] = useState(-999) //grid z position of the mouse
 
-    //only have one model for each grid, but clear it on refresh instead of making a new one
-    //i might change this back if different stages require different models, but I could also just store 4 models in refs as well
-    const dataRef = useRef(require('../terrain/japanese'))
-    const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false))
+    const gridRef = useRef(null); //ref to the contained that holds the grid
+    const dataRef = useRef(require('../terrain/japanese')) //stores the data for the model
+    const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false)) //stores the model
+    const init = useRef(true); //used to prevent certain useEffects from triggering on start
+    const resetRef = useRef(null); //used to reset the tiles after some time after no movement
 
-    const [scale, setScale] = useState(1)
-    const init = useRef(true);
-
+    //generates the initial state for the tiles state
     function initTiles() {
         const newTiles = new Array(destLen * destLen)
         for (let i = 0; i < newTiles.length; i++) {
@@ -33,6 +36,7 @@ export default function Grid({progress, raisedTiles, raiseTile}) {
         return newTiles;
     }
 
+    //redraws the tiles, with changes made depending on the spriteData and if raised
     function updateTiles() {
         const data = dataRef.current
         const model = modelRef.current;
@@ -51,11 +55,31 @@ export default function Grid({progress, raisedTiles, raiseTile}) {
         setTiles(newTiles)
     }
 
+    //function that handles the raising of a new tile
+    function raiseTile(pos) {
+        const newTiles = [...raisedTiles]
+        newTiles.push(pos)
+        if (newTiles.length > 10) {
+            newTiles.shift()
+        }
+        setRaisedTiles(newTiles)
+    }
+
+    //resets all raised tiles after 500ms of no movement
+    useEffect(() => {
+        clearTimeout(resetRef.current)
+        resetRef.current = setTimeout(() => {
+            setRaisedTiles([])
+        }, 500)
+    }, [raisedTiles])
+
+    //updates tiles on progress, scale, or raisedTile changes, but not initially
     useEffect(() => {
         if (init.current) return;
         updateTiles()
     }, [progress, scale, raisedTiles]);
 
+    //initialization process for this component, generates model, and sets initial scale, adding resize listener for scale
     useEffect(() => {
         const model = modelRef.current;
         while (!model.generate()) {
@@ -74,11 +98,7 @@ export default function Grid({progress, raisedTiles, raiseTile}) {
         }
     }, []);
 
-
-    const gridRef = useRef(null);
-    const [mouseOnX, setMouseOnX] = useState(-999)
-    const [mouseOnZ, setMouseOnZ] = useState(-999)
-
+    //gets the mouse position in grid coordinates and updates the state
     function handleMouseMove(e) {
         if (gridRef == null) return;
         const {clientX, clientY} = e;
@@ -93,6 +113,7 @@ export default function Grid({progress, raisedTiles, raiseTile}) {
         setMouseOnZ(gridPos[1])
     }
 
+    //raises tiles on mouse grid pos change, checking for OOB as well.
     useEffect(() => {
         if (init.current) return;
         if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
@@ -107,6 +128,9 @@ export default function Grid({progress, raisedTiles, raiseTile}) {
         >
             <div
                 className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
+                style={{
+                    top: `${tileSize}px` //bandaid fix that shifts the grid down some
+                }}
                 onMouseMove={(e) => handleMouseMove(e)}
                 ref={gridRef}
             >

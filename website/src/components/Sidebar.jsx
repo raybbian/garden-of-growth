@@ -47,7 +47,7 @@ export default function Sidebar({
             className={"grid place-items-center h-full overflow-y-scroll tablet:w-screen w-[36rem] border-l-2 border-black mobile:border-l-0"}
         >
             <div
-                className={"h-full max-w-[36rem] px-12 mobile:px-8 bg-cream tablet:bg-opacity-[85%] tablet:border-x-2 border-black mobile:border-none"}>
+                className={"h-full max-w-[36rem] px-12 mobile:px-8 bg-cream tablet:bg-opacity-[80%] tablet:border-x-2 border-black mobile:border-none"}>
                 <div
                     className={"h-auto"}>
                     <div

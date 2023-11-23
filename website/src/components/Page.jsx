@@ -1,6 +1,6 @@
 import Grid from "./Grid";
 import Nav from "./Nav";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 
 
@@ -24,22 +24,6 @@ export default function Page() {
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
-    const [raisedTiles, setRaisedTiles] = useState([])
-
-    function raiseTile(pos) {
-        const newTiles = [...raisedTiles]
-        newTiles.push(pos)
-        setRaisedTiles(newTiles)
-    }
-
-    const resetRef = useRef(null);
-    useEffect(() => {
-        clearTimeout(resetRef.current)
-        resetRef.current = setTimeout(() => {
-            setRaisedTiles([])
-        }, 1000)
-    }, [raisedTiles])
-
     return (
         <div className={"relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col overflow-hidden"}>
             <Nav
@@ -56,8 +40,6 @@ export default function Page() {
                 >
                     <Grid
                         progress={progress}
-                        raisedTiles={raisedTiles}
-                        raiseTile={raiseTile}
                     />
                 </div>
                 <div className={`relative tablet:w-screen w-[36rem]`}
