@@ -124,7 +124,7 @@ export default function Grid({progress}) {
     //ripple effect
     function handleMouseClick() {
         if (rippleRef.current !== null) return;
-        const rippleDiameter = [0];
+        const rippleDiameter = [1];
         rippleRef.current = setInterval(() => {
             rippleIterator(rippleDiameter)
         }, 100)
