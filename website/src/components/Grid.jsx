@@ -8,17 +8,19 @@ export default function Grid({progress}) {
     const destLen = 16; //the side length of the grid
     const tileSize = 48; //the width of each tile, in pixels
 
-    const [tiles, setTiles] = useState(initTiles()); //stores the tiles themselves, where each element is an object
-    const [scale, setScale] = useState(1) //stores the scale of the tiles (depends on screen width)
-    const [raisedTiles, setRaisedTiles] = useState([]) //list of tiles that should be raised ATM
-    const [mouseOnX, setMouseOnX] = useState(-999) //grid x position of the mouse
-    const [mouseOnZ, setMouseOnZ] = useState(-999) //grid z position of the mouse
-
-    const gridRef = useRef(null); //ref to the contained that holds the grid
+    const gridRef = useRef(null); //ref to the container that holds the grid
     const dataRef = useRef(require('../terrain/japanese')) //stores the data for the model
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false)) //stores the model
     const init = useRef(true); //used to prevent certain useEffects from triggering on start
     const resetRef = useRef(null); //used to reset the tiles after some time after no movement
+    const rippleRef = useRef(null); //used to store the ripple iterator interval
+    const hoverQueueRef = useRef([]) //used to store max amount of hovered tiles
+
+    const [tiles, setTiles] = useState(initTiles()); //stores the tiles themselves, where each element is an object
+    const [scale, setScale] = useState(1) //stores the scale of the tiles (depends on screen width)
+    const [mouseOnX, setMouseOnX] = useState(-999) //grid x position of the mouse
+    const [mouseOnZ, setMouseOnZ] = useState(-999) //grid z position of the mouse
+    const [raisedTiles, setRaisedTiles] = useState(new Array(modelRef.current.FMXxFMY).fill(false)) //bool array of tiles that should be raised ATM
 
     //generates the initial state for the tiles state
     function initTiles() {
@@ -47,7 +49,7 @@ export default function Grid({progress}) {
             for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
                 newTiles[pos].spriteData = data.tiles[model.process[i][j][1]].sprite
-                if (raisedTiles.includes(pos)) {
+                if (raisedTiles[pos]) {
                     newTiles[pos].y = 10;
                 }
             }
@@ -55,21 +57,11 @@ export default function Grid({progress}) {
         setTiles(newTiles)
     }
 
-    //function that handles the raising of a new tile
-    function raiseTile(pos) {
-        const newTiles = [...raisedTiles]
-        newTiles.push(pos)
-        if (newTiles.length > 10) {
-            newTiles.shift()
-        }
-        setRaisedTiles(newTiles)
-    }
-
-    //resets all raised tiles after 500ms of no movement
+    //resets all raised tiles after 500ms of no changes
     useEffect(() => {
         clearTimeout(resetRef.current)
         resetRef.current = setTimeout(() => {
-            setRaisedTiles([])
+            setRaisedTiles(new Array(modelRef.current.FMXxFMY).fill(false))
         }, 500)
     }, [raisedTiles])
 
@@ -118,9 +110,59 @@ export default function Grid({progress}) {
         if (init.current) return;
         if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
         const idx = (mouseOnX + destLen / 2) * destLen + (mouseOnZ + destLen / 2);
-        raiseTile(idx)
+        if (rippleRef.current !== null) return;
+        const newTiles = [...raisedTiles]
+        newTiles[idx] = true;
+        hoverQueueRef.current.push(idx)
+        if (hoverQueueRef.current.length > 10) {
+            const removeIdx = hoverQueueRef.current.shift()
+            newTiles[removeIdx] = false;
+        }
+        setRaisedTiles(newTiles)
     }, [mouseOnX, mouseOnZ])
 
+    //ripple effect
+    function handleMouseClick() {
+        if (rippleRef.current !== null) return;
+        const rippleDiameter = [0];
+        rippleRef.current = setInterval(() => {
+            rippleIterator(rippleDiameter)
+        }, 100)
+    }
+
+    function rippleIterator(rippleDiameter) {
+        const diameter = rippleDiameter[0] += 2
+        const res = drawCircle(diameter, true, mouseOnX, mouseOnZ)
+        if (!res) { //if did not change any circles, empty rippleQueue
+            clearInterval(rippleRef.current)
+            rippleRef.current = null; //done rippling
+        }
+    }
+
+    function drawCircle(diameter, raise, originX, originZ) {
+        const newTiles = new Array(modelRef.current.FMXxFMY).fill(false)
+        const radius = diameter / 2 - 0.5
+        const r = (radius + 0.25) ** 2 + 1
+        const r_min = (diameter > 5) ? (radius - 2) ** 2 + 1 : 0
+        let resp = false;
+
+        for (let i = 0; i < diameter; i++) {
+            const z = (i - radius) ** 2;
+            for (let j = 0; j < diameter; j++) {
+                const x = (j - radius) ** 2
+                const posX = Math.round(i + originX - radius);
+                const posZ = Math.round(j + originZ - radius);
+                const oob = posX < -destLen / 2 || posZ < -destLen / 2 || posX >= destLen / 2 || posZ >= destLen / 2
+                const idx = (posX + destLen / 2) * destLen + (posZ + destLen / 2);
+                if (r_min <= x + z && x + z <= r && !oob) {
+                    newTiles[idx] = raise;
+                    resp = true;
+                }
+            }
+        }
+        setRaisedTiles(newTiles)
+        return resp;
+    }
 
     return (
         <div
@@ -132,6 +174,7 @@ export default function Grid({progress}) {
                     top: `${tileSize}px` //bandaid fix that shifts the grid down some
                 }}
                 onMouseMove={(e) => handleMouseMove(e)}
+                onMouseDown={() => handleMouseClick()}
                 ref={gridRef}
             >
                 {tiles.map((tile, tileNum) => (
