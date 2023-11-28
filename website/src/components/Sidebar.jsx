@@ -120,18 +120,25 @@ export default function Sidebar({
                                 left={false}
                             />
                             <ProjectEntry
+                                title={"GT Multibooker"}
+                                detail={"Intuitive UI that allows users to book multiple GT Library rooms at once. Developed with React, FastAPI and Postman."}
+                                link={"https://multibooker.raybb.dev/"}
+                                src={`${process.env.PUBLIC_URL}/project-covers/gt-multibooker.png`}
+                                left={true}
+                            />
+                            <ProjectEntry
                                 title={"USACO Checklist App"}
                                 detail={"Sophisticated web scraper to pull problem progress and statistics from USACO, with sharable progress."}
                                 link={"https://github.com/orgs/USACO-Checklist/repositories"}
                                 src={`${process.env.PUBLIC_URL}/project-covers/usaco-checklist.png`}
-                                left={true}
+                                left={false}
                             />
                             <ProjectEntry
                                 title={"Prom Reservations"}
                                 detail={"Simple and streamlined seating registration made with React and FastAPI for seating reservations during DAIS Prom 2023."}
                                 link={"https://github.com/orgs/DAIS-Prom-2023/repositories"}
                                 src={`${process.env.PUBLIC_URL}/project-covers/prom-reservations.png`}
-                                left={false}
+                                left={true}
                             />
                         </div>
                     </div>
