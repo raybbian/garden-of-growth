@@ -95,7 +95,7 @@ export default function Sidebar({
                                 title={"Garden of Growth"}
                                 detail={"The website you are looking at right now! Terrain generated with Wave Function Collapse, presented using React."}
                                 link={"https://github.com/raybbian/garden-of-growth"}
-                                src={`${process.env.PUBLIC_URL}/project-covers/garden-of-growth.webp`}
+                                src={`${process.env.PUBLIC_URL}/project-covers/garden-of-growth.png`}
                                 left={true}
                             />
                             <ProjectEntry
