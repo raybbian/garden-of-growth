@@ -1,13 +1,14 @@
 export default function ExperienceEntry({title, detail, startDate, endDate, src, left, last}) {
     return (
-        <div className={`grid grid-cols-7 w-full h-auto ${!last ? "-mb-16" : ""}`}>
+        <div className={`grid grid-cols-7 w-full h-80 ${!last ? "-mb-16" : ""}`}>
             <div
                 className={`${left ? "order-first" : "order-last"} relative col-span-3 w-full h-full border-2 border-black`}>
                 <div className={`flex flex-col w-full h-full bg-cream`}>
-                    <div className={"w-full pr-4 pl-3 py-2 grid place-items-center border-b-2 border-black"}>
-                        <img className={"object-contain"} alt={'company-img'} src={src}/>
+                    <div
+                        className={"w-full grid place-items-center border-b-2 border-black flex-none h-2/5 hover:h-[45%] transition-all duration-300 ease-in-out"}>
+                        <img className={"object-contain w-full h-full"} alt={'company-img'} src={src}/>
                     </div>
-                    <div className={"p-4"}>
+                    <div className={"py-2 px-4 flex-auto"}>
                         <p className={"text-xl"}>{title}</p>
                         <p className={"text-base mobile:text-sm opacity-60"}>{detail}</p>
                     </div>

@@ -15,12 +15,14 @@ export default function Page() {
     const stageTwoRef = useRef(null)
     const stageThreeRef = useRef(null)
     const stageFourRef = useRef(null)
+    const stageFiveRef = useRef(null)
 
     function scrollTo(state) {
         let scrollYAmount = 0;
         if (state >= 2) scrollYAmount += stageOneRef.current.getBoundingClientRect().height
         if (state >= 3) scrollYAmount += stageTwoRef.current.getBoundingClientRect().height
         if (state >= 4) scrollYAmount += stageThreeRef.current.getBoundingClientRect().height
+        if (state >= 5) scrollYAmount += stageFourRef.current.getBoundingClientRect().height
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
@@ -53,6 +55,7 @@ export default function Page() {
                         stageTwoRef={stageTwoRef}
                         stageThreeRef={stageThreeRef}
                         stageFourRef={stageFourRef}
+                        stageFiveRef={stageFiveRef}
                     />
                 </div>
             </div>

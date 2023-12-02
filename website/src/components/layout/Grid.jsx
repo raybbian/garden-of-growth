@@ -1,7 +1,6 @@
-import {useEffect, useRef, useState} from "react";
-import {SimpleTiledModel} from "../terrain/simple-tiled-model";
-import MemoizedTile from "./Tile";
-import {screenToGridCoordinates} from "../utils/tile-mapping";
+import {memo, useEffect, useRef, useState} from "react";
+import {SimpleTiledModel} from "../../terrain/simple-tiled-model";
+import {getZIndex, gridToScreenCoordinates, screenToGridCoordinates} from "../../utils/tile-mapping";
 
 export default function Grid({progress}) {
 
@@ -9,7 +8,7 @@ export default function Grid({progress}) {
     const tileSize = 48; //the width of each tile, in pixels
 
     const gridRef = useRef(null); //ref to the container that holds the grid
-    const dataRef = useRef(require('../terrain/japanese')) //stores the data for the model
+    const dataRef = useRef(require('../../terrain/japanese')) //stores the data for the model
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false)) //stores the model
     const init = useRef(true); //used to prevent certain useEffects from triggering on start
     const resetRef = useRef(null); //used to reset the tiles after some time after no movement
@@ -193,3 +192,27 @@ export default function Grid({progress}) {
         </div>
     )
 }
+
+function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
+    const screenCoordinates = gridToScreenCoordinates(x, z, scale * tileSize)
+
+    return (
+        <div
+            className={`absolute -translate-x-1/2 -translate-y-full tile-(${x},${z})`}
+            style={{
+                top: `${screenCoordinates[0] - scale * y}px`,
+                left: `${screenCoordinates[1]}px`,
+                zIndex: getZIndex(x, z),
+                width: `${scale * spriteData.w}px`,
+                height: `${scale * spriteData.h}px`,
+                backgroundImage: `url(${spriteSheet})`,
+                backgroundPosition: `-${scale * spriteData.x}px -${scale * spriteData.y}px`,
+                transformOrigin: "top center",
+                imageRendering: "crisp-edges",
+                transition: "top 100ms ease-in-out"
+            }}
+        ></div>
+    );
+}
+
+const MemoizedTile = memo(Tile)
