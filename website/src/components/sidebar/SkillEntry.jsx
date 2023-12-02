@@ -1,10 +1,10 @@
-export default function SkillEntry({name, icon, description, shrink, left}) {
+export default function SkillEntry({name, icon, description, left}) {
     return (
         <div
             className={`border-2 border-black bg-cream group w-auto grow-0 shrink-0 transition-all duration-300 ease-in-out flex flex-row ${left ? "snap-start" : "snap-end"}`}>
             <div
                 className={`${left ? "order-first" : "order-last"} grid place-items-center bg-neutral-800 w-32 aspect-square`}>
-                <img src={icon} className={`${shrink ? "w-24" : "w-32"} object-contain aspect-square`}
+                <img src={icon} className={`w-24 object-contain aspect-square`}
                      alt={"Skill icon"}/>
             </div>
             <div
