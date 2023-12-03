@@ -19,10 +19,11 @@ export default function Page() {
 
     function scrollTo(state) {
         let scrollYAmount = 0;
-        if (state >= 2) scrollYAmount += stageOneRef.current.getBoundingClientRect().height
-        if (state >= 3) scrollYAmount += stageTwoRef.current.getBoundingClientRect().height
-        if (state >= 4) scrollYAmount += stageThreeRef.current.getBoundingClientRect().height
-        if (state >= 5) scrollYAmount += stageFourRef.current.getBoundingClientRect().height
+        //16 is to account for gap-4
+        if (state >= 2) scrollYAmount += stageOneRef.current.getBoundingClientRect().height + 16
+        if (state >= 3) scrollYAmount += stageTwoRef.current.getBoundingClientRect().height + 16
+        if (state >= 4) scrollYAmount += stageThreeRef.current.getBoundingClientRect().height + 16
+        if (state >= 5) scrollYAmount += stageFourRef.current.getBoundingClientRect().height + 16
         containerRef.current.scrollTo({top: scrollYAmount, left: 0, behavior: "smooth"})
     }
 
