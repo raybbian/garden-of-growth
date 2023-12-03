@@ -5,7 +5,7 @@ export default function Nav({state, scrollTo}) {
     const [showMobileNav, setShowMobileNav] = useState(false)
     return (
         <div
-            className={`select-none bg-cream w-full z-50 flex justify-between py-4 px-8
+            className={`select-none bg-cream w-full z-50 flex justify-between py-4 px-8 mobile:px-5
                         font-semibold whitespace-nowrap h-auto border-b-2 border-black`}
         >
             <div className={"w-2/5 text-4xl mobile:pointer-events-none"}
@@ -20,7 +20,7 @@ export default function Nav({state, scrollTo}) {
             >
                 <FaBars size={36}/>
             </button>
-            <button
+            <div
                 className={`desktop:hidden absolute w-full h-full top-0 left-0 bg-black ${showMobileNav ? "bg-opacity-50" : "bg-opacity-0 pointer-events-none"}`}
                 onClick={() => setShowMobileNav(false)}
                 style={{
