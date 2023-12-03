@@ -13,7 +13,7 @@ export default function Projects({elRef}) {
             />
             <ProjectEntry
                 title={"Choreolyzer"}
-                detail={"Dance choreography analysis AI that uses multi-object image recognition to parse and display the birds-eye position of dancers."}
+                detail={"Dance choreography analysis AI that uses multi-object image recognition to display the birds-eye position of dancers."}
                 link={"https://github.com/orgs/Choreolyzer/repositories"}
                 src={`${process.env.PUBLIC_URL}/project-covers/choreolyzer.png`}
                 left={false}
@@ -41,13 +41,13 @@ export default function Projects({elRef}) {
             />
             <ProjectEntry
                 title={"USACO Checklist App"}
-                detail={"Sophisticated web scraper to pull problem progress and statistics from USACO, with sharable progress."}
+                detail={"Sophisticated web scraper to pull problem progress and stats from USACO, with sharable progress."}
                 link={"https://github.com/orgs/USACO-Checklist/repositories"}
                 src={`${process.env.PUBLIC_URL}/project-covers/usaco-checklist.png`}
                 left={false}
             />
             <ProjectEntry
-                title={"Prom Reservations"}
+                title={"Prom RSVP"}
                 detail={"Simple and streamlined seating registration made with React and FastAPI for seating reservations during DAIS Prom 2023."}
                 link={"https://github.com/orgs/DAIS-Prom-2023/repositories"}
                 src={`${process.env.PUBLIC_URL}/project-covers/prom-reservations.png`}

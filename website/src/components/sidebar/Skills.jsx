@@ -28,7 +28,7 @@ export default function Skills({elRef}) {
                 <SkillEntry
                     name={"Java"}
                     icon={`${process.env.PUBLIC_URL}/skills/java.svg`}
-                    description={"3 years experience through AP CS-A, CS1331, and CS1332."}
+                    description={"3 years experience through AP CS, CS1331, and CS1332."}
                     left={true}
                 />
             </SkillsGallery>

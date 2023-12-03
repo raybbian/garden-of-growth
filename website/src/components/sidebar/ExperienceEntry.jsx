@@ -1,6 +1,6 @@
 export default function ExperienceEntry({title, detail, startDate, endDate, src, left, last}) {
     return (
-        <div className={`grid grid-cols-7 w-full h-80 ${!last ? "-mb-16" : ""}`}>
+        <div className={`grid grid-cols-7 w-full h-72 ${!last ? "-mb-16" : ""}`}>
             <div
                 className={`${left ? "order-first" : "order-last"} relative col-span-3 w-full h-full border-2 border-black`}>
                 <div className={`flex flex-col w-full h-full bg-cream`}>

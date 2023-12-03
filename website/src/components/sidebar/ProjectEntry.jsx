@@ -1,6 +1,6 @@
 export default function ProjectEntry({title, detail, link, src, left}) {
     return (
-        <div className={`flex flex-row w-full overflow-hidden border-black border-2 bg-cream h-52`}>
+        <div className={`flex flex-row w-full overflow-hidden border-black border-2 bg-cream h-44`}>
             <div
                 className={`flex-auto h-auto flex flex-col justify-between py-2 px-4`}>
                 <div>

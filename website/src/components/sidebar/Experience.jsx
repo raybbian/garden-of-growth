@@ -14,7 +14,7 @@ export default function Experience({elRef}) {
                 </div>
                 <ExperienceEntry
                     title={"DMECC"}
-                    detail={"Lead developer and project manager for an organization-wide volunteer portal."}
+                    detail={"Lead developer and project manager for an org-wide volunteer portal."}
                     startDate={new Date('5/1/2022')}
                     endDate={new Date()}
                     src={`${process.env.PUBLIC_URL}/experience-icons/dmecc.png`}
