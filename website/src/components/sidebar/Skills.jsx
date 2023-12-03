@@ -75,19 +75,19 @@ function SkillsGallery({children, toRight}) {
             autoScrollIntervalRef.current = setInterval(() => {
                 const skillEl = skillRef.current
                 if (toRight) {
-                    if (skillEl.scrollLeft + 112 >= skillEl.scrollWidth / 2) {
+                    if (skillEl.scrollLeft + 208 >= skillEl.scrollWidth / 2) {
                         skillEl.scrollTo({left: 0})
                     }
                     skillEl.scrollTo({
-                        left: skillEl.scrollLeft + 112,
+                        left: skillEl.scrollLeft + 208,
                         behavior: "smooth"
                     })
                 } else {
-                    if (skillEl.scrollLeft - 112 + skillEl.clientWidth <= skillEl.scrollWidth / 2) {
+                    if (skillEl.scrollLeft - 208 + skillEl.clientWidth <= skillEl.scrollWidth / 2) {
                         skillEl.scrollTo({left: skillEl.scrollWidth - skillEl.clientWidth})
                     }
                     skillEl.scrollTo({
-                        left: skillEl.scrollLeft - 112,
+                        left: skillEl.scrollLeft - 208,
                         behavior: "smooth"
                     })
                 }
