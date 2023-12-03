@@ -40,7 +40,7 @@ export default function Projects({elRef}) {
                 left={true}
             />
             <ProjectEntry
-                title={"USACO Checklist App"}
+                title={"USACO Checklist"}
                 detail={"Sophisticated web scraper to pull problem progress and stats from USACO, with sharable progress."}
                 link={"https://github.com/orgs/USACO-Checklist/repositories"}
                 src={`${process.env.PUBLIC_URL}/project-covers/usaco-checklist.png`}
