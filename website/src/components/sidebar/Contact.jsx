@@ -47,7 +47,7 @@ export default function Contact({elRef}) {
                         setFormSucceeded(true);
                     })
                 }}
-                className={"flex flex-col gap-4 mt-4 text-base mobile:text-sm"}
+                className={"flex flex-col gap-4 mt-2 text-base mobile:text-sm"}
             >
                 <input type="email" name="email"
                        className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"}
