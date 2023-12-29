@@ -60,7 +60,7 @@ export default function Contact({elRef}) {
                         <FaCheck size={48}/>
                     </div>
                     <button type="submit"
-                            className={"bg-[#ffe3ed] border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send
+                            className={"bg-cream border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send
                     </button>
                 </div>
             </form>
