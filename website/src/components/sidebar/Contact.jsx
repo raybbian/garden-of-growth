@@ -7,12 +7,12 @@ export default function Contact({elRef}) {
 
     return (
         <div ref={elRef} className={"flex flex-col gap-4"}>
-            <p className={"top-0 text-3xl font-semibold"}>Contact</p>
+            <p className={"top-0 text-4xl font-bold"}>Contact</p>
             <div className={"grid place-items-center w-full"}>
                 <img alt={'headshot'} src={`${process.env.PUBLIC_URL}/img/contact.jpg`}
                      className={"w-[40%] hover:w-[45%] m-4 aspect-square rounded-full border-2 border-black object-cover transition-all duration-300 ease-in-out"}/>
             </div>
-            <p className={"text-base mobile:text-sm"}>
+            <p className={"text-lg"}>
                 I would love to be informed of any bugs, inquiries, and knowledge that you might have! I am
                 always
                 interested in learning about new things that I may have missed.
@@ -47,7 +47,7 @@ export default function Contact({elRef}) {
                         setFormSucceeded(true);
                     })
                 }}
-                className={"flex flex-col gap-4 mt-2 text-base mobile:text-sm"}
+                className={"flex flex-col gap-4 mt-2 text-lg"}
             >
                 <input type="email" name="email"
                        className={"w-full border-2 border-black bg-cream py-2 px-4 hover:border-koi-red transition-colors duration-150 ease-in-out"}
@@ -60,7 +60,7 @@ export default function Contact({elRef}) {
                         <FaCheck size={48}/>
                     </div>
                     <button type="submit"
-                            className={"border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out bg-cream"}>Send
+                            className={"bg-[#ffe3ed] border-2 border-black p-2 w-1/4 justify-self-center hover:border-koi-red transition-colors duration-150 ease-in-out"}>Send
                     </button>
                 </div>
             </form>

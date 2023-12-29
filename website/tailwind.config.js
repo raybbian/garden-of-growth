@@ -15,14 +15,23 @@ module.exports = {
                 'sakura-pink': '#eb80a8',
                 'pastel-orange': '#fcdaba',
                 'pastel-pink': '#ffe3ed',
-            }
+            },
+            transitionProperty: {
+                'width': 'width',
+                'height': 'height',
+                'top': 'top',
+                'bottom': 'bottom',
+                'left': 'left',
+                'right': 'right',
+            },
         },
         screens: {
             'mobile': {'max': '575px'},
-            'tablet': {'max': '1151px'},
-            'desktop': {'min': '1152px'}
+            'desktop': {'min': '576px'}
         }
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/line-clamp'),
+    ],
 }
 

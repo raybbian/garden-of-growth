@@ -3,7 +3,10 @@ import ExperienceEntry from "./ExperienceEntry";
 export default function Experience({elRef}) {
     return (
         <div ref={elRef} className={"flex flex-col gap-4"}>
-            <p className={"top-0 text-3xl font-semibold"}>Experience</p>
+            <p className={"text-4xl font-bold"}>Experience</p>
+            <p className={"text-lg"}>
+                The path I've taken in my career so far.
+            </p>
             <div className={"relative w-full h-auto"}>
                 <div className={"absolute pointer-events-none select-none w-full h-full"}>
                     <div

@@ -5,7 +5,10 @@ export default function Skills({elRef}) {
 
     return (
         <div ref={elRef} className={"flex flex-col gap-4"}>
-            <p className={"top-0 text-3xl font-semibold"}>Skills</p>
+            <p className={"top-0 text-4xl font-bold"}>Skills</p>
+            <p className={"text-lg"}>
+                Here are all the languages and frameworks I use to create, learn, and share information.
+            </p>
             <SkillsGallery toRight={true}>
                 <SkillEntry
                     name={"Javascript"}
@@ -91,7 +94,7 @@ function SkillsGallery({children, toRight}) {
                         behavior: "smooth"
                     })
                 }
-            }, 2000)
+            }, 3000)
         }
         return () => {
             clearInterval(autoScrollIntervalRef.current)
@@ -106,7 +109,7 @@ function SkillsGallery({children, toRight}) {
     }, []);
 
     return (
-        <div className={`w-full grid h-36`}>
+        <div className={`w-full grid h-42`}>
             <div
                 ref={skillRef}
                 className={"flex flex-row gap-4 items-center overflow-x-scroll max-w-fit snap-x"}

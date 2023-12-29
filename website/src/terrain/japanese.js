@@ -11,11 +11,12 @@ module.exports = {
         9: "tiles/final9x.png",
         10: "tiles/final10x.png",
     },
-    "tiles":[
+    "tiles": [
         {
             "name": "temple-0-3",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -43,6 +44,7 @@ module.exports = {
             "name": "temple-0-2",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 48,
                 "y": 192,
@@ -69,6 +71,7 @@ module.exports = {
             "name": "temple-0-1",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 96,
                 "y": 192,
@@ -95,6 +98,7 @@ module.exports = {
             "name": "temple-0-0",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 144,
                 "y": 192,
@@ -122,6 +126,7 @@ module.exports = {
             "name": "temple-1-0",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 192,
                 "y": 192,
@@ -148,6 +153,7 @@ module.exports = {
             "name": "temple-2-0",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 240,
                 "y": 192,
@@ -173,6 +179,7 @@ module.exports = {
             "name": "temple-3-0",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 288,
                 "y": 192,
@@ -198,6 +205,7 @@ module.exports = {
             "name": "temple-4-0",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -225,6 +233,7 @@ module.exports = {
             "name": "temple-1-3",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -251,6 +260,7 @@ module.exports = {
             "name": "temple-1-2",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -276,6 +286,7 @@ module.exports = {
             "name": "temple-1-1",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -301,6 +312,7 @@ module.exports = {
             "name": "temple-2-1",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -326,6 +338,7 @@ module.exports = {
             "name": "temple-3-1",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -351,6 +364,7 @@ module.exports = {
             "name": "temple-4-1",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -377,6 +391,7 @@ module.exports = {
             "name": "temple-2-3",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -403,6 +418,7 @@ module.exports = {
             "name": "temple-2-2",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -428,6 +444,7 @@ module.exports = {
             "name": "temple-3-2",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -453,6 +470,7 @@ module.exports = {
             "name": "temple-4-2",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -479,6 +497,7 @@ module.exports = {
             "name": "temple-3-3",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -505,6 +524,7 @@ module.exports = {
             "name": "temple-4-3",
             "weight": 1,
             "count": 1,
+            "group": 1,
             "sprite": {
                 "x": 0,
                 "y": 144,
@@ -701,7 +721,8 @@ module.exports = {
         {
             "name": "sakura",
             "weight": 1,
-            "count": 3,
+            "count": 4,
+            "group": 3,
             "sprite": {
                 "x": 384,
                 "y": 0,
@@ -755,6 +776,7 @@ module.exports = {
             "name": "tree",
             "weight": 1,
             "count": 1,
+            "group": 3,
             "sprite": {
                 "x": 432,
                 "y": 0,
@@ -808,6 +830,7 @@ module.exports = {
             "name": "bigtree",
             "weight": 1,
             "count": 2,
+            "group": 3,
             "sprite": {
                 "x": 400,
                 "y": 120,
@@ -860,7 +883,8 @@ module.exports = {
         {
             "name": "bigsakura",
             "weight": 1,
-            "count": 2,
+            "count": 3,
+            "group": 3,
             "sprite": {
                 "x": 480,
                 "y": 0,
@@ -914,6 +938,7 @@ module.exports = {
             "name": "corner-0",
             "weight": 0.2,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 0,
                 "y": 0,
@@ -961,6 +986,7 @@ module.exports = {
             "name": "corner-1",
             "weight": 0.2,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 48,
                 "y": 0,
@@ -1008,6 +1034,7 @@ module.exports = {
             "name": "corner-2",
             "weight": 0.2,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 96,
                 "y": 0,
@@ -1055,6 +1082,7 @@ module.exports = {
             "name": "corner-3",
             "weight": 0.2,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 144,
                 "y": 0,
@@ -1102,6 +1130,7 @@ module.exports = {
             "name": "line-0",
             "weight": 1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 0,
                 "y": 48,
@@ -1145,6 +1174,7 @@ module.exports = {
             "name": "line-1",
             "weight": 1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 48,
                 "y": 48,
@@ -1189,6 +1219,7 @@ module.exports = {
             "name": "line-2",
             "weight": 1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 96,
                 "y": 48,
@@ -1232,6 +1263,7 @@ module.exports = {
             "name": "line-3",
             "weight": 1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 144,
                 "y": 48,
@@ -1276,6 +1308,7 @@ module.exports = {
             "name": "bend-0",
             "weight": 0.1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 0,
                 "y": 96,
@@ -1305,6 +1338,7 @@ module.exports = {
             "name": "bend-1",
             "weight": 0.1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 48,
                 "y": 96,
@@ -1334,6 +1368,7 @@ module.exports = {
             "name": "bend-2",
             "weight": 0.1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 96,
                 "y": 96,
@@ -1363,6 +1398,7 @@ module.exports = {
             "name": "bend-3",
             "weight": 0.1,
             "count": 256,
+            "group": 4,
             "sprite": {
                 "x": 144,
                 "y": 96,
@@ -1390,8 +1426,9 @@ module.exports = {
         },
         {
             "name": "water",
-            "weight": 2.2,
+            "weight": 3.3,
             "count": 25,
+            "group": 2,
             "sprite": {
                 "x": 192,
                 "y": 144,
@@ -1433,6 +1470,7 @@ module.exports = {
             "name": "water-corner-0",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 192,
                 "y": 0,
@@ -1482,6 +1520,7 @@ module.exports = {
             "name": "water-corner-1",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 240,
                 "y": 0,
@@ -1531,6 +1570,7 @@ module.exports = {
             "name": "water-corner-2",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 288,
                 "y": 0,
@@ -1580,6 +1620,7 @@ module.exports = {
             "name": "water-corner-3",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 336,
                 "y": 0,
@@ -1629,6 +1670,7 @@ module.exports = {
             "name": "water-line-0",
             "weight": 0.1,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 192,
                 "y": 48,
@@ -1671,6 +1713,7 @@ module.exports = {
             "name": "water-line-1",
             "weight": 0.1,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 240,
                 "y": 48,
@@ -1713,6 +1756,7 @@ module.exports = {
             "name": "water-line-2",
             "weight": 0.1,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 288,
                 "y": 48,
@@ -1755,6 +1799,7 @@ module.exports = {
             "name": "water-line-3",
             "weight": 0.1,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 336,
                 "y": 48,
@@ -1797,6 +1842,7 @@ module.exports = {
             "name": "water-bend-0",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 192,
                 "y": 96,
@@ -1826,6 +1872,7 @@ module.exports = {
             "name": "water-bend-1",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 240,
                 "y": 96,
@@ -1855,6 +1902,7 @@ module.exports = {
             "name": "water-bend-2",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 288,
                 "y": 96,
@@ -1884,6 +1932,7 @@ module.exports = {
             "name": "water-bend-3",
             "weight": 0.4,
             "count": 256,
+            "group": 2,
             "sprite": {
                 "x": 336,
                 "y": 96,

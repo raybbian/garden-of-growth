@@ -1,8 +1,9 @@
 import {memo, useEffect, useRef, useState} from "react";
 import {SimpleTiledModel} from "../../terrain/simple-tiled-model";
 import {getZIndex, gridToScreenCoordinates, screenToGridCoordinates} from "../../utils/tile-mapping";
+import {NavTitle} from "./Nav";
 
-export default function Grid({progress}) {
+export default function Grid({state, setState, hoverState, setHoverState, setShowRightSidebar}) {
 
     const destLen = 16; //the side length of the grid
     const tileSize = 48; //the width of each tile, in pixels
@@ -11,15 +12,32 @@ export default function Grid({progress}) {
     const dataRef = useRef(require('../../terrain/japanese')) //stores the data for the model
     const modelRef = useRef(new SimpleTiledModel(dataRef.current, null, destLen, destLen, false)) //stores the model
     const init = useRef(true); //used to prevent certain useEffects from triggering on start
-    const resetRef = useRef(null); //used to reset the tiles after some time after no movement
-    const rippleRef = useRef(null); //used to store the ripple iterator interval
-    const hoverQueueRef = useRef([]) //used to store max amount of hovered tiles
+    const progRef = useRef(-1)
+    const drawingRef = useRef(null)
 
     const [tiles, setTiles] = useState(initTiles()); //stores the tiles themselves, where each element is an object
     const [scale, setScale] = useState(1) //stores the scale of the tiles (depends on screen width)
     const [mouseOnX, setMouseOnX] = useState(-999) //grid x position of the mouse
     const [mouseOnZ, setMouseOnZ] = useState(-999) //grid z position of the mouse
-    const [raisedTiles, setRaisedTiles] = useState(new Array(modelRef.current.FMXxFMY).fill(false)) //bool array of tiles that should be raised ATM
+    const [cursor, setCursor] = useState("default")
+
+
+    //updates tiles on progress, scale, or raisedTile changes, but not initially
+    useEffect(() => {
+        if (init.current) return;
+        updateTiles()
+    }, [hoverState, scale]);
+
+    //initialization process for this component, generates model, and sets initial scale, adding resize listener for scale
+    useEffect(() => {
+        initGrid()
+    }, []);
+
+    //raises tiles on mouse grid pos change, checking for OOB as well.
+    useEffect(() => {
+        if (init.current) return
+        handleCoordinateChange()
+    }, [mouseOnX, mouseOnZ])
 
     //generates the initial state for the tiles state
     function initTiles() {
@@ -31,10 +49,45 @@ export default function Grid({progress}) {
                 "x": x - destLen / 2,
                 "y": 0,
                 "z": z - destLen / 2,
-                "spriteData": {x: '48', y: '144', w: '48', h: '48'},
+                "spriteData": {x: '49', y: '145', w: '48', h: '48'},
+                "group": -1
             }
         }
         return newTiles;
+    }
+
+    function initGrid() {
+        const model = modelRef.current;
+
+        while (!model.generate()) {
+            model.clear()
+        }
+        progRef.current = model.process.length
+        fancyDraw()
+        const handleResize = function () {
+            setScale(Math.max(Math.floor(window.innerWidth / 16 / tileSize), 1))
+        }
+        handleResize()
+        init.current = false //finished init
+
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }
+
+    function fancyDraw() {
+        if (drawingRef.current !== null) return;
+        progRef.current = 0
+        drawingRef.current = setInterval(() => {
+            if (progRef.current >= modelRef.current.process.length) {
+                clearInterval(drawingRef.current)
+                drawingRef.current = null
+                return
+            }
+            updateTiles()
+            progRef.current = progRef.current + 1
+        }, 5)
     }
 
     //redraws the tiles, with changes made depending on the spriteData and if raised
@@ -43,137 +96,105 @@ export default function Grid({progress}) {
         const model = modelRef.current;
 
         const newTiles = [...initTiles()]
-        const placeAmount = Math.floor(progress * (model.process.length - 1)) + 1
-        for (let i = 0; i < placeAmount; i++) {
+        for (let i = 0; i < progRef.current; i++) {
             for (let j = 0; j < model.process[i].length; j++) {
                 const pos = model.process[i][j][0];
-                newTiles[pos].spriteData = data.tiles[model.process[i][j][1]].sprite
-                if (raisedTiles[pos]) {
-                    newTiles[pos].y = 10;
+                const tileObj = data.tiles[model.process[i][j][1]]
+                newTiles[pos].spriteData = tileObj.sprite
+                if ('group' in tileObj)
+                    newTiles[pos].group = tileObj.group
+                if (tileObj.group === hoverState) {
+                    newTiles[pos].y = 8;
+                    // make all tiles in the same group raise as well
                 }
             }
         }
         setTiles(newTiles)
     }
 
-    //resets all raised tiles after 500ms of no changes
-    useEffect(() => {
-        clearTimeout(resetRef.current)
-        resetRef.current = setTimeout(() => {
-            setRaisedTiles(new Array(modelRef.current.FMXxFMY).fill(false))
-        }, 500)
-    }, [raisedTiles])
-
-    //updates tiles on progress, scale, or raisedTile changes, but not initially
-    useEffect(() => {
-        if (init.current) return;
-        updateTiles()
-    }, [progress, scale, raisedTiles]);
-
-    //initialization process for this component, generates model, and sets initial scale, adding resize listener for scale
-    useEffect(() => {
-        const model = modelRef.current;
-        while (!model.generate()) {
-            model.clear()
-        }
-        updateTiles()
-        const handleResize = function () {
-            setScale(Math.max(Math.floor(window.innerWidth / 16 / tileSize), 1))
-        }
-        handleResize()
-        init.current = false
-
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, []);
 
     //gets the mouse position in grid coordinates and updates the state
     function handleMouseMove(e) {
+        const gridPos = getGridCoordinatesFromMouseEvent(e)
+        setMouseOnX(gridPos[0])
+        setMouseOnZ(gridPos[1])
+    }
+
+    function getGridCoordinatesFromMouseEvent(e) {
         if (gridRef == null) return;
         const {clientX, clientY} = e;
         const {left, top} = gridRef.current.getBoundingClientRect();
 
         const relativeX = clientX - left;
         //because all tiles are shifted tileSize up, need to do same with Y
-        const relativeY = clientY - top + scale * tileSize
+        const relativeY = clientY + top - scale * tileSize
 
-        const gridPos = screenToGridCoordinates(relativeY, relativeX, scale * tileSize)
-        setMouseOnX(gridPos[0])
-        setMouseOnZ(gridPos[1])
+        return screenToGridCoordinates(relativeY, relativeX, scale * tileSize)
     }
 
-    //raises tiles on mouse grid pos change, checking for OOB as well.
-    useEffect(() => {
+    function handleCoordinateChange() {
         if (init.current) return;
-        if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) return;
+
+        const model = modelRef.current
+        const data = dataRef.current
+
+        if (mouseOnX < -destLen / 2 || mouseOnZ < -destLen / 2 || mouseOnX >= destLen / 2 || mouseOnZ >= destLen / 2) {
+            setCursor("default")
+            setHoverState(-1)
+            return;
+        }
         const idx = (mouseOnX + destLen / 2) * destLen + (mouseOnZ + destLen / 2);
-        if (rippleRef.current !== null) return;
-        const newTiles = [...raisedTiles]
-        newTiles[idx] = true;
-        hoverQueueRef.current.push(idx)
-        if (hoverQueueRef.current.length > 10) {
-            const removeIdx = hoverQueueRef.current.shift()
-            newTiles[removeIdx] = false;
-        }
-        setRaisedTiles(newTiles)
-    }, [mouseOnX, mouseOnZ])
+        const tileID = model.observed[idx]
+        const groupVal = 'group' in data.tiles[tileID] ? data.tiles[tileID].group : -1
 
-    //ripple effect
-    function handleMouseClick() {
-        if (rippleRef.current !== null) return;
-        const rippleDiameter = [1];
-        rippleRef.current = setInterval(() => {
-            rippleIterator(rippleDiameter)
-        }, 100)
+        setCursor(groupVal === -1 ? "default" : "pointer")
+        setHoverState(groupVal)
     }
 
-    function rippleIterator(rippleDiameter) {
-        const diameter = rippleDiameter[0] += 2
-        const res = drawCircle(diameter, true, mouseOnX, mouseOnZ)
-        if (!res) { //if did not change any circles, empty rippleQueue
-            clearInterval(rippleRef.current)
-            rippleRef.current = null; //done rippling
-        }
-    }
+    function handleMouseClick(e) {
+        const gridPos = getGridCoordinatesFromMouseEvent(e)
+        const clickMouseX = gridPos[0]
+        const clickMouseZ = gridPos[1]
 
-    function drawCircle(diameter, raise, originX, originZ) {
-        const newTiles = new Array(modelRef.current.FMXxFMY).fill(false)
-        const radius = diameter / 2 - 0.5
-        const r = (radius + 0.25) ** 2 + 1
-        const r_min = (diameter > 5) ? (radius - 2) ** 2 + 1 : 0
-        let resp = false;
-
-        for (let i = 0; i < diameter; i++) {
-            const z = (i - radius) ** 2;
-            for (let j = 0; j < diameter; j++) {
-                const x = (j - radius) ** 2
-                const posX = Math.round(i + originX - radius);
-                const posZ = Math.round(j + originZ - radius);
-                const oob = posX < -destLen / 2 || posZ < -destLen / 2 || posX >= destLen / 2 || posZ >= destLen / 2
-                const idx = (posX + destLen / 2) * destLen + (posZ + destLen / 2);
-                if (r_min <= x + z && x + z <= r && !oob) {
-                    newTiles[idx] = raise;
-                    resp = true;
-                }
-            }
+        if (clickMouseX < -destLen / 2 || clickMouseZ < -destLen / 2 || clickMouseX >= destLen / 2 || clickMouseZ >= destLen / 2) {
+            setState(-1)
+            return;
         }
-        setRaisedTiles(newTiles)
-        return resp;
+        const idx = (clickMouseX + destLen / 2) * destLen + (clickMouseZ + destLen / 2);
+        const tileID = modelRef.current.observed[idx]
+        const groupVal = 'group' in dataRef.current.tiles[tileID] ? dataRef.current.tiles[tileID].group : -1
+        if (groupVal === -1) {
+            return;
+        }
+        setState(groupVal)
+        setShowRightSidebar(true)
     }
 
     return (
         <div
-            className={"h-full w-full overflow-hidden select-none"}
+            className={"h-full w-full select-none relative"}
         >
             <div
-                className={"relative w-full h-full translate-x-1/2 translate-y-1/2"}
+                className={"absolute top-0 left-0 p-8 cursor-pointer"}
+                onClick={() => {
+                    while (!modelRef.current.generate()) {
+                        modelRef.current.clear()
+                    }
+                    setState(-1)
+                    fancyDraw()
+                }}
+            >
+                <NavTitle/>
+                <small>click me!</small>
+            </div>
+            <div
+                className={"relative w-full h-full translate-x-1/2 -translate-y-1/2"}
                 style={{
-                    top: `${tileSize}px` //bandaid fix that shifts the grid down some
+                    top: `${tileSize * scale}px`, //bandaid fix that shifts the grid down some
+                    cursor: cursor
                 }}
                 onMouseMove={(e) => handleMouseMove(e)}
-                onMouseDown={() => handleMouseClick()}
+                onMouseUp={(e) => handleMouseClick(e)}
                 ref={gridRef}
             >
                 {tiles.map((tile, tileNum) => (
@@ -198,18 +219,16 @@ function Tile({x, y, z, spriteData, spriteSheet, tileSize, scale}) {
 
     return (
         <div
-            className={`absolute -translate-x-1/2 -translate-y-full tile-(${x},${z})`}
+            className={`absolute tile-(${x},${z}) crisp-edges`}
             style={{
-                top: `${screenCoordinates[0] - scale * y}px`,
-                left: `${screenCoordinates[1]}px`,
+                bottom: `${-screenCoordinates[0] + scale * y}px`,
+                left: `${screenCoordinates[1] - scale * 0.5 * spriteData.w}px`,
                 zIndex: getZIndex(x, z),
                 width: `${scale * spriteData.w}px`,
                 height: `${scale * spriteData.h}px`,
                 backgroundImage: `url(${spriteSheet})`,
                 backgroundPosition: `-${scale * spriteData.x}px -${scale * spriteData.y}px`,
-                transformOrigin: "top center",
-                imageRendering: "crisp-edges",
-                transition: "top 100ms ease-in-out"
+                transition: "bottom 100ms ease-in-out"
             }}
         ></div>
     );
