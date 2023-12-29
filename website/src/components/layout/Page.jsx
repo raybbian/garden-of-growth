@@ -44,12 +44,12 @@ export default function Page() {
 
     return (
         <div
-            className={`relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex flex-col ${state === -1 ? "overflow-hidden" : "overflow-scroll"}`}
+            className={`relative h-[100dvh] w-[100dvw] bg-[#d7e4c2] flex overflow-hidden`}
             ref={containerRef}
         >
-            <div className={"grow w-full min-h-0 flex flex-row mobile:flex-col relative"}>
+            <div className={"grow w-full flex flex-row mobile:flex-col relative"}>
                 <div
-                    className={`relative flex-auto transition-all duration-300 ease-in-out overflow-hidden mobile:min-h-[15%]`}>
+                    className={`relative flex-auto transition-all duration-300 ease-in-out overflow-hidden`}>
                     <div
                         className={`w-full h-full absolute bg-black cursor-pointer ${showRightSidebar ? "bg-opacity-20 pointer-events-auto" : "bg-opacity-0 pointer-events-none"} z-10 transition-all duration-300 ease-in-out`}
                         onClick={(e) => closeSidebar(e)}
@@ -58,7 +58,7 @@ export default function Page() {
                           setShowRightSidebar={setShowRightSidebar}/>
                 </div>
                 <div
-                    className={`relative ${showRightSidebar ? "w-[65%] h-auto" : "w-0 mobile:h-0"} max-w-[36rem] bg-cream mobile:w-full h-full z-10 border-l-2 mobile:border-l-0 mobile:border-t-2 border-black transition-all duration-300 ease-in-out`}>
+                    className={`relative ${showRightSidebar ? "w-[65%] mobile:h-[85%]" : "w-0 mobile:h-0"} max-w-[36rem] bg-cream mobile:w-full h-full z-10 border-l-2 mobile:border-l-0 mobile:border-t-2 border-black transition-all duration-300 ease-in-out`}>
                     <div
                         className={"w-6 h-12 top-1/2 mobile:w-12 mobile:h-8 left-2 mobile:top-2 mobile:left-1/2 absolute grid place-items-center cursor-pointer -translate-y-1/2 -translate-x-1/2"}
                         onClick={(e) => closeSidebar(e)}
@@ -66,7 +66,7 @@ export default function Page() {
                         <div className={"rounded-full bg-black bg-opacity-60 w-1 h-8 mobile:w-8 mobile:h-1"}></div>
                     </div>
                     <div
-                        className={"bg-cream h-auto desktop:h-full w-full p-12 mobile:p-8 grid place-items-center mobile:place-items-start overflow-y-scroll"}>
+                        className={"bg-cream h-full w-full p-12 mobile:p-8 grid place-items-center mobile:place-items-start overflow-y-scroll"}>
                         {getSidebarContent()}
                     </div>
                 </div>
